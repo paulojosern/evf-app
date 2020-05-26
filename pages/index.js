@@ -34,8 +34,6 @@ export default function Home() {
 		getCep(newcep);
 	};
 
-	const validateDetais = () => {};
-
 	const handleConfirm = () => {};
 
 	return (
