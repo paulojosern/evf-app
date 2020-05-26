@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import useFormCep from '~/effects/useFormCep';
 import axios from 'axios';
+import LogoEvf from '~/assets/logos/logo-evf.svg';
 
 export default function Home() {
 	const [btn, setBtn] = useState();
@@ -47,7 +48,7 @@ export default function Home() {
 						!data.logradouro ? 'home__logo' : 'home__logo home__logo--hide'
 					}
 				>
-					EU VOU FÁCIL
+					<LogoEvf />
 				</div>
 				<div
 					className={
