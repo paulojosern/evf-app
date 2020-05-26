@@ -1,0 +1,38 @@
+html,
+body,
+body > div:first-child,
+div#__next,
+div#__next > div,
+div#__next > div > div,
+main {
+	height: 100%;
+}
+body {
+	background-color: $blue;
+	// @include size(mobile) {
+	// 	background-color: rgb(0, 255, 0);
+	// }
+	// @include size(mobile_min) {
+	// 	background-color: green;
+	// }
+	// @include size(mobile_med) {
+	// 	background-color: rgb(0, 247, 255);
+	// }
+	// @include size(mobile_max) {
+	// 	background-color: rgb(128, 115, 0);
+	// }
+	// @include size(tablet) {
+	// 	background-color: rgb(128, 0, 117);
+	// }
+	// @include size(pro) {
+	// 	background-color: $blue;
+	// }
+	// @include size(hd) {
+	// 	background-color: $yellow;
+	// }
+	// @include size(fullhd) {
+	// 	background-color: rgba(255, 238, 0, 0.829);
+	// }
+	@include font($color, 13px, 400);
+	overflow: hidden;
+}

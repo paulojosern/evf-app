@@ -1,0 +1,118 @@
+.home {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+
+	&__logo {
+		background-color: $blue;
+		height: 40%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 2em;
+		font-weight: 600;
+		padding: 0 30px;
+		transition: all 0.5s ease-in-out;
+		&--hide {
+			height: 0;
+		}
+	}
+	&__cep {
+		background-color: $yellow;
+		flex: auto;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 1.8em;
+		font-weight: 500;
+		padding: 0 40px 50px;
+		position: relative;
+		bottom: -100%;
+		animation: show;
+		animation-timing-function: ease-in-out;
+		animation-duration: 0.3s;
+		animation-fill-mode: both;
+		animation-delay: 1s;
+		@include size(mobile_min) {
+			font-size: 2.2em;
+		}
+		@include size(mobile_med) {
+			font-size: 2.4em;
+		}
+		&--show {
+			align-items: flex-start;
+			padding: 10% 40px 50px;
+			@include size(mobile_min) {
+				padding: 16% 40px 50px;
+			}
+		}
+		.cep__detail {
+			background: white;
+			height: 0;
+			width: 100%;
+			position: absolute;
+			left: 0;
+			bottom: -100%;
+			transition: all 0.5s ease-in-out;
+			line-height: 0.8em;
+			//z-index: -1;
+			&--show {
+				bottom: 0;
+				height: 45%;
+				padding: 40px;
+				width: calc(100% - 80px);
+			}
+			.cep__form {
+				font-size: 0.6em;
+			}
+			h4 {
+				font-size: 0.8em;
+				padding: 0;
+			}
+			h5 {
+				font-size: 0.7em;
+				padding: 5px 0 15px;
+			}
+		}
+		.cep__erro {
+			font-size: 0.7em;
+			padding: 10px 0;
+		}
+		.cep__btn {
+			font-size: 1.1em;
+			padding: 0;
+			width: 60px;
+			height: 60px;
+		}
+	}
+	@keyframes show {
+		0% {
+			bottom: -100%;
+		}
+		100% {
+			bottom: 0;
+		}
+	}
+	&__btn {
+		//position: absolute;
+		left: -200px;
+		margin-top: 10px;
+		appearance: none;
+		border: 0;
+		background: $blue;
+		border-radius: 50px;
+		padding: 0 20px;
+		//width: 70px;
+		height: 50px;
+		min-width: 50px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		outline: 0;
+		@include font($color, 0.7em, 600);
+		transition: all 0.4s ease-in-out;
+		&--open {
+			left: 40px;
+		}
+	}
+}
