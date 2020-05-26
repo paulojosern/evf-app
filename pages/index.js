@@ -1,11 +1,12 @@
-import { useState, useEffect } from 'react';
-
+import { useState } from 'react';
+import useFormCep from './effects/useFormCep';
 import axios from 'axios';
 
 export default function Home() {
 	const [btn, setBtn] = useState();
 	const [data, setData] = useState({});
 	const [cep, setCep] = useState();
+	const [{ values, loading }, handleChange, handleSubmitCep] = useFormCep();
 
 	const getCep = (newcep) => {
 		axios
@@ -34,7 +35,9 @@ export default function Home() {
 		getCep(newcep);
 	};
 
-	const handleConfirm = () => {};
+	const sendConfirm = () => {
+		console.log(values);
+	};
 
 	return (
 		<main className="main">
@@ -43,7 +46,9 @@ export default function Home() {
 					className={
 						!data.logradouro ? 'home__logo' : 'home__logo home__logo--hide'
 					}
-				></div>
+				>
+					EU VOU FÁCIL
+				</div>
 				<div
 					className={
 						!data.logradouro ? 'home__cep' : 'home__cep home__cep--show'
@@ -70,22 +75,31 @@ export default function Home() {
 							{data.bairro}, {data.uf}
 						</h5>
 						<div className="form__group cep__form">
-							<form onSubmit={handleConfirm}>
+							<form onSubmit={handleSubmitCep(sendConfirm)}>
 								<input
 									type="text"
 									className="form__input"
 									placeholder="Número"
+									name="numero"
+									onChange={handleChange}
 								/>
 								<input
 									type="text"
 									className="form__input"
 									placeholder="Complemento"
+									name="complemento"
+									onChange={handleChange}
 								/>
-								<input
+								<button
 									type="submit"
-									value="Ok"
-									className="home__btn cep__btn"
-								/>
+									className={
+										values === undefined
+											? 'home__btn cep__btn'
+											: 'home__btn cep__btn cep__btn--show'
+									}
+								>
+									{loading ? '...' : 'ok'}
+								</button>
 							</form>
 						</div>
 					</div>

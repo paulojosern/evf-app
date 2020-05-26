@@ -5,34 +5,50 @@
 
 	&__logo {
 		background-color: $blue;
-		height: 40%;
+		height: 100%;
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		font-size: 2em;
 		font-weight: 600;
 		padding: 0 30px;
-		transition: all 0.5s ease-in-out;
+		transition: all 0.4s ease-in-out;
+		animation: showLogo;
+		animation-timing-function: ease-in-out;
+		animation-duration: 0.3s;
+		animation-fill-mode: both;
+		animation-delay: 1s;
 		&--hide {
 			height: 0;
+			opacity: 0;
+		}
+	}
+	@keyframes showLogo {
+		0% {
+			height: 100%;
+		}
+		100% {
+			height: 40%;
 		}
 	}
 	&__cep {
 		background-color: $yellow;
-		flex: auto;
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		font-size: 1.8em;
 		font-weight: 500;
 		padding: 0 40px 50px;
-		position: relative;
+		position: absolute;
 		bottom: -100%;
 		animation: show;
 		animation-timing-function: ease-in-out;
 		animation-duration: 0.3s;
 		animation-fill-mode: both;
 		animation-delay: 1s;
+		height: 50%;
+		transition: all 0.4s ease-in-out;
+		width: calc(100% - 80px);
 		@include size(mobile_min) {
 			font-size: 2.2em;
 		}
@@ -41,9 +57,10 @@
 		}
 		&--show {
 			align-items: flex-start;
-			padding: 10% 40px 50px;
+			padding: 10% 40px 0;
+			height: calc(101% - 10%);
 			@include size(mobile_min) {
-				padding: 16% 40px 50px;
+				padding: 16% 40px 0;
 			}
 		}
 		.cep__detail {
@@ -83,6 +100,11 @@
 			padding: 0;
 			width: 60px;
 			height: 60px;
+			&--show {
+				transform: translateX(0px);
+				opacity: 1;
+				visibility: visible;
+			}
 		}
 	}
 	@keyframes show {
@@ -95,7 +117,9 @@
 	}
 	&__btn {
 		//position: absolute;
-		left: -200px;
+		transform: translateX(-200px);
+		opacity: 0;
+		visibility: hidden;
 		margin-top: 10px;
 		appearance: none;
 		border: 0;
@@ -112,7 +136,9 @@
 		@include font($color, 0.7em, 600);
 		transition: all 0.4s ease-in-out;
 		&--open {
-			left: 40px;
+			transform: translateX(0px);
+			opacity: 1;
+			visibility: visible;
 		}
 	}
 }
