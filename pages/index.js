@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import useFormCep from './effects/useFormCep';
+import useFormCep from '~/effects/useFormCep';
 import axios from 'axios';
 
 export default function Home() {
