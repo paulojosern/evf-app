@@ -1,10 +1,13 @@
 $blue: rgb(14, 217, 231);
 $yellow: rgb(238, 255, 0);
-$color: #222;
+$background: rgb(255, 0, 85);
+$color: rgb(39, 45, 56);
+$border: rgb(141, 149, 158);
 $placeholder: $color;
-
-@import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap');
-$font: 'Hind Siliguri', sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Cabin:wght@400;500;600;700&display=swap');
+//@import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap');
+//$font: 'Hind Siliguri', sans-serif;
+$font: 'Cabin', sans-serif;
 @mixin font($color, $size, $type) {
 	color: $color;
 	font-family: $font;
@@ -62,8 +65,12 @@ body > div:first-child,
 div#__next,
 // div#__next > div,
 // div#__next > div > div,
+
 main {
 	height: 100%;
+}
+html {
+	scroll-behavior: smooth;
 }
 body {
 	background-color: $yellow;

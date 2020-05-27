@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import AddressForm from '~/components/address.form';
 import { useAddressContext } from '~/context/address.context';
@@ -12,6 +12,10 @@ export default function Main() {
 	const {
 		addressState: { visible },
 	} = useAddressContext();
+
+	useEffect(() => {
+		!visible && (document.querySelector('body').style.overflowY = 'hidden');
+	}, [visible]);
 
 	const getCep = (newcep) => {
 		axios
