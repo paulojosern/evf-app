@@ -21,6 +21,23 @@
 			height: 0;
 			opacity: 0;
 		}
+		&--erro {
+			height: 100%;
+			opacity: 1;
+			animation: logoerro;
+			animation-timing-function: ease-in-out;
+			animation-duration: 0.3s;
+			animation-fill-mode: both;
+			animation-delay: 1s;
+		}
+		@keyframes logoerro {
+			0% {
+				height: 100%;
+			}
+			100% {
+				height: 40%;
+			}
+		}
 		svg {
 			width: 0;
 			height: auto;
@@ -70,7 +87,7 @@
 		animation-fill-mode: both;
 		animation-delay: 1s;
 		height: 50%;
-		transition: all 0.4s ease-in-out;
+		transition: bottom 0.4s ease-in-out;
 		width: calc(100% - 80px);
 		@include size(mobile_min) {
 			font-size: 2.2em;
@@ -86,6 +103,25 @@
 				padding: 16% 40px 0;
 			}
 		}
+		&--active {
+			animation: none;
+			bottom: 0;
+			height: 100%;
+			align-items: flex-start;
+			padding: 10% 40px 0;
+			height: calc(101% - 10%);
+			@include size(mobile_min) {
+				padding: 16% 40px 0;
+			}
+		}
+		@keyframes show {
+			0% {
+				bottom: -100%;
+			}
+			100% {
+				bottom: 0;
+			}
+		}
 		.cep__detail {
 			background: white;
 			height: 0;
@@ -95,7 +131,9 @@
 			bottom: -100%;
 			transition: all 0.5s ease-in-out;
 			line-height: 0.8em;
-			//z-index: -1;
+			@include size(tablet) {
+				line-height: 110%;
+			}
 			&--show {
 				bottom: 0;
 				height: 45%;
@@ -108,10 +146,14 @@
 			h4 {
 				font-size: 0.8em;
 				padding: 0;
+				max-width: 400px;
+				margin: 0 auto;
 			}
 			h5 {
 				font-size: 0.7em;
 				padding: 5px 0 15px;
+				max-width: 400px;
+				margin: 0 auto;
 			}
 		}
 		.cep__erro {
@@ -123,6 +165,7 @@
 			padding: 0;
 			width: 60px;
 			height: 60px;
+			text-decoration: none;
 			&--show {
 				transform: translateX(0px);
 				opacity: 1;
@@ -130,14 +173,7 @@
 			}
 		}
 	}
-	@keyframes show {
-		0% {
-			bottom: -100%;
-		}
-		100% {
-			bottom: 0;
-		}
-	}
+
 	&__btn {
 		//position: absolute;
 		transform: translateX(-200px);

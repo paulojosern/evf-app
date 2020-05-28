@@ -1,33 +1,53 @@
 .default {
-	position: relative;
+	position: fixed;
 	background-color: white;
 	width: 100%;
-	min-height: 100%;
 	transform: translateY(100%);
 	animation: fadein;
 	animation-duration: 0.2s;
 	animation-delay: 0.1s;
 	animation-fill-mode: both;
-
+	height: calc(100% - 200px);
+	bottom: 0;
+	display: block;
+	overflow-y: auto;
+	overflow-x: hidden;
+	z-index: 9;
+	scroll-behavior: smooth;
+	&--hide {
+		animation: fadeout;
+		animation-duration: 0.2s;
+		animation-delay: 0.1s;
+		animation-fill-mode: both;
+	}
 	&__header {
-		height: 70px;
+		height: 200px;
 		background-color: $background;
 		position: fixed !important;
 		z-index: 10;
 		width: 100%;
-		transform: translateY(1000%);
-		animation: fadeinheader;
+		top: 0;
+		display: flex;
+		align-items: flex-end;
+		box-shadow: 0 2px 5px 2px rgba($color, 0.08);
+		transform: translateY(100%);
+		animation: fadein;
 		animation-duration: 0.2s;
 		animation-delay: 0.1s;
 		animation-fill-mode: both;
-		@keyframes fadeinheader {
-			0% {
-				transform: translateY(1000%);
-			}
-			100% {
-				transform: translateY(0);
-			}
-		}
+		// transform: translateY(1000%);
+		// animation: fadeinheader;
+		// animation-duration: 0.2s;
+		// animation-delay: 0.1s;
+		// animation-fill-mode: both;
+		// @keyframes fadeinheader {
+		// 	0% {
+		// 		transform: translateY(1000%);
+		// 	}
+		// 	100% {
+		// 		transform: translateY(0);
+		// 	}
+		// }
 		.header__avatar {
 			background: white;
 			height: 65px;
@@ -44,59 +64,176 @@
 			font-size: 0.6em;
 		}
 	}
-	&__location {
-		background-color: $background;
-		transition: all 0.2s ease-in-out;
-		height: auto;
-		letter-spacing: 0.3px;
-		color: white;
-		position: relative !important;
-		.location__btn {
-			background-color: $background;
-			display: flex;
-			padding: 15px 15px 12px;
+	&__menu {
+		padding: 20px;
+		background: rgb(255, 255, 255);
+		width: calc(100% - 40px);
+		.menu__link {
+			text-decoration: none;
+			@include font($color, 0.85em, 400);
+			border: 1px solid $border;
+			border-radius: 15px;
+			padding: 5px 8px;
+			margin: 4px;
+			letter-spacing: 0.2px;
+			&:first-of-type {
+				margin: 4px 4px 4px 0;
+			}
+		}
+	}
+	&__container {
+		background-color: #ff0;
+	}
+	&__item {
+		padding: 20px 0 20px 20px;
+		.section__title {
+			@include font($color, 1.5em, 600);
+			padding: 0 0 15px;
+		}
+		.item {
+			width: 200px !important;
+			margin-right: 10px;
+			outline: none !important;
 			position: relative;
-			z-index: 2;
-			align-items: center;
-			svg {
-				fill: white;
-				width: 15px;
-				height: auto;
-				margin-right: 8px;
-			}
-		}
-		.location__content {
-			padding: 0 15px 10px;
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-			//transform: translateY(-100%);
-			transition: all 0.2s ease-in-out;
-			position: absolute;
-			z-index: -1;
-			top: -100%;
-		}
-		.location__input {
-			display: none;
-			&:checked ~ .location__content {
-				opacity: 1;
-				visibility: visible;
-				top: 0;
+			height: 100% !important;
+			&__image {
+				background-color: $background;
+				width: 100%;
+				height: 150px;
+				border-radius: 6px;
 				position: relative;
-				z-index: 1;
+				z-index: 2;
 			}
-			&:checked ~ .location__btn {
-				padding: 15px 15px 0px;
+			&__detail {
+				padding: 0 10px 0 5px;
+				margin: 10px 10px 10px 0;
+				@include font($color, 0.95em, 400);
+				line-height: 120%;
+				border-right: 1px solid $border;
+				min-height: 100px;
+			}
+			&__title {
+				@include font($color, 1.3em, 600);
+				padding: 0 0 5px;
+			}
+			&__price {
+				@include font($color, 1.5em, 600);
+				text-align: right;
+				position: absolute;
+				right: 40px;
+				bottom: 12px;
+			}
+			&__add {
+				position: absolute;
+				right: -10px;
+				bottom: 0px;
+				width: 40px;
+				height: 40px;
+				background: $blue;
+				border-radius: 50%;
+				z-index: 5;
+				&::before,
+				&::after {
+					height: 4px;
+					width: 18px;
+					content: '';
+					position: absolute;
+					top: 50%;
+					left: 50%;
+					transform: translateX(-50%) translateY(-50%);
+					background: $color;
+				}
+				&::after {
+					transform: translateX(-50%) translateY(-50%) rotate(90deg);
+				}
 			}
 		}
+	}
+
+	&__footer2 {
+		height: 400px;
+		background: $yellow;
+		width: 100%;
+	}
+	&__footer {
+		position: fixed;
+		z-index: 999;
+		bottom: 0;
+
+		width: 100%;
+		background: $blue;
+		transform: translateY(100%);
+		animation: fadein;
+		animation-duration: 0.2s;
+		animation-delay: 0.1s;
+		animation-fill-mode: both;
+	}
+	&__location {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		width: calc(100% - 30px);
+		padding: 10px 15px;
+		svg {
+			fill: $color;
+			width: 16px;
+			height: auto;
+			margin-right: 8px;
+		}
+		label {
+			display: block;
+			font-size: 0.85em;
+			font-weight: 300;
+			padding-bottom: 3px;
+		}
+		// .location__btn {
+		// 	background-color: $background;
+		// 	display: flex;
+		// 	padding: 15px 15px 12px;
+		// 	position: relative;
+		// 	z-index: 2;
+		// 	align-items: center;
+		// }
+		.location__content {
+			display: flex;
+			align-items: center;
+		}
+		// .location__input {
+		// 	display: none;
+		// 	&:checked ~ .location__content {
+		// 		opacity: 1;
+		// 		visibility: visible;
+		// 		top: 0;
+		// 		position: relative;
+		// 		z-index: 1;
+		// 	}
+		// 	&:checked ~ .location__btn {
+		// 		padding: 15px 15px 0px;
+		// 	}
+		// }
 		.location__change {
 			appearance: none;
-			background-color: $blue;
+			background-color: white;
 			color: $color;
 			border: 0;
 			border-radius: 16px;
 			padding: 3px 10px;
 			@include font($color, 0.9em, 500);
+		}
+	}
+	&__card {
+		display: flex;
+		align-items: center;
+		width: calc(100% - 30px);
+		padding: 12px 15px;
+		background-color: $background;
+		@include font(white, 1.3em, 500);
+		letter-spacing: 0.5px;
+		svg {
+			fill: white;
+			width: 20px;
+			height: auto;
+			margin-right: 10px;
 		}
 	}
 	@keyframes fadein {
@@ -107,94 +244,12 @@
 			transform: translateY(0);
 		}
 	}
-
-	&__menu {
-		padding: 20px;
-		background: rgb(255, 255, 255);
-		position: absolute;
-		width: calc(100% - 40px);
-		.menu__link {
-			text-decoration: none;
-			@include font($color, 0.9em, 500);
-			border: 1px solid $border;
-			border-radius: 15px;
-			padding: 5px 8px;
-			margin: 4px;
-			&:first-of-type {
-				margin: 4px 4px 4px 0;
-			}
+	@keyframes fadeout {
+		0% {
+			transform: translateY(0);
 		}
-	}
-	//itens cardapio
-	&__content {
-		background: white;
-		border-bottom: 1px solid $border;
-		padding: 100px 0 20px 20px;
-	}
-	.section__title {
-		@include font($color, 1.4em, 600);
-		padding: 0 0 10px;
-	}
-	.item {
-		width: 200px !important;
-		margin-right: 10px;
-		outline: none !important;
-		position: relative;
-		height: 100% !important;
-		&__image {
-			background-color: $background;
-			width: 100%;
-			height: 150px;
-			border-radius: 6px;
-			position: relative;
-			z-index: 2;
+		100% {
+			transform: translateY(-100%);
 		}
-		&__detail {
-			padding: 0 10px 0 5px;
-			margin: 10px 10px 10px 0;
-			@include font($color, 0.95em, 400);
-			line-height: 120%;
-			border-right: 1px solid $border;
-			min-height: 100px;
-		}
-		&__title {
-			@include font($color, 1.3em, 600);
-			padding: 0 0 5px;
-		}
-		&__price {
-			@include font($color, 1.5em, 600);
-			text-align: right;
-			position: absolute;
-			right: 40px;
-			bottom: 12px;
-		}
-		&__add {
-			position: absolute;
-			right: -10px;
-			bottom: 0px;
-			width: 40px;
-			height: 40px;
-			background: $blue;
-			border-radius: 50%;
-			z-index: 5;
-			&::before,
-			&::after {
-				height: 4px;
-				width: 18px;
-				content: '';
-				position: absolute;
-				top: 50%;
-				left: 50%;
-				transform: translateX(-50%) translateY(-50%);
-				background: $color;
-			}
-			&::after {
-				transform: translateX(-50%) translateY(-50%) rotate(90deg);
-			}
-		}
-	}
-	.carousel {
-		display: flex;
-		flex-flow: row wrap;
 	}
 }

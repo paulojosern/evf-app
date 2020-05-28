@@ -1,5 +1,7 @@
 .form {
 	&__group {
+		max-width: 400px;
+		margin: 0 auto;
 		label {
 			display: block;
 			width: 100%;
@@ -26,7 +28,6 @@
 		letter-spacing: 0.05em;
 		@include size(tablet) {
 			width: calc(100% - 0px);
-			margin: 0;
 			&:hover {
 				border: 1px solid black;
 			}

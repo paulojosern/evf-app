@@ -1,17 +1,23 @@
+import { useRouter } from 'next/router';
 import useFormCep from '~/effects/useFormCep';
 import { useAddressContext } from '~/context/address.context';
 
-const AddressForm = ({ rua, bairro }) => {
+const AddressForm = ({ cep, rua, bairro }) => {
 	const [{ values, loading }, handleChange, handleSubmitCep] = useFormCep();
 	const { inputAddress } = useAddressContext();
 
-	const sendConfirm = () => {
+	const router = useRouter();
+	const href = '/default';
+	const sendConfirm = (e) => {
+		e.preventDefault();
 		const newAddress = {
+			cep,
 			rua,
 			bairro,
 			...values,
 		};
 		inputAddress(newAddress);
+		router.push(href);
 	};
 
 	return (
@@ -31,8 +37,8 @@ const AddressForm = ({ rua, bairro }) => {
 					name="complemento"
 					onChange={handleChange}
 				/>
-				<button
-					type="submit"
+				<a
+					href={href}
 					onClick={sendConfirm}
 					className={
 						values === undefined
@@ -41,7 +47,7 @@ const AddressForm = ({ rua, bairro }) => {
 					}
 				>
 					{loading ? '...' : 'ok'}
-				</button>
+				</a>
 			</form>
 		</div>
 	);
