@@ -1,10 +1,11 @@
-import { useState, useEffect, useRef, useLayoutEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useAddressContext } from '~/context/address.context';
 import { useRouter } from 'next/router';
 import DefaultMenu from '~/components/default.menu';
 import ItemContent from '~/components/item.content';
 import IconLocation from '~/assets/logos/icon-location.svg';
 import IconShop from '~/assets/logos/icon-shop.svg';
+import { json } from '../services/json';
 
 const Default = () => {
 	const {
@@ -12,6 +13,8 @@ const Default = () => {
 		changeAddress,
 	} = useAddressContext();
 	const [hide, setHide] = useState(false);
+	const [addpay, setAddpay] = useState(false);
+	const [list, setList] = useState();
 	const router = useRouter();
 	const querie = router.asPath;
 
@@ -43,100 +46,32 @@ const Default = () => {
 		);
 	};
 
-	const json = [
-		{
-			cod: '1',
-			title: 'Promoções',
-			slug: 'promocoes',
-			items: [
-				{
-					image: '',
-					description: 'Sanduiche de presunto',
-					detail:
-						'Sanduiche de presunto 200g de uma carne de qualidade superior ao hambúrguer convencional',
-					price: 'R$ 32,00',
-					url: '',
-				},
-				{
-					image: '',
-					description: 'Sanduiche de Mortadela',
-					detail: 'Sanduiche de mortadela 200g de uma carne de big',
-					price: 'R$ 29,00',
-					url: '',
-				},
-				{
-					image: '',
-					description: 'Sanduiche de Mortadela',
-					detail: 'Sanduiche de mortadela 200g de uma carne de big',
-					price: 'R$ 29,00',
-					url: '',
-				},
-			],
-		},
-		{
-			cod: '2',
-			title: 'Lanches',
-			slug: 'lanches',
-			items: [
-				{
-					image: '',
-					description: 'Sanduiche de presunto',
-					detail:
-						'Sanduiche de presunto 200g de uma carne de qualidade superior ao hambúrguer convencional',
-					price: 'R$ 32,00',
-					url: '',
-				},
-				{
-					image: '',
-					description: 'Sanduiche de Mortadela',
-					detail: 'Sanduiche de mortadela 200g de uma carne de big',
-					price: 'R$ 29,00',
-					url: '',
-				},
-				{
-					image: '',
-					description: 'Sanduiche de Mortadela',
-					detail: 'Sanduiche de mortadela 200g de uma carne de big',
-					price: 'R$ 29,00',
-					url: '',
-				},
-			],
-		},
-		{
-			cod: '3',
-			title: 'Naturais',
-			slug: 'naturais',
-			items: [
-				{
-					image: '',
-					description: 'Sanduiche de presunto',
-					detail:
-						'Sanduiche de presunto 200g de uma carne de qualidade superior ao hambúrguer convencional',
-					price: 'R$ 32,00',
-					url: '',
-				},
-				{
-					image: '',
-					description: 'Sanduiche de Mortadela',
-					detail: 'Sanduiche de mortadela 200g de uma carne de big',
-					price: 'R$ 29,00',
-					url: '',
-				},
-				{
-					image: '',
-					description: 'Sanduiche de Mortadela',
-					detail: 'Sanduiche de mortadela 200g de uma carne de big',
-					price: 'R$ 29,00',
-					url: '',
-				},
-			],
-		},
-	];
+	// const handleAddProduct = (product) => {
+	// 	setAddpay(!addpay);
+	// 	console.log(product.detail);
+	// };
+	const getItem = (item) => {
+		setAddpay(!addpay);
+		setList({
+			image: item.image,
+			description: item.description,
+			price: item.price,
+			detail: item.detail,
+		});
+	};
 
-	console.log(json);
-
+	const closeList = () => setAddpay(!addpay);
 	return (
 		<>
+			<div className={addpay ? 'card__list card__list--show' : 'card__list'}>
+				<img className="list__image" src={list.image} alt={list.description} />
+				<div className="list__description">{list.description}</div>
+				<div className="list__destail">{list.detail}</div>
+				<div className="list__content"></div>
+				<button className="item__add" onClick={closeList}>
+					fechar
+				</button>
+			</div>
 			<header
 				className={hide ? 'default__header default--hide' : 'default__header'}
 			>
@@ -152,7 +87,12 @@ const Default = () => {
 			<div className={hide ? 'default default--hide' : 'default'}>
 				{json.map((categ, i) => (
 					<Item id={categ.slug} key={i}>
-						<ItemContent items={categ.items} title={categ.title} />
+						<ItemContent
+							items={categ.items}
+							title={categ.title}
+							getItem={getItem}
+							column={categ.column ? categ.column : false}
+						/>
 					</Item>
 				))}
 				<div className="default__footer2"></div>
@@ -162,7 +102,7 @@ const Default = () => {
 			>
 				<div className="default__card">
 					<IconShop />
-					Vazio
+					Nenhum pedido
 				</div>
 				<div className="default__location">
 					<div className="location__content">
