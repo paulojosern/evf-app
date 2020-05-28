@@ -1,7 +1,7 @@
 .default {
 	position: relative;
 	background-color: white;
-
+	width: 100%;
 	min-height: 100%;
 	transform: translateY(100%);
 	animation: fadein;
@@ -129,35 +129,68 @@
 	&__content {
 		background: white;
 		border-bottom: 1px solid $border;
-		padding: 100px 20px 20px;
-		height: 250px;
+		padding: 100px 0 20px 20px;
 	}
 	.section__title {
-		@include font($color, 1.3em, 600);
+		@include font($color, 1.4em, 600);
 		padding: 0 0 10px;
 	}
 	.item {
 		width: 200px !important;
 		margin-right: 10px;
 		outline: none !important;
+		position: relative;
+		height: 100% !important;
 		&__image {
 			background-color: $background;
 			width: 100%;
-			height: 100px;
+			height: 150px;
 			border-radius: 6px;
 			position: relative;
 			z-index: 2;
 		}
 		&__detail {
 			padding: 0 10px 0 5px;
-			margin: 10px 5px 10px 0;
-			@include font($color, 0.8em, 400);
+			margin: 10px 10px 10px 0;
+			@include font($color, 0.95em, 400);
 			line-height: 120%;
 			border-right: 1px solid $border;
+			min-height: 100px;
 		}
 		&__title {
 			@include font($color, 1.3em, 600);
 			padding: 0 0 5px;
+		}
+		&__price {
+			@include font($color, 1.5em, 600);
+			text-align: right;
+			position: absolute;
+			right: 40px;
+			bottom: 12px;
+		}
+		&__add {
+			position: absolute;
+			right: -10px;
+			bottom: 0px;
+			width: 40px;
+			height: 40px;
+			background: $blue;
+			border-radius: 50%;
+			z-index: 5;
+			&::before,
+			&::after {
+				height: 4px;
+				width: 18px;
+				content: '';
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translateX(-50%) translateY(-50%);
+				background: $color;
+			}
+			&::after {
+				transform: translateX(-50%) translateY(-50%) rotate(90deg);
+			}
 		}
 	}
 	.carousel {

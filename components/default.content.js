@@ -22,7 +22,7 @@ const DefaultContent = () => {
 						<div className="item__detail">
 							<div className="item__title">Sanduiche de presunto</div>
 							200g de uma carne de qualidade superior ao hambúrguer convencional
-							<div className="item__price"></div>
+							<div className="item__price">R$ 32,00</div>
 						</div>
 						<div className="item__add"></div>
 					</div>
@@ -32,7 +32,7 @@ const DefaultContent = () => {
 							<div className="item__title">Sanduba Natural</div>
 							180g de burger vegano de qualidade superior ao hambúrguer
 							convencional
-							<div className="item__price"></div>
+							<div className="item__price">R 12,50</div>
 						</div>
 						<div className="item__add"></div>
 					</div>
@@ -42,15 +42,114 @@ const DefaultContent = () => {
 							<div className="item__title">Sanduba Natural</div>
 							180g de burger vegano de qualidade superior ao hambúrguer
 							convencional
-							<div className="item__price"></div>
+							<div className="item__price">R$ 22,90</div>
 						</div>
 						<div className="item__add"></div>
 					</div>
 				</Slider>
 			</article>
-			<article className="default__content" id="02"></article>
-			<article className="default__content" id="03"></article>
-			<article className="default__content" id="04"></article>
+			<article className="default__content" id="02">
+				<h3 className="section__title">Lanches</h3>
+				<Slider {...settings}>
+					<div className="item">
+						<div className="item__image"></div>
+						<div className="item__detail">
+							<div className="item__title">Sanduiche de presunto</div>
+							200g de uma carne de qualidade superior ao hambúrguer convencional
+							<div className="item__price">R$ 32,00</div>
+						</div>
+						<div className="item__add"></div>
+					</div>
+					<div className="item">
+						<div className="item__image"></div>
+						<div className="item__detail">
+							<div className="item__title">Sanduba Natural</div>
+							180g de burger vegano de qualidade superior ao hambúrguer
+							convencional
+							<div className="item__price">R 12,50</div>
+						</div>
+						<div className="item__add"></div>
+					</div>
+					<div className="item">
+						<div className="item__image"></div>
+						<div className="item__detail">
+							<div className="item__title">Sanduba Natural</div>
+							180g de burger vegano de qualidade superior ao hambúrguer
+							convencional
+							<div className="item__price">R$ 22,90</div>
+						</div>
+						<div className="item__add"></div>
+					</div>
+				</Slider>
+			</article>
+			<article className="default__content" id="03">
+				<h3 className="section__title">Lançamentos</h3>
+				<Slider {...settings}>
+					<div className="item">
+						<div className="item__image"></div>
+						<div className="item__detail">
+							<div className="item__title">Sanduiche de presunto</div>
+							200g de uma carne de qualidade superior ao hambúrguer convencional
+							<div className="item__price">R$ 32,00</div>
+						</div>
+						<div className="item__add"></div>
+					</div>
+					<div className="item">
+						<div className="item__image"></div>
+						<div className="item__detail">
+							<div className="item__title">Sanduba Natural</div>
+							180g de burger vegano de qualidade superior ao hambúrguer
+							convencional
+							<div className="item__price">R 12,50</div>
+						</div>
+						<div className="item__add"></div>
+					</div>
+					<div className="item">
+						<div className="item__image"></div>
+						<div className="item__detail">
+							<div className="item__title">Sanduba Natural</div>
+							180g de burger vegano de qualidade superior ao hambúrguer
+							convencional
+							<div className="item__price">R$ 22,90</div>
+						</div>
+						<div className="item__add"></div>
+					</div>
+				</Slider>
+			</article>
+			<article className="default__content" id="04">
+				<h3 className="section__title">Super Sandubas</h3>
+				<Slider {...settings}>
+					<div className="item">
+						<div className="item__image"></div>
+						<div className="item__detail">
+							<div className="item__title">Sanduiche de presunto</div>
+							200g de uma carne de qualidade superior ao hambúrguer convencional
+							<div className="item__price">R$ 32,00</div>
+						</div>
+						<div className="item__add"></div>
+					</div>
+					<div className="item">
+						<div className="item__image"></div>
+						<div className="item__detail">
+							<div className="item__title">Sanduba Natural</div>
+							180g de burger vegano de qualidade superior ao hambúrguer
+							convencional
+							<div className="item__price">R 12,50</div>
+						</div>
+						<div className="item__add"></div>
+					</div>
+					<div className="item">
+						<div className="item__image"></div>
+						<div className="item__detail">
+							<div className="item__title">Sanduba Natural</div>
+							180g de burger vegano de qualidade superior ao hambúrguer
+							convencional
+							<div className="item__price">R$ 22,90</div>
+						</div>
+						<div className="item__add"></div>
+					</div>
+				</Slider>
+			</article>
 		</div>
 	);
 };
