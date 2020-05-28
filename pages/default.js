@@ -64,13 +64,21 @@ const Default = () => {
 	return (
 		<>
 			<div className={addpay ? 'card__list card__list--show' : 'card__list'}>
-				<img className="list__image" src={list.image} alt={list.description} />
-				<div className="list__description">{list.description}</div>
-				<div className="list__destail">{list.detail}</div>
-				<div className="list__content"></div>
-				<button className="item__add" onClick={closeList}>
-					fechar
-				</button>
+				{list !== undefined && (
+					<>
+						<img
+							className="list__image"
+							src={list.image}
+							alt={list.description}
+						/>
+						<div className="list__description">{list.description}</div>
+						<div className="list__destail">{list.detail}</div>
+						<div className="list__content"></div>
+						<button className="item__add" onClick={closeList}>
+							fechar
+						</button>
+					</>
+				)}
 			</div>
 			<header
 				className={hide ? 'default__header default--hide' : 'default__header'}

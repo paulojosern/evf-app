@@ -308,13 +308,12 @@
 		}
 		.list__description {
 			padding: 20px;
-			position: absolute;
-			top: 300px;
+			// position: absolute;
+			// top: 300px;
 			z-index: 10;
-			@include font(white, 1.6em, 600);
+			@include font($color, 1.6em, 600);
 		}
 		.list__destail {
-			padding: 20px;
 			position: relative;
 			@include font($color, 1em, 400);
 		}
