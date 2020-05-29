@@ -65,21 +65,21 @@
 		}
 	}
 	&__menu {
-		padding: 10px 0 10px 15px;
+		padding: 10px 0 10px 10px;
 		background: rgb(255, 255, 255);
-		width: calc(100% - 15px);
+		width: calc(100% - 10px);
 		border-radius: 7px 7px 0 0;
 		.menu__link {
 			text-decoration: none;
 			@include font($color, 0.85em, 400);
-			border: 1px solid $border;
+			border: 1px solid rgba($color, 0.2);
 			border-radius: 15px;
 			padding: 5px 8px;
-			margin: 4px;
+			margin: 4px 5px !important;
 			letter-spacing: 0.2px;
 			width: auto !important;
 			&:first-of-type {
-				margin: 4px 4px 4px 0;
+				margin: 4px 4px 4px 0 !important;
 			}
 		}
 	}
@@ -108,7 +108,7 @@
 				margin: 10px 10px 10px 0;
 				@include font(rgba($color, 0.8), 0.9em, 300);
 				line-height: 120%;
-				border-right: 1px solid $border;
+				border-right: 1px solid rgba($color, 0.4);
 				min-height: 100px;
 			}
 			&__title {
@@ -134,7 +134,7 @@
 				border: 5px solid white;
 				&::before,
 				&::after {
-					height: 4px;
+					height: 3px;
 					width: 18px;
 					content: '';
 					position: absolute;
@@ -142,6 +142,7 @@
 					left: 50%;
 					transform: translateX(-50%) translateY(-50%);
 					background: $color;
+					border-radius: 1px;
 				}
 				&::after {
 					transform: translateX(-50%) translateY(-50%) rotate(90deg);
@@ -194,7 +195,7 @@
 		position: fixed;
 		z-index: 11;
 		bottom: 0;
-
+		padding-top: 8px;
 		width: 100%;
 		background: white;
 		transform: translateY(100%);
@@ -202,71 +203,110 @@
 		animation-duration: 0.2s;
 		animation-delay: 0.1s;
 		animation-fill-mode: both;
+		box-shadow: 0 -2px 4px 3px rgba($color, 0.08);
 	}
 	&__location {
 		display: flex;
-		align-items: center;
+		align-items: flex-end;
 		justify-content: space-between;
 		width: calc(100% - 30px);
-		padding: 8px 15px;
+		padding: 6px 15px 12px;
+		@include font(rgba($color, 0.7), 0.9em, 300);
 		svg {
 			fill: $background;
-			width: 16px;
+			width: 14px;
 			height: auto;
 			margin-right: 8px;
 		}
-		label {
-			display: block;
-			@include font(rgba($color, 0.7), 0.8em, 300);
-			padding-bottom: 3px;
+		.location__btn {
+			background-color: white;
+			width: 20px;
+			height: 20px;
+			position: relative;
+			&::before,
+			&::after {
+				height: 2px;
+				width: 10px;
+				content: '';
+				position: absolute;
+				top: 50%;
+				left: 8px;
+				transform: translateY(-50%) rotate(45deg);
+				background: $background;
+				border-radius: 1px;
+			}
+			&::after {
+				transform: translateY(-50%) rotate(-45deg);
+				left: 2px;
+			}
+			&--add {
+				&::before,
+				&::after {
+					height: 2px;
+					width: 13px;
+					content: '';
+					position: absolute;
+					top: 50%;
+					left: 50%;
+					transform: translateX(-50%) translateY(-50%);
+					background: $background;
+					border-radius: 1px;
+				}
+				&::after {
+					transform: translateX(-50%) translateY(-50%) rotate(90deg);
+				}
+			}
 		}
-		// .location__btn {
-		// 	background-color: $background;
-		// 	display: flex;
-		// 	padding: 15px 15px 12px;
-		// 	position: relative;
-		// 	z-index: 2;
-		// 	align-items: center;
-		// }
 		.location__content {
 			display: flex;
 			align-items: center;
+
+			.content__address {
+				line-height: 120%;
+				.show {
+					display: none;
+				}
+			}
 		}
-		// .location__input {
-		// 	display: none;
-		// 	&:checked ~ .location__content {
-		// 		opacity: 1;
-		// 		visibility: visible;
-		// 		top: 0;
-		// 		position: relative;
-		// 		z-index: 1;
-		// 	}
-		// 	&:checked ~ .location__btn {
-		// 		padding: 15px 15px 0px;
-		// 	}
-		// }
+
+		.location__input {
+			display: none;
+			&:checked ~ .location__content {
+				align-items: flex-start;
+				@include font(rgba($color, 0.9), 1.1em, 300);
+			}
+			&:checked ~ .location__btn {
+			}
+			&:checked ~ .location__content > .content__address > .show {
+				display: block;
+			}
+		}
 		.location__change {
 			appearance: none;
-			background-color: $blue;
-			color: $color;
+			background-color: white;
+			color: $background;
 			border: 0;
 			border-radius: 16px;
-			padding: 3px 10px;
-			@include font($color, 0.9em, 500);
+			margin-top: 4px;
+			padding: 3px 10px 0 0;
+			border: 0px solid rgba($color, 0.2);
+			@include font($background, 01em, 500);
 		}
 	}
 	&__card {
 		display: flex;
 		align-items: center;
-		width: calc(100% - 30px);
-		padding: 12px 15px;
+		width: calc(100% - 46px);
+		padding: 10px 15px;
+		margin: 0 8px;
 		background-color: $background;
-		@include font(white, 1.2em, 500);
+		@include font(white, 1em, 500);
 		letter-spacing: 0.5px;
 		justify-content: space-between;
+		border-radius: 4px;
 		svg {
 			fill: white;
-			width: 20px;
+			width: 18px;
 			height: auto;
 			margin-right: 10px;
 		}

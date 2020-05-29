@@ -60,6 +60,7 @@ const Default = () => {
 		});
 	};
 
+	console.log(cep);
 	const closeList = () => setAddpay(!addpay);
 	return (
 		<>
@@ -126,15 +127,38 @@ const Default = () => {
 					<IconShop />
 					Nenhum pedido
 				</div>
+
 				<div className="default__location">
+					<input
+						type="checkbox"
+						id="location__input"
+						className="location__input"
+					/>
 					<div className="location__content">
 						<IconLocation />
-						{rua}, {numero} - {bairro}
+						{cep !== undefined ? (
+							<div className="content__address">
+								<p>
+									{rua}, {numero}
+								</p>
+								<p class="show">{complemento}</p>
+								<p class="show">{bairro}</p>
+								<button className="location__change show" onClick={sendConfirm}>
+									Trocar endereço
+								</button>
+							</div>
+						) : (
+							'Nenhum endereço'
+						)}
 					</div>
-
-					<button className="location__change" onClick={sendConfirm}>
-						Trocar
-					</button>
+					<label
+						className={
+							cep !== undefined
+								? 'location__btn'
+								: 'location__btn location__btn--add'
+						}
+						htmlFor="location__input"
+					></label>
 				</div>
 			</div>
 		</>
