@@ -2,11 +2,13 @@
 	&__group {
 		max-width: 400px;
 		margin: 0 auto;
+
 		label {
 			display: block;
 			width: 100%;
 			padding-bottom: 8px;
-			font-size: 0.9em;
+			font-size: 0.85em;
+			color: $color;
 		}
 	}
 	&__input {
@@ -62,5 +64,30 @@
 		// 	background: white;
 		// 	cursor: not-allowed;
 		// }
+	}
+	&__btn {
+		width: 40px;
+		height: 40px;
+		background-color: $blue;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		z-index: 10;
+		color: $color;
+		position: relative;
+		z-index: 30;
+		left: 0;
+		border-radius: 50%;
+		text-decoration: none;
+		@include font($color, 0.9em, 600);
+		transform: translateX(-150%);
+		opacity: 0;
+		visibility: hidden;
+		transition: all 0.3s ease-in-out;
+		&--show {
+			opacity: 1;
+			visibility: visible;
+			transform: translateX(0);
+		}
 	}
 }

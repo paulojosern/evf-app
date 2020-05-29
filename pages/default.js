@@ -1,18 +1,13 @@
-import { useState, useEffect, useCallback } from 'react';
-import { useAddressContext } from '~/context/address.context';
+import { useState, useEffect } from 'react';
+
 import { useRouter } from 'next/router';
 import DefaultMenu from '~/components/default.menu';
+import DefaultFooter from '~/components/default.footer';
 import ItemContent from '~/components/item.content';
-import IconLocation from '~/assets/logos/icon-location.svg';
-import IconShop from '~/assets/logos/icon-shop.svg';
-import { json } from '../services/json';
+
+import { json } from '~/services/json';
 
 const Default = () => {
-	const {
-		addressState: { cep, rua, bairro, numero, complemento, visible },
-		changeAddress,
-	} = useAddressContext();
-	const [hide, setHide] = useState(false);
 	const [addpay, setAddpay] = useState(false);
 	const [list, setList] = useState();
 	const router = useRouter();
@@ -28,16 +23,6 @@ const Default = () => {
 		}, 300);
 	}, [querie]);
 
-	const href = '/';
-	const sendConfirm = (e) => {
-		e.preventDefault();
-		setHide(!hide);
-		// changeAddress();
-		setTimeout(() => {
-			router.push(href);
-		}, 200);
-	};
-
 	const Item = ({ children, id }) => {
 		return (
 			<article className="default__item" id={id}>
@@ -46,10 +31,6 @@ const Default = () => {
 		);
 	};
 
-	// const handleAddProduct = (product) => {
-	// 	setAddpay(!addpay);
-	// 	console.log(product.detail);
-	// };
 	const getItem = (item) => {
 		setAddpay(!addpay);
 		setList({
@@ -60,8 +41,8 @@ const Default = () => {
 		});
 	};
 
-	console.log(cep);
 	const closeList = () => setAddpay(!addpay);
+
 	return (
 		<>
 			<div className={addpay ? 'card__list card__list--show' : 'card__list'}>
@@ -95,19 +76,11 @@ const Default = () => {
 					</>
 				)}
 			</div>
-			<header
-				className={hide ? 'default__header default--hide' : 'default__header'}
-			>
-				{/* <div>
-					{cep},{rua}, {numero}, {bairro}
-				</div>
-				<button className="location__change" onClick={sendConfirm}>
-					Trocar
-				</button> */}
+			<header className="default__header">
 				<DefaultMenu />
 			</header>
 
-			<div className={hide ? 'default default--hide' : 'default'}>
+			<div className="default">
 				{json.map((categ, i) => (
 					<Item id={categ.slug} key={i}>
 						<ItemContent
@@ -120,47 +93,7 @@ const Default = () => {
 				))}
 				<div className="default__footer2"></div>
 			</div>
-			<div
-				className={hide ? 'default__footer default--hide' : 'default__footer'}
-			>
-				<div className="default__card">
-					<IconShop />
-					Nenhum pedido
-				</div>
-
-				<div className="default__location">
-					<input
-						type="checkbox"
-						id="location__input"
-						className="location__input"
-					/>
-					<div className="location__content">
-						<IconLocation />
-						{cep !== undefined ? (
-							<div className="content__address">
-								<p>
-									{rua}, {numero}
-								</p>
-								<p class="show">{complemento}</p>
-								<p class="show">{bairro}</p>
-								<button className="location__change show" onClick={sendConfirm}>
-									Trocar endereço
-								</button>
-							</div>
-						) : (
-							'Nenhum endereço'
-						)}
-					</div>
-					<label
-						className={
-							cep !== undefined
-								? 'location__btn'
-								: 'location__btn location__btn--add'
-						}
-						htmlFor="location__input"
-					></label>
-				</div>
-			</div>
+			<DefaultFooter />
 		</>
 	);
 };

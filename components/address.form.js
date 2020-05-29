@@ -2,12 +2,12 @@ import { useRouter } from 'next/router';
 import useFormCep from '~/effects/useFormCep';
 import { useAddressContext } from '~/context/address.context';
 
-const AddressForm = ({ cep, rua, bairro }) => {
+const AddressForm = ({ cep, rua, bairro, href, input }) => {
 	const [{ values, loading }, handleChange, handleSubmitCep] = useFormCep();
 	const { inputAddress } = useAddressContext();
 
-	const router = useRouter();
-	const href = '/default';
+	const router = href !== undefined && useRouter();
+
 	const sendConfirm = (e) => {
 		e.preventDefault();
 		const newAddress = {
@@ -17,7 +17,8 @@ const AddressForm = ({ cep, rua, bairro }) => {
 			...values,
 		};
 		inputAddress(newAddress);
-		router.push(href);
+		input.current.click();
+		href !== undefined && router.push(href);
 	};
 
 	return (
@@ -38,15 +39,13 @@ const AddressForm = ({ cep, rua, bairro }) => {
 					onChange={handleChange}
 				/>
 				<a
-					href={href}
+					// href={href}
 					onClick={sendConfirm}
 					className={
-						values === undefined
-							? 'home__btn cep__btn'
-							: 'home__btn cep__btn cep__btn--show'
+						values === undefined ? 'form__btn' : 'form__btn form__btn--show'
 					}
 				>
-					{loading ? '...' : 'ok'}
+					{loading ? '...' : 'OK'}
 				</a>
 			</form>
 		</div>

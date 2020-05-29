@@ -209,20 +209,20 @@
 		display: flex;
 		align-items: flex-end;
 		justify-content: space-between;
+		flex-flow: row wrap;
 		width: calc(100% - 30px);
-		padding: 6px 15px 12px;
-		@include font(rgba($color, 0.7), 0.9em, 300);
-		svg {
-			fill: $background;
-			width: 14px;
-			height: auto;
-			margin-right: 8px;
-		}
+		padding: 5px 15px 10px;
+		@include font(rgba($color, 0.7), 0.9em, 400);
+
 		.location__btn {
 			background-color: white;
 			width: 20px;
 			height: 20px;
-			position: relative;
+			position: absolute;
+			right: 10px;
+			bottom: 5px;
+			transition: all 0.3s ease;
+			margin-left: 8px;
 			&::before,
 			&::after {
 				height: 2px;
@@ -260,9 +260,30 @@
 		.location__content {
 			display: flex;
 			align-items: center;
-
+			flex: auto;
+			padding-top: 5px;
+			svg {
+				fill: $background;
+				width: 14px;
+				height: auto;
+				margin-right: 8px;
+			}
 			.content__address {
 				line-height: 120%;
+				flex: auto;
+				padding: 0 22px 0 0;
+				.address {
+					@include font($color, 1.2em, 400);
+					line-height: 125%;
+					&__detail {
+						@include font($color, 1em, 400);
+						padding: 0 10px 10px;
+						span {
+							font-size: 0.8em;
+							display: block;
+						}
+					}
+				}
 				.show {
 					display: none;
 				}
@@ -273,12 +294,47 @@
 			display: none;
 			&:checked ~ .location__content {
 				align-items: flex-start;
-				@include font(rgba($color, 0.9), 1.1em, 300);
+				//@include font(rgba($color, 0.9), 1.1em, 300);
 			}
 			&:checked ~ .location__btn {
+				transform: rotate(45deg);
+				&::before,
+				&::after {
+					height: 2px;
+					width: 13px;
+					content: '';
+					position: absolute;
+					top: 50%;
+					left: 50%;
+					transform: translateX(-50%) translateY(-50%);
+					background: $background;
+					border-radius: 1px;
+				}
+				&::after {
+					transform: translateX(-50%) translateY(-50%) rotate(90deg);
+				}
 			}
-			&:checked ~ .location__content > .content__address > .show {
-				display: block;
+			&:checked ~ .location__btn--add {
+				transform: rotate(45deg);
+			}
+			&:checked ~ .location__content {
+				.active {
+					@include font($color, 1.1em, 400);
+				}
+				.content__address {
+					.show {
+						display: block;
+					}
+					.hidden {
+						display: none;
+					}
+				}
+			}
+			&:checked ~ .default__card {
+				opacity: 0;
+				visibility: hidden;
+				bottom: -1000px;
+				position: absolute;
 			}
 		}
 		.location__change {
@@ -290,15 +346,15 @@
 			margin-top: 4px;
 			padding: 3px 10px 0 0;
 			border: 0px solid rgba($color, 0.2);
-			@include font($background, 01em, 500);
+			@include font($background, 1em, 500);
 		}
 	}
 	&__card {
 		display: flex;
 		align-items: center;
-		width: calc(100% - 46px);
+		width: calc(100% - 30px);
 		padding: 10px 15px;
-		margin: 0 8px;
+		margin: 0 0 5px;
 		background-color: $background;
 		@include font(white, 1em, 500);
 		letter-spacing: 0.5px;
@@ -329,6 +385,7 @@
 	}
 }
 .card {
+	transition: all 0.3s ease-in-out;
 	&__list {
 		position: absolute;
 		left: 0;

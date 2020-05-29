@@ -103,6 +103,7 @@ export default function Home() {
 							cep={inputCep}
 							rua={data.logradouro}
 							bairro={data.bairro}
+							href="/default"
 						/>
 					</div>
 				</div>
