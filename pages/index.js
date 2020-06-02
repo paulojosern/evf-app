@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { useRouter } from 'next/router';
 import axios from 'axios';
 import AddressForm from '~/components/address.form';
 import { useAddressContext } from '~/context/address.context';
@@ -12,6 +13,7 @@ const Index = () => {
 	const [name] = useLocalStorage('address');
 	const cepInput = useRef();
 	const [address, setAddress] = useState();
+	const router = useRouter();
 
 	const {
 		addressState: { cep, numero, complemento, visible },
@@ -31,6 +33,11 @@ const Index = () => {
 	}, []);
 
 	const handleAddress = () => setAddress(undefined);
+
+	const handleConfirm = (e) => {
+		e.preventDefault();
+		router.push('/default');
+	};
 
 	const getCep = (newcep) => {
 		axios
@@ -94,7 +101,9 @@ const Index = () => {
 									<button className="btn btn--default" onClick={handleAddress}>
 										Não
 									</button>
-									<button className="btn">Sim</button>
+									<button className="btn" onClick={handleConfirm}>
+										Sim
+									</button>
 								</div>
 							</div>
 						) : (

@@ -4,7 +4,6 @@ import { useShopCardContext } from '~/context/shopcard.context';
 import useLocalStorage from '~/effects/useLocalStorage';
 import useGetCep from '~/effects/useGetCep';
 import AddressForm from '~/components/address.form';
-import IconLocation from '~/assets/logos/icon-location.svg';
 import IconShop from '~/assets/logos/icon-shop.svg';
 
 const DefaultFooter = () => {
@@ -32,6 +31,8 @@ const DefaultFooter = () => {
 			: setAddress(name && JSON.parse(name));
 	}, [cep]);
 
+	const handleAddress = () => setAddress(undefined);
+
 	const handleCEP = (e) => {
 		var x = e.target.value.replace(/\D/g, '').match(/(\d{0,5})(\d{0,3})/);
 		e.target.value = !x[2] ? x[1] : x[1] + '-' + x[2];
@@ -50,20 +51,35 @@ const DefaultFooter = () => {
 					className="location__input"
 					ref={input}
 				/>
-				<div className="default__card">
-					<IconShop />
-					{total}
-				</div>
+
 				<div className="location__content">
-					<IconLocation />
 					{address !== undefined ? (
 						<div className="content__address active">
-							<p>
-								{address.rua}, {address.numero}
-							</p>
-							<p className="show">{address.complemento}</p>
-							<p className="show">{address.bairro}</p>
-							<button className="location__change show">Trocar endereço</button>
+							<div className="address__detail">
+								<label>Entregar em:</label>
+								<p>
+									{address.rua}, {address.numero}
+								</p>
+								<p className="show">
+									{address.complemento}
+									{address.complemento && ' - '}
+									{address.bairro}
+								</p>
+							</div>
+							<button
+								className="address__change btn show"
+								onClick={handleAddress}
+							>
+								Trocar endereço
+							</button>
+							<label
+								className={
+									address !== undefined
+										? 'location__btn'
+										: 'location__btn location__btn--add'
+								}
+								htmlFor="location__input"
+							></label>
 						</div>
 					) : (
 						<div className="content__address">
@@ -79,11 +95,13 @@ const DefaultFooter = () => {
 									/>
 									{data &&
 										(data.erro ? (
-											<div className="address__detail">Não encontrado :(</div>
+											<div className="address__detail address__detail--form">
+												Não encontrado :(
+											</div>
 										) : (
 											<>
-												<div className="address__detail">
-													{data.logradouro}
+												<div className="address__detail address__detail--form">
+													<h4>{data.logradouro}</h4>
 													<span>
 														{data.bairro}, {data.uf}
 													</span>
@@ -102,14 +120,10 @@ const DefaultFooter = () => {
 						</div>
 					)}
 				</div>
-				<label
-					className={
-						address !== undefined
-							? 'location__btn'
-							: 'location__btn location__btn--add'
-					}
-					htmlFor="location__input"
-				></label>
+				<div className="location__card">
+					<IconShop />
+					{total ? total : 'vazio'}
+				</div>
 			</div>
 		</div>
 	);

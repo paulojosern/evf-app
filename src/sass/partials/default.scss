@@ -207,37 +207,38 @@
 	}
 	&__location {
 		display: flex;
-		align-items: flex-end;
+		align-items: stretch;
 		justify-content: space-between;
-		flex-flow: row wrap;
+		flex-flow: row;
 		width: calc(100% - 30px);
-		padding: 5px 15px 10px;
+		padding: 5px 15px 15px;
 		@include font(rgba($color, 0.7), 0.9em, 400);
 
 		.location__btn {
-			background-color: white;
-			width: 20px;
-			height: 20px;
+			width: 100%;
+			height: 30px;
 			position: absolute;
-			right: 10px;
-			bottom: 5px;
+			right: 0;
+			top: 50%;
+			transform: translateY(-50%);
 			transition: all 0.3s ease;
-			margin-left: 8px;
+			cursor: pointer;
 			&::before,
 			&::after {
 				height: 2px;
-				width: 10px;
+				width: 12px;
 				content: '';
 				position: absolute;
-				top: 50%;
-				left: 8px;
+				top: 13px;
+				right: 4px;
 				transform: translateY(-50%) rotate(45deg);
 				background: $background;
 				border-radius: 1px;
+				display: none;
 			}
 			&::after {
 				transform: translateY(-50%) rotate(-45deg);
-				left: 2px;
+				top: 20px;
 			}
 			&--add {
 				&::before,
@@ -261,7 +262,8 @@
 			display: flex;
 			align-items: center;
 			flex: auto;
-			padding-top: 5px;
+			margin-right: 5px;
+			position: relative;
 			svg {
 				fill: $background;
 				width: 14px;
@@ -271,17 +273,27 @@
 			.content__address {
 				line-height: 120%;
 				flex: auto;
-				padding: 0 22px 0 0;
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
 				.address {
 					@include font($color, 1.2em, 400);
 					line-height: 125%;
 					&__detail {
-						@include font($color, 1em, 400);
-						padding: 0 10px 10px;
-						span {
-							font-size: 0.8em;
+						@include font($color, 1em, 300);
+
+						label {
+							font-size: 0.9em;
 							display: block;
 						}
+						&--form {
+							padding: 0px 10px 10px;
+							font-weight: 600;
+							line-height: 135%;
+						}
+					}
+					&__change {
+						margin: 0 0px 0 0;
 					}
 				}
 				.show {
@@ -294,26 +306,18 @@
 			display: none;
 			&:checked ~ .location__content {
 				align-items: flex-start;
-				//@include font(rgba($color, 0.9), 1.1em, 300);
-			}
-			&:checked ~ .location__btn {
-				transform: rotate(45deg);
-				&::before,
-				&::after {
-					height: 2px;
-					width: 13px;
-					content: '';
-					position: absolute;
-					top: 50%;
-					left: 50%;
-					transform: translateX(-50%) translateY(-50%);
-					background: $background;
-					border-radius: 1px;
-				}
-				&::after {
-					transform: translateX(-50%) translateY(-50%) rotate(90deg);
+				.location__btn {
+					&::before,
+					&::after {
+						right: -5px;
+						transform: translateY(-50%) rotate(-45deg);
+					}
+					&::after {
+						transform: translateY(-50%) rotate(45deg);
+					}
 				}
 			}
+
 			&:checked ~ .location__btn--add {
 				transform: rotate(45deg);
 			}
@@ -330,43 +334,33 @@
 					}
 				}
 			}
-			&:checked ~ .default__card {
+			&:checked ~ .location__card {
 				opacity: 0;
 				visibility: hidden;
 				bottom: -1000px;
 				position: absolute;
 			}
 		}
-		.location__change {
-			appearance: none;
-			background-color: white;
-			color: $background;
-			border: 0;
-			border-radius: 16px;
-			margin-top: 4px;
-			padding: 3px 10px 0 0;
-			border: 0px solid rgba($color, 0.2);
-			@include font($background, 1em, 500);
+		.location__card {
+			display: flex;
+			align-items: center;
+			width: calc(40% - 30px);
+			padding: 10px 15px;
+
+			background-color: $background;
+			@include font(white, 1em, 500);
+			letter-spacing: 0.5px;
+			justify-content: space-between;
+			border-radius: 4px;
+			svg {
+				fill: white;
+				width: 18px;
+				height: auto;
+				margin-right: 10px;
+			}
 		}
 	}
-	&__card {
-		display: flex;
-		align-items: center;
-		width: calc(100% - 30px);
-		padding: 10px 15px;
-		margin: 0 0 5px;
-		background-color: $background;
-		@include font(white, 1em, 500);
-		letter-spacing: 0.5px;
-		justify-content: space-between;
-		border-radius: 4px;
-		svg {
-			fill: white;
-			width: 18px;
-			height: auto;
-			margin-right: 10px;
-		}
-	}
+
 	@keyframes fadein {
 		0% {
 			transform: translateY(100%);
