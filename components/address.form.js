@@ -7,8 +7,8 @@ const AddressForm = ({ cep, rua, bairro, href, input }) => {
 	const [{ values, loading }, handleChange, handleSubmitCep] = useFormCep();
 	const { inputAddress } = useAddressContext();
 	const [name, setName] = useLocalStorage('address');
-	const address = name && JSON.parse(name);
-	href && console.log(href);
+	// const address = name && JSON.parse(name);
+	// href && console.log(href);
 
 	const router = href !== undefined && useRouter();
 	const sendConfirm = (e) => {

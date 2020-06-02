@@ -23,11 +23,14 @@ const DefaultFooter = () => {
 	} = useShopCardContext();
 
 	// total && console.log(total);
-	address && console.log(address);
+	// console.log('storage :', name);
+	// console.log('address :', cep);
 
 	useEffect(() => {
-		setAddress(name && JSON.parse(name));
-	}, [name]);
+		cep !== undefined
+			? setAddress({ cep, rua, bairro, numero, complemento })
+			: setAddress(name && JSON.parse(name));
+	}, [cep]);
 
 	const handleCEP = (e) => {
 		var x = e.target.value.replace(/\D/g, '').match(/(\d{0,5})(\d{0,3})/);

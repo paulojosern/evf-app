@@ -11,13 +11,15 @@ const Index = () => {
 	const [inputCep, setInputCep] = useState();
 	const [name] = useLocalStorage('address');
 	const cepInput = useRef();
-	const address = name && JSON.parse(name);
-
-	name && console.log(address.cep);
+	const [address, setAddress] = useState();
 
 	const {
 		addressState: { cep, numero, complemento, visible },
 	} = useAddressContext();
+
+	useEffect(() => {
+		setAddress(name && JSON.parse(name));
+	}, [name]);
 
 	useEffect(() => {
 		document.querySelector('body').style.overflowY = 'hidden';
@@ -27,6 +29,8 @@ const Index = () => {
 			cepInput.current.value = cep;
 		}
 	}, []);
+
+	const handleAddress = () => setAddress(undefined);
 
 	const getCep = (newcep) => {
 		axios
@@ -55,7 +59,7 @@ const Index = () => {
 		getCep(newcep);
 	};
 
-	data && console.log(data);
+	data && console.log('data,', data);
 	return (
 		<main className="main">
 			<div className="home">
@@ -78,14 +82,33 @@ const Index = () => {
 					}
 				>
 					<div className="form__group">
-						<label>Informe seu cep</label>
-						<input
-							type="text"
-							className="form__input"
-							onChange={handleCEP}
-							ref={cepInput}
-							value={name && address.cep}
-						/>
+						{address !== undefined ? (
+							<div className="cep__address">
+								<label>Entregar nesse endereço?</label>
+								<h3>
+									{address.rua}, {address.numero}
+								</h3>
+								<h4>{address.complemento}</h4>
+								<h4>{address.bairro}</h4>
+								<div className="flex center">
+									<button className="btn btn--default" onClick={handleAddress}>
+										Não
+									</button>
+									<button className="btn">Sim</button>
+								</div>
+							</div>
+						) : (
+							<>
+								<label>Informe seu cep</label>
+								<input
+									type="text"
+									className="form__input"
+									onChange={handleCEP}
+									ref={cepInput}
+								/>
+							</>
+						)}
+
 						{data.erro && <div className="cep__erro">Não encontrado :(</div>}
 						<input
 							type="submit"

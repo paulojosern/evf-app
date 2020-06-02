@@ -93,10 +93,10 @@
 			font-weight: 600;
 		}
 		@include size(mobile_min) {
-			font-size: 2.2em;
+			font-size: 2em;
 		}
 		@include size(mobile_med) {
-			font-size: 2.4em;
+			font-size: 2em;
 		}
 		&--show {
 			align-items: flex-start;
@@ -176,6 +176,15 @@
 				visibility: visible;
 			}
 		}
+		.cep__address {
+			font-size: 0.6em;
+			width: 100%;
+			text-align: center;
+			line-height: 150%;
+			label {
+				padding-bottom: 5px;
+			}
+		}
 	}
 	&__detail {
 		background: white;
@@ -222,10 +231,10 @@
 		appearance: none;
 		border: 0;
 		background: $blue;
-		border-radius: 50px;
+		border-radius: 6px;
 		padding: 0 20px;
 		//width: 70px;
-		height: 50px;
+		height: 45px;
 		min-width: 50px;
 		display: flex;
 		align-items: center;
