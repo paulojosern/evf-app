@@ -1,17 +1,33 @@
-import { useState, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useAddressContext } from '~/context/address.context';
+import { useShopCardContext } from '~/context/shopcard.context';
+import useLocalStorage from '~/effects/useLocalStorage';
 import useGetCep from '~/effects/useGetCep';
 import AddressForm from '~/components/address.form';
 import IconLocation from '~/assets/logos/icon-location.svg';
 import IconShop from '~/assets/logos/icon-shop.svg';
 
 const DefaultFooter = () => {
+	const [name, setName] = useLocalStorage('address');
+	const [address, setAddress] = useState();
+	const input = useRef();
 	const {
 		addressState: { cep, rua, bairro, numero, complemento, visible },
 		changeAddress,
 	} = useAddressContext();
+	// cep
 	const [{ data }, getCep] = useGetCep();
-	const input = useRef();
+	//ShopCard
+	const {
+		ShopCardState: { total },
+	} = useShopCardContext();
+
+	// total && console.log(total);
+	address && console.log(address);
+
+	useEffect(() => {
+		setAddress(name && JSON.parse(name));
+	}, [name]);
 
 	const handleCEP = (e) => {
 		var x = e.target.value.replace(/\D/g, '').match(/(\d{0,5})(\d{0,3})/);
@@ -20,7 +36,6 @@ const DefaultFooter = () => {
 			getCep(e.target.value);
 		} else {
 		}
-		data && console.log(data);
 	};
 
 	return (
@@ -34,18 +49,17 @@ const DefaultFooter = () => {
 				/>
 				<div className="default__card">
 					<IconShop />
-					Nenhum pedido
+					{total}
 				</div>
-
 				<div className="location__content">
 					<IconLocation />
-					{cep !== undefined ? (
+					{address !== undefined ? (
 						<div className="content__address active">
 							<p>
-								{rua}, {numero}
+								{address.rua}, {address.numero}
 							</p>
-							<p className="show">{complemento}</p>
-							<p className="show">{bairro}</p>
+							<p className="show">{address.complemento}</p>
+							<p className="show">{address.bairro}</p>
 							<button className="location__change show">Trocar endereço</button>
 						</div>
 					) : (
@@ -87,7 +101,7 @@ const DefaultFooter = () => {
 				</div>
 				<label
 					className={
-						cep !== undefined
+						address !== undefined
 							? 'location__btn'
 							: 'location__btn location__btn--add'
 					}

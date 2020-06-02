@@ -7,7 +7,8 @@ $placeholder: $color;
 @import url('https://fonts.googleapis.com/css2?family=Cabin:wght@400;500;600;700&display=swap');
 //@import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap');
 //$font: 'Hind Siliguri', sans-serif;
-$font: 'Cabin', sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700&display=swap');
+$font: 'Source Sans Pro', sans-serif;
 @mixin font($color, $size, $type) {
 	color: $color;
 	font-family: $font;

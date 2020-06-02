@@ -2,14 +2,18 @@ import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import AddressForm from '~/components/address.form';
 import { useAddressContext } from '~/context/address.context';
-
+import useLocalStorage from '~/effects/useLocalStorage';
 import LogoEvf from '~/assets/logos/logo-evf.svg';
 
-export default function Home() {
+const Index = () => {
 	const [btn, setBtn] = useState();
-	const [data, setData] = useState({});
+	const [data, setData] = useState({ empty: true });
 	const [inputCep, setInputCep] = useState();
+	const [name] = useLocalStorage('address');
 	const cepInput = useRef();
+	const address = name && JSON.parse(name);
+
+	name && console.log(address.cep);
 
 	const {
 		addressState: { cep, numero, complemento, visible },
@@ -51,27 +55,26 @@ export default function Home() {
 		getCep(newcep);
 	};
 
+	data && console.log(data);
 	return (
 		<main className="main">
 			<div className="home">
 				<div
 					className={
-						data.erro
-							? 'home__logo  home__logo--erro'
-							: !data.logradouro
-							? 'home__logo'
-							: 'home__logo home__logo--hide'
+						!data.logradouro ? 'home__logo' : 'home__logo home__logo--hide'
 					}
 				>
 					<LogoEvf />
 				</div>
 				<div
 					className={
-						!data.logradouro
+						data.empty
 							? 'home__cep'
-							: !cep
-							? 'home__cep home__cep--show'
-							: 'home__cep home__cep--active'
+							: !data.logradouro
+							? data.erro
+								? 'home__cep home__cep--erro'
+								: 'home__cep home__cep--show'
+							: 'home__cep home__cep--show'
 					}
 				>
 					<div className="form__group">
@@ -81,6 +84,7 @@ export default function Home() {
 							className="form__input"
 							onChange={handleCEP}
 							ref={cepInput}
+							value={name && address.cep}
 						/>
 						{data.erro && <div className="cep__erro">Não encontrado :(</div>}
 						<input
@@ -90,24 +94,40 @@ export default function Home() {
 							className={!btn ? 'home__btn' : 'home__btn home__btn--open'}
 						/>
 					</div>
-					<div
-						className={
-							!data.logradouro ? 'cep__detail' : 'cep__detail cep__detail--show'
-						}
-					>
-						<h4>{data.logradouro}</h4>
-						<h5>
-							{data.bairro}, {data.uf}
-						</h5>
-						<AddressForm
-							cep={inputCep}
-							rua={data.logradouro}
-							bairro={data.bairro}
-							href="/default"
-						/>
-					</div>
+				</div>
+				<div
+					className={
+						data.erro
+							? 'home__detail  home__detail--erro'
+							: !data.logradouro
+							? 'home__detail'
+							: 'home__detail home__detail--show'
+					}
+				>
+					<h4>{data.logradouro}</h4>
+					<h5>
+						{data.bairro}, {data.uf}
+					</h5>
+					<AddressForm
+						cep={inputCep}
+						rua={data.logradouro}
+						bairro={data.bairro}
+						href="/default"
+					/>
 				</div>
 			</div>
 		</main>
 	);
-}
+};
+
+// Index.getInitialProps = async () => {
+// 	//const localStorageAddress = await localStorage.getItem('address');
+// 	const localStorageAddress =
+// 		(await JSON.parse(localStorage.getItem('address'))) || null;
+// 	// const [address, setAddress] = useState();
+// 	// await setAddress(JSON.parse(localStorageAddress));
+// 	console.log('address', localStorageAddress);
+// 	return localStorageAddress;
+// };
+
+export default Index;

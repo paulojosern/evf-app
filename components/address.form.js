@@ -1,13 +1,16 @@
 import { useRouter } from 'next/router';
 import useFormCep from '~/effects/useFormCep';
 import { useAddressContext } from '~/context/address.context';
+import useLocalStorage from '~/effects/useLocalStorage';
 
 const AddressForm = ({ cep, rua, bairro, href, input }) => {
 	const [{ values, loading }, handleChange, handleSubmitCep] = useFormCep();
 	const { inputAddress } = useAddressContext();
+	const [name, setName] = useLocalStorage('address');
+	const address = name && JSON.parse(name);
+	href && console.log(href);
 
 	const router = href !== undefined && useRouter();
-
 	const sendConfirm = (e) => {
 		e.preventDefault();
 		const newAddress = {
@@ -17,8 +20,9 @@ const AddressForm = ({ cep, rua, bairro, href, input }) => {
 			...values,
 		};
 		inputAddress(newAddress);
-		input.current.click();
+		input && input.current.click();
 		href !== undefined && router.push(href);
+		setName(JSON.stringify(newAddress));
 	};
 
 	return (

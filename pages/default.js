@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-
 import { useRouter } from 'next/router';
+import { ShopCardProvider } from '~/context/shopcard.context';
 import DefaultMenu from '~/components/default.menu';
 import DefaultFooter from '~/components/default.footer';
 import ItemContent from '~/components/item.content';
@@ -44,7 +44,7 @@ const Default = () => {
 	const closeList = () => setAddpay(!addpay);
 
 	return (
-		<>
+		<ShopCardProvider>
 			<div className={addpay ? 'card__list card__list--show' : 'card__list'}>
 				{list !== undefined && (
 					<>
@@ -94,7 +94,7 @@ const Default = () => {
 				<div className="default__footer2"></div>
 			</div>
 			<DefaultFooter />
-		</>
+		</ShopCardProvider>
 	);
 };
 
