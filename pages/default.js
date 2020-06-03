@@ -77,7 +77,12 @@ const Default = () => {
 				)}
 			</div>
 			<header className="default__header">
-				<DefaultMenu />
+				<div className="header__avatar"></div>
+				<div className="header__content">
+					<h3>REstaurante Terrinha</h3>
+					<p>Comida Chinesa</p>
+					<DefaultMenu />
+				</div>
 			</header>
 
 			<div className="default">

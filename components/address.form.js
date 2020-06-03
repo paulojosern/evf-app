@@ -28,20 +28,22 @@ const AddressForm = ({ cep, rua, bairro, href, input }) => {
 	return (
 		<div className="form__group cep__form">
 			<form onSubmit={handleSubmitCep(sendConfirm)}>
-				<input
-					type="text"
-					className="form__input"
-					placeholder="Número"
-					name="numero"
-					onChange={handleChange}
-				/>
-				<input
-					type="text"
-					className="form__input"
-					placeholder="Complemento"
-					name="complemento"
-					onChange={handleChange}
-				/>
+				<div className="form__item form__item--address">
+					<input
+						type="text"
+						className="form__input"
+						placeholder="Número"
+						name="numero"
+						onChange={handleChange}
+					/>
+					<input
+						type="text"
+						className="form__input"
+						placeholder="Complemento"
+						name="complemento"
+						onChange={handleChange}
+					/>
+				</div>
 				<a
 					// href={href}
 					onClick={sendConfirm}

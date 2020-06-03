@@ -11,6 +11,20 @@
 			color: $color;
 		}
 	}
+	&__item {
+		display: flex;
+		&--address {
+			input[type='text'] {
+				//flex: auto;
+				&:first-of-type {
+					// width: 40px;
+					flex: 90px;
+					min-width: 90px;
+					margin-right: 10px;
+				}
+			}
+		}
+	}
 	&__input {
 		@include font($color, 1.1em, 500);
 		background: transparent;

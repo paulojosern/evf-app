@@ -70,7 +70,7 @@ const DefaultFooter = () => {
 								className="address__change btn show"
 								onClick={handleAddress}
 							>
-								Trocar endereço
+								Trocar
 							</button>
 							<label
 								className={
@@ -101,7 +101,7 @@ const DefaultFooter = () => {
 										) : (
 											<>
 												<div className="address__detail address__detail--form">
-													<h4>{data.logradouro}</h4>
+													{data.logradouro}
 													<span>
 														{data.bairro}, {data.uf}
 													</span>

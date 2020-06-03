@@ -1,13 +1,13 @@
 .default {
 	position: fixed;
-	background-color: white;
+	background-color: $background;
 	width: 100%;
 	transform: translateY(100%);
 	animation: fadein;
 	animation-duration: 0.2s;
 	animation-delay: 0.1s;
 	animation-fill-mode: both;
-	height: calc(100% - 150px);
+	height: calc(100% - 130px);
 	bottom: 0;
 	display: block;
 	overflow-y: auto;
@@ -21,8 +21,8 @@
 		animation-fill-mode: both;
 	}
 	&__header {
-		height: 150px;
-		background-color: $background;
+		height: 130px;
+		background-color: $red;
 		position: fixed !important;
 		z-index: 10;
 		width: 100%;
@@ -58,28 +58,38 @@
 			display: flex;
 			align-items: center;
 			justify-content: center;
-			bottom: -10px;
-			left: 15%;
-			transform: translateX(-50%);
+			bottom: 50px;
+			left: 20px;
+
 			font-size: 0.6em;
+		}
+		.header__content {
+			padding: 10px 0 0;
+			background: rgb(255, 255, 255);
+			width: 100%;
+			border-radius: 7px 7px 0 0;
+			h3,
+			p {
+				padding: 2px 10px 2px 100px;
+			}
 		}
 	}
 	&__menu {
 		padding: 10px 0 10px 10px;
 		background: rgb(255, 255, 255);
 		width: calc(100% - 10px);
-		border-radius: 7px 7px 0 0;
 		.menu__link {
 			text-decoration: none;
 			@include font($color, 0.85em, 400);
-			border: 1px solid rgba($color, 0.2);
+			//border: 1px solid rgba($color, 0.2);
 			border-radius: 15px;
 			padding: 5px 8px;
-			margin: 4px 5px !important;
+			margin: 4px 6px !important;
 			letter-spacing: 0.2px;
 			width: auto !important;
+			background: rgba($color, 0.1);
 			&:first-of-type {
-				margin: 4px 4px 4px 0 !important;
+				margin: 4px 6px 4px 0 !important;
 			}
 		}
 	}
@@ -91,7 +101,7 @@
 		}
 		.item {
 			width: 200px !important;
-			margin-right: 10px;
+			margin-right: 14px;
 			outline: none !important;
 			position: relative;
 			height: 100% !important;
@@ -99,17 +109,24 @@
 				background-color: $background;
 				width: 100%;
 				height: 150px;
-				border-radius: 6px;
+				border-radius: 8px 8px 0 0;
 				position: relative;
 				z-index: 2;
+				background-size: 100%;
+				background-position: center;
+				background-repeat: no-repeat;
 			}
 			&__detail {
-				padding: 0 10px 0 5px;
-				margin: 10px 10px 10px 0;
-				@include font(rgba($color, 0.8), 0.9em, 300);
+				padding: 10px;
+				margin: 0;
+				@include font(rgba($color, 0.8), 0.9em, 400);
 				line-height: 120%;
-				border-right: 1px solid rgba($color, 0.4);
-				min-height: 100px;
+				min-height: 110px;
+				background: white;
+				border-radius: 0 0 8px 8px;
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
 			}
 			&__title {
 				@include font($color, 1.3em, 600);
@@ -117,25 +134,28 @@
 			}
 			&__price {
 				@include font($color, 1.4em, 500);
-				text-align: left;
-				position: absolute;
-				right: 40px;
-				bottom: 12px;
+				display: flex;
+				justify-content: space-between;
+				align-items: flex-end;
+				h4 {
+					padding: 5px;
+				}
 			}
 			&__add {
-				position: absolute;
-				right: -15px;
-				bottom: -5px;
-				width: 50px;
-				height: 50px;
+				// position: absolute;
+				// right: -15px;
+				// bottom: -5px;
+				position: relative;
+				width: 45px;
+				height: 45px;
 				background: $blue;
-				border-radius: 50%;
+				border-radius: 8px;
 				z-index: 5;
 				border: 5px solid white;
 				&::before,
 				&::after {
 					height: 3px;
-					width: 18px;
+					width: 16px;
 					content: '';
 					position: absolute;
 					top: 50%;
@@ -150,37 +170,41 @@
 			}
 			&--column {
 				width: calc(100% - 20px) !important;
-				padding: 0 0 40px 0;
-				margin: 0 20px 20px 0;
+				margin: 0 20px 14px 0;
+				border-radius: 8px;
 				display: flex;
-				border-bottom: 1px solid $border;
+				background: white;
 				height: auto !important;
 				.item__image {
-					background-color: $background;
-					flex: 110px;
-					min-width: 110px;
-					width: 110px;
-					max-width: 110px;
-					height: 110px;
-					border-radius: 6px;
+					background-color: white;
+					flex: 120px;
+					min-width: 120px;
+					width: 120px;
+					max-width: 120px;
+					height: 130px;
+					border-radius: 8px 0 0 8px;
 					position: relative;
 					z-index: 2;
+					background-size: auto 110%;
+					background-position: center;
+					background-repeat: no-repeat;
 				}
 				.item__detail {
 					flex: auto;
-					padding: 10px 0 10px 15px;
+					padding: 12px 10px 12px 14px;
 					margin: 0;
-					@include font($color, 0.95em, 400);
+					@include font($color, 0.9em, 400);
 					border-right: 0;
 					min-height: auto;
+					border-radius: 0 8px 8px 0;
 				}
 				.item__price {
-					right: 55px;
-					bottom: 22px;
+					// right: 55px;
+					// bottom: 22px;
 				}
 				.item__add {
 					right: -5px;
-					bottom: 5px;
+					bottom: -5px;
 				}
 			}
 		}
@@ -280,14 +304,17 @@
 					@include font($color, 1.2em, 400);
 					line-height: 125%;
 					&__detail {
-						@include font($color, 1em, 300);
+						@include font($color, 1em, 400);
 
 						label {
-							font-size: 0.9em;
+							@include font($color, 0.9em, 300);
+							display: block;
+						}
+						span {
 							display: block;
 						}
 						&--form {
-							padding: 0px 10px 10px;
+							padding: 0px 2px 10px;
 							font-weight: 600;
 							line-height: 135%;
 						}
@@ -347,11 +374,11 @@
 			width: calc(40% - 30px);
 			padding: 10px 15px;
 
-			background-color: $background;
+			background-color: $red;
 			@include font(white, 1em, 500);
 			letter-spacing: 0.5px;
 			justify-content: space-between;
-			border-radius: 4px;
+			border-radius: 6px;
 			svg {
 				fill: white;
 				width: 18px;

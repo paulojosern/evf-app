@@ -20,17 +20,18 @@ const ItemContent = ({ items, title, column, getItem }) => {
 					const handleClick = () => getItem(item);
 					return (
 						<div className="item item--column" key={i}>
-							<img
+							<div
 								className="item__image"
-								src={item.image}
-								alt={item.description}
-							/>
+								style={{ backgroundImage: `url(${item.image})` }}
+							></div>
 							<div className="item__detail">
 								<div className="item__title">{item.description}</div>
 								{item.detail}
-								<div className="item__price">{item.price}</div>
+								<div className="item__price">
+									<h4>{item.price}</h4>
+									<button className="item__add" onClick={handleClick}></button>
+								</div>
 							</div>
-							<button className="item__add" onClick={handleClick}></button>
 						</div>
 					);
 				})
@@ -40,17 +41,21 @@ const ItemContent = ({ items, title, column, getItem }) => {
 						const handleClick = () => getItem(item);
 						return (
 							<div className="item" key={i}>
-								<img
+								<div
 									className="item__image"
-									src={item.image}
-									alt={item.description}
-								/>
+									style={{ backgroundImage: `url(${item.image})` }}
+								></div>
 								<div className="item__detail">
 									<div className="item__title">{item.description}</div>
 									{item.detail}
-									<div className="item__price">{item.price}</div>
+									<div className="item__price">
+										<h4>{item.price}</h4>
+										<button
+											className="item__add"
+											onClick={handleClick}
+										></button>
+									</div>
 								</div>
-								<button className="item__add" onClick={handleClick}></button>
 							</div>
 						);
 					})}
