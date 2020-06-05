@@ -1,6 +1,6 @@
 .default {
 	position: fixed;
-	background-color: $background;
+	background-color: $yellow;
 	width: 100%;
 	transform: translateY(100%);
 	animation: fadein;
@@ -22,32 +22,20 @@
 	}
 	&__header {
 		height: 130px;
-		background-color: $red;
+		background-color: $color;
 		position: fixed !important;
 		z-index: 10;
 		width: 100%;
 		top: 0;
 		display: flex;
 		align-items: flex-end;
-		box-shadow: 0 2px 5px 2px rgba($color, 0.08);
+		//box-shadow: 0 2px 5px 2px rgba($color, 0.08);
 		transform: translateY(100%);
 		animation: fadein;
 		animation-duration: 0.2s;
 		animation-delay: 0.1s;
 		animation-fill-mode: both;
-		// transform: translateY(1000%);
-		// animation: fadeinheader;
-		// animation-duration: 0.2s;
-		// animation-delay: 0.1s;
-		// animation-fill-mode: both;
-		// @keyframes fadeinheader {
-		// 	0% {
-		// 		transform: translateY(1000%);
-		// 	}
-		// 	100% {
-		// 		transform: translateY(0);
-		// 	}
-		// }
+
 		.header__avatar {
 			background: white;
 			height: 65px;
@@ -62,30 +50,32 @@
 			left: 20px;
 
 			font-size: 0.6em;
+			display: none;
 		}
 		.header__content {
 			padding: 10px 0 0;
-			background: rgb(255, 255, 255);
+			background: $yellow;
+
 			width: 100%;
-			border-radius: 7px 7px 0 0;
+
+			//border-radius: 7px 7px 0 0;
 			h3,
 			p {
-				padding: 2px 10px 2px 100px;
+				padding: 2px 15px;
 			}
 		}
 	}
 	&__menu {
 		padding: 10px 0 10px 10px;
-		background: rgb(255, 255, 255);
+		background: $yellow;
 		width: calc(100% - 10px);
 		.menu__link {
 			text-decoration: none;
 			@include font($color, 0.85em, 400);
 			//border: 1px solid rgba($color, 0.2);
 			border-radius: 15px;
-			padding: 5px 8px;
-			margin: 4px 6px !important;
-			letter-spacing: 0.2px;
+			padding: 7px 8px;
+			margin: 4px 5px !important;
 			width: auto !important;
 			background: rgba($color, 0.1);
 			&:first-of-type {
@@ -105,28 +95,36 @@
 			outline: none !important;
 			position: relative;
 			height: 100% !important;
+			//padding: 20px;
+			background: white;
+			border-radius: 15px;
 			&__image {
 				background-color: $background;
 				width: 100%;
 				height: 150px;
-				border-radius: 8px 8px 0 0;
+				border-radius: 15px;
 				position: relative;
 				z-index: 2;
 				background-size: 100%;
 				background-position: center;
 				background-repeat: no-repeat;
+				margin: 0;
+				border-radius: 15px 15px 0 0;
 			}
 			&__detail {
-				padding: 10px;
+				padding: 15px;
 				margin: 0;
 				@include font(rgba($color, 0.8), 0.9em, 400);
 				line-height: 120%;
 				min-height: 110px;
-				background: white;
-				border-radius: 0 0 8px 8px;
+				//background: white;
+
 				display: flex;
 				flex-direction: column;
 				justify-content: space-between;
+				p {
+					padding: 5px 0;
+				}
 			}
 			&__title {
 				@include font($color, 1.3em, 600);
@@ -146,22 +144,27 @@
 				// right: -15px;
 				// bottom: -5px;
 				position: relative;
-				width: 45px;
-				height: 45px;
-				background: $blue;
-				border-radius: 8px;
+				// width: 45px;
+				//height: 45px;
+				background: $color;
+				border-radius: 30px;
 				z-index: 5;
-				border: 5px solid white;
+				border: 0px solid $color;
+				padding: 10px 30px 10px 14px;
+				font-weight: 500;
+				font-family: $font;
+				color: white;
+				margin: 12px auto 0;
 				&::before,
 				&::after {
-					height: 3px;
-					width: 16px;
+					height: 2px;
+					width: 12px;
 					content: '';
 					position: absolute;
 					top: 50%;
-					left: 50%;
+					right: 5px;
 					transform: translateX(-50%) translateY(-50%);
-					background: $color;
+					background: white;
 					border-radius: 1px;
 				}
 				&::after {
@@ -209,7 +212,6 @@
 			}
 		}
 	}
-
 	&__footer2 {
 		height: 400px;
 		background: white;
@@ -218,24 +220,27 @@
 	&__footer {
 		position: fixed;
 		z-index: 11;
-		bottom: 0;
+		bottom: 10px;
 		padding-top: 8px;
-		width: 100%;
+		width: calc(100% - 20px);
+		left: 10px;
 		background: white;
 		transform: translateY(100%);
 		animation: fadein;
 		animation-duration: 0.2s;
 		animation-delay: 0.1s;
 		animation-fill-mode: both;
-		box-shadow: 0 -2px 4px 3px rgba($color, 0.08);
+		border-radius: 40px;
+		box-shadow: 0 -2px 10px 6px rgba($color, 0.2);
+		//border-radius: 16px 16px 0 0;
 	}
 	&__location {
 		display: flex;
 		align-items: stretch;
 		justify-content: space-between;
 		flex-flow: row;
-		width: calc(100% - 30px);
-		padding: 5px 15px 15px;
+		width: calc(100% - 40px);
+		padding: 5px 25px 15px;
 		@include font(rgba($color, 0.7), 0.9em, 400);
 
 		.location__btn {
@@ -328,7 +333,6 @@
 				}
 			}
 		}
-
 		.location__input {
 			display: none;
 			&:checked ~ .location__content {
@@ -371,14 +375,14 @@
 		.location__card {
 			display: flex;
 			align-items: center;
-			width: calc(40% - 30px);
+			width: calc(35% - 30px);
 			padding: 10px 15px;
 
-			background-color: $red;
+			background-color: $color;
 			@include font(white, 1em, 500);
 			letter-spacing: 0.5px;
 			justify-content: space-between;
-			border-radius: 6px;
+			border-radius: 20px;
 			svg {
 				fill: white;
 				width: 18px;
@@ -412,17 +416,17 @@
 		left: 0;
 		bottom: 0;
 		width: 100%;
-		height: 95%;
+		height: 100%;
 		background: white;
 		z-index: 20;
-		transform: translateY(100%);
+		transform: translateX(-100%);
 		transition: all 0.2s ease-in-out;
-		border-radius: 8px 8px 0 0;
-		box-shadow: 0 -9px 10px 10px rgba(black, 0.2);
+		//border-radius: 8px 8px 0 0;
+		//box-shadow: 0 -9px 10px 10px rgba(black, 0.2);
 		visibility: hidden;
 		opacity: 0;
 		&--show {
-			transform: translateY(0);
+			transform: translateX(0);
 			visibility: visible;
 			opacity: 1;
 		}
@@ -431,14 +435,15 @@
 			position: relative;
 			z-index: 1;
 			border-radius: 8px 8px 0 0;
+			height: 50%;
 			&-overlay {
 				position: absolute;
 				width: 100%;
 				height: 100%;
 				background-image: linear-gradient(
 					to top,
-					rgba($color, 0.6),
-					rgba($color, 0.1)
+					rgba(black, 0.8),
+					rgba(black, 0.1)
 				);
 				z-index: 3;
 			}
@@ -446,91 +451,177 @@
 				max-width: 100%;
 				position: relative;
 				z-index: 1;
-				border-radius: 8px 8px 0 0;
+				background-size: 100%;
+				height: 100%;
+				background-position: center;
 			}
 		}
 		.list__description {
 			position: absolute;
-			padding: 20px;
+			padding: 25px 40px 45px 25px;
 			z-index: 4;
 			bottom: 0;
-			@include font(white, 1.6em, 600);
+			@include font(white, 2em, 600);
 			text-shadow: 1px 1px 2px rgba($color, 0.4);
+			line-height: 120%;
 		}
 		.list__destail {
 			position: relative;
 			@include font($color, 1em, 400);
 			padding: 12px 20px;
 			line-height: 120%;
+			display: none;
 		}
 		.list__content {
 			// height: 400px;
 			background: white;
+			padding: 1px 15px 85px;
+			position: relative;
+			min-height: calc(50% - 86px);
+			z-index: 5;
+
+			.content__separate {
+				position: absolute;
+				top: -20px;
+				left: 0;
+				border-radius: 20px 20px 0 0;
+				background: white;
+				z-index: 11;
+				width: 100%;
+				height: 21px;
+			}
+			.content__title {
+				@include font($color, 0.9em, 500);
+				padding: 0 0 10px;
+			}
 			.content__item {
 				display: flex;
-				padding: 10px 15px;
-				justify-content: center;
-				.counter {
-					display: flex;
-					border: 1px solid $border;
-					border-radius: 30px;
-					&__add {
-						position: relative;
-						width: 40px;
-						height: 40px;
-						background: white;
-						border-radius: 50%;
-						z-index: 5;
-						border: 5px solid white;
-						cursor: pointer;
-						&::before,
-						&::after {
-							height: 3px;
-							width: 15px;
-							content: '';
-							position: absolute;
-							top: 50%;
-							left: 50%;
-							transform: translateX(-50%) translateY(-50%) rotate(-90deg);
-							background: $color;
-							border-radius: 1px;
-						}
-						&::after {
-							transform: translateX(-50%) translateY(-50%) rotate(180deg);
-						}
+				padding: 8px 10px;
+				justify-content: space-between;
+				background-color: rgba($color, 0.07);
+				border-radius: 15px;
+				margin-bottom: 15px;
+				&--option {
+					margin: 0;
+				}
+				&:not(:first-of-type) {
+					border-radius: 0px;
+					border-top: 1px solid white;
+				}
+				&:nth-of-type(3) {
+					border-radius: 15px 15px 0 0;
+				}
+				&:last-of-type {
+					border-radius: 0 0 15px 15px;
+				}
+				&:first-of-type {
+					border-radius: 15px 15px;
+				}
+			}
+
+			.counter {
+				display: flex;
+				border: 0px solid $border;
+				border-radius: 30px;
+				align-items: center;
+				&__add {
+					position: relative;
+					width: 30px;
+					height: 30px;
+
+					border-radius: 50%;
+					z-index: 5;
+					border: 1px solid $color;
+					cursor: pointer;
+					transition: all 0.3s ease-in-out;
+					&::before,
+					&::after {
+						height: 3px;
+						width: 12px;
+						content: '';
+						position: absolute;
+						top: 50%;
+						left: 50%;
+						transform: translateX(-50%) translateY(-50%) rotate(-90deg);
+						background: $color;
+						border-radius: 1px;
 					}
-					&__remove {
-						position: relative;
-						width: 40px;
-						height: 40px;
-						background: white;
-						border-radius: 50%;
-						z-index: 5;
-						border: 5px solid white;
-						cursor: pointer;
+					&::after {
+						transform: translateX(-50%) translateY(-50%) rotate(180deg);
+					}
+					&--delete {
+						border: 1px solid $red;
+						display: none;
 						&::before {
-							height: 3px;
-							width: 15px;
+							display: none;
+						}
+						&::after {
+							height: 2px;
+							width: 12px;
 							content: '';
 							position: absolute;
 							top: 50%;
 							left: 50%;
-							transform: translateX(-50%) translateY(-50%) rotate(180deg);
-							background: $color;
+							transform: translateX(-50%) translateY(-50%) rotate(0deg);
+							background: $red;
 							border-radius: 1px;
 						}
 					}
-					&__item {
-						padding: 5px;
-						display: flex;
-						align-items: center;
-						@include font($color, 1.5em, 600);
+				}
+				&__remove {
+					position: relative;
+					width: 30px;
+					height: 30px;
+
+					border-radius: 50%;
+					z-index: 5;
+					border: 1px solid $color;
+					cursor: pointer;
+					&::before {
+						height: 3px;
+						width: 12px;
+						content: '';
+						position: absolute;
+						top: 50%;
+						left: 50%;
+						transform: translateX(-50%) translateY(-50%) rotate(180deg);
+						background: $color;
+						border-radius: 1px;
 					}
-					&__price {
-						display: flex;
-						align-items: center;
-						padding-left: 12px;
-						@include font($color, 1.3em, 500);
+				}
+				&__item {
+					padding: 0px 14px;
+					display: flex;
+					align-items: center;
+					@include font($color, 1.3em, 600);
+				}
+				&__price {
+					display: flex;
+					align-items: center;
+					padding-left: 10px;
+					@include font($color, 1em, 500);
+					span {
+						@include font($color, 0.9em, 400);
+						padding-right: 6px;
+					}
+					&-image {
+						width: 40px;
+						height: 40px;
+						background-position: center;
+						background-size: 100%;
+						border-radius: 8px;
+						position: relative;
+						left: -10px;
+					}
+				}
+				&--input {
+					display: none;
+
+					&:checked ~ .counter__add {
+						display: none;
+					}
+					&:checked ~ .counter__add--delete {
+						display: block;
 					}
 				}
 			}
@@ -538,22 +629,25 @@
 		.list__btn {
 			position: absolute;
 			bottom: 0px;
+			left: 0;
 			width: calc(100% - 40px);
 			padding: 0 20px 10px;
 			display: flex;
 			flex-direction: row;
+			background-color: white;
+			z-index: 11;
 			.btn__close {
 				position: relative;
 				width: 50px;
 				height: 50px;
-				background: $background;
+				background: $color;
 				border-radius: 50%;
 				z-index: 5;
 				border: 5px solid white;
 
 				&::before,
 				&::after {
-					height: 4px;
+					height: 3px;
 					width: 18px;
 					content: '';
 					position: absolute;
@@ -572,26 +666,33 @@
 				width: auto;
 				flex: auto;
 				height: 50px;
-				background: $blue;
+				background: $yellow;
 				border-radius: 30px;
 				z-index: 5;
 				border: 5px solid white;
-				@include font($color, 1.1em, 600);
+				@include font($color, 0.85em, 600);
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				padding: 0 30px 0 16px;
+				span {
+					@include font($color, 1.2em, 500);
+				}
 				&::before,
 				&::after {
-					height: 4px;
-					width: 15px;
+					height: 2px;
+					width: 10px;
 					content: '';
 					position: absolute;
 					top: 22px;
 					right: 12px;
 					transform: rotate(-45deg);
 					background: $color;
-					border-radius: 1px;
+					border-radius: 2px;
 				}
 				&::after {
 					transform: rotate(45deg);
-					top: 14px;
+					top: 16px;
 				}
 			}
 		}

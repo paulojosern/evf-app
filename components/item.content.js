@@ -12,6 +12,12 @@ const ItemContent = ({ items, title, column, getItem }) => {
 		variableWidth: true,
 	};
 
+	const numberToReal = (numero) => {
+		var numero = numero.toFixed(2).split('.');
+		numero[0] = 'R$ ' + numero[0].split(/(?=(?:...)*$)/).join('.');
+		return numero.join(',');
+	};
+
 	return (
 		<>
 			<h3 className="section__title">{title}</h3>
@@ -28,7 +34,7 @@ const ItemContent = ({ items, title, column, getItem }) => {
 								<div className="item__title">{item.description}</div>
 								{item.detail}
 								<div className="item__price">
-									<h4>{item.price}</h4>
+									<h4>{numberToReal(item.price)}</h4>
 									<button className="item__add" onClick={handleClick}></button>
 								</div>
 							</div>
@@ -47,13 +53,15 @@ const ItemContent = ({ items, title, column, getItem }) => {
 								></div>
 								<div className="item__detail">
 									<div className="item__title">{item.description}</div>
-									{item.detail}
+									<p>
+										{item.detail.length > 50
+											? item.detail.substr(0, 50) + '...'
+											: item.detail}
+									</p>
 									<div className="item__price">
-										<h4>{item.price}</h4>
-										<button
-											className="item__add"
-											onClick={handleClick}
-										></button>
+										<button className="item__add" onClick={handleClick}>
+											{numberToReal(item.price)}
+										</button>
 									</div>
 								</div>
 							</div>

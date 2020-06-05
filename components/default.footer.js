@@ -56,7 +56,7 @@ const DefaultFooter = () => {
 					{address !== undefined ? (
 						<div className="content__address active">
 							<div className="address__detail">
-								<label>Entregar em:</label>
+								<label className="hidden">Entregar em:</label>
 								<p>
 									{address.rua}, {address.numero}
 								</p>
