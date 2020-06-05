@@ -5,12 +5,12 @@ $red: rgb(255, 0, 85);
 $color: rgb(39, 45, 56);
 $border: rgb(141, 149, 158);
 $placeholder: $color;
-//@import url('https://fonts.googleapis.com/css2?family=Cabin:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cabin:wght@400;500;600;700&display=swap');
 //@import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap');
 //$font: 'Hind Siliguri', sans-serif;
 //@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap');
-$font: 'Montserrat', sans-serif;
+//@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap');
+$font: 'Cabin', sans-serif;
 @mixin font($color, $size, $type) {
 	color: $color;
 	font-family: $font;

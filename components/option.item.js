@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+// import React, { useState } from 'react';
 const OptionItem = ({ list, card, setCard }) => {
-	const [state, setState] = useState();
+	// const [state, setState] = useState();
 
-	const numberToReal = (numero) => {
-		var numero = numero.toFixed(2).split('.');
-		numero[0] = 'R$ ' + numero[0].split(/(?=(?:...)*$)/).join('.');
-		return numero.join(',');
-	};
+	// const numberToReal = (numero) => {
+	// 	var numero = numero.toFixed(2).split('.');
+	// 	numero[0] = 'R$ ' + numero[0].split(/(?=(?:...)*$)/).join('.');
+	// 	return numero.join(',');
+	// };
 	const addOption = (price, option) => {
 		const optionDefault = option;
 		setCard({
@@ -23,7 +23,7 @@ const OptionItem = ({ list, card, setCard }) => {
 		});
 	};
 
-	console.log(card);
+	// console.log(card);
 	return (
 		<>
 			{list.options &&
@@ -36,7 +36,7 @@ const OptionItem = ({ list, card, setCard }) => {
 					return (
 						<div className="content__item content__item--option" key={i}>
 							<div className="counter__price">
-								<span>{el.detail}</span> + {numberToReal(el.price)}
+								<span>{el.detail}</span> + {el.price}
 							</div>
 							<div className="counter">
 								<input type="checkbox" className="counter--input" id={option} />

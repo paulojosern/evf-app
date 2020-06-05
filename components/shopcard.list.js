@@ -27,11 +27,11 @@ const ShopCardList = ({ addpay, list, closeList }) => {
 		indent !== 1 && setIndent(indent - 1);
 	};
 
-	const numberToReal = (numero) => {
-		var numero = numero.toFixed(2).split('.');
-		numero[0] = 'R$ ' + numero[0].split(/(?=(?:...)*$)/).join('.');
-		return numero.join(',');
-	};
+	// const numberToReal = (numero) => {
+	// 	var numero = numero.toFixed(2).split('.');
+	// 	numero[0] = 'R$ ' + numero[0].split(/(?=(?:...)*$)/).join('.');
+	// 	return numero.join(',');
+	// };
 
 	return (
 		<div className={addpay ? 'card__list card__list--show' : 'card__list'}>
@@ -56,7 +56,7 @@ const ShopCardList = ({ addpay, list, closeList }) => {
 										className="counter__price-image"
 										style={{ backgroundImage: `url(${list.image})` }}
 									/>
-									{numberToReal(list.price)}
+									{list.price}
 								</div>
 								<div className="counter">
 									<button
@@ -73,7 +73,7 @@ const ShopCardList = ({ addpay, list, closeList }) => {
 						<div className="list__btn">
 							<button className="btn__close" onClick={closeList}></button>
 							<button className="btn__add">
-								<span>Total: {numberToReal(card.total)}</span>
+								<span>Total: {card.total}</span>
 								Confirmar
 							</button>
 						</div>
