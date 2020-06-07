@@ -1,7 +1,6 @@
-import React from 'react';
 import Slider from 'react-slick';
 
-const ItemContent = ({ items, title, column, getItem }) => {
+const ItemContent = ({ items, title, column, getItem, toReal }) => {
 	const settings = {
 		className: 'slider variable-width',
 		dots: false,
@@ -11,12 +10,6 @@ const ItemContent = ({ items, title, column, getItem }) => {
 		slidesToScroll: 1,
 		variableWidth: true,
 	};
-
-	// const numberToReal = (numero) => {
-	// 	var numero = numero.toFixed(2).split('.');
-	// 	numero[0] = 'R$ ' + numero[0].split(/(?=(?:...)*$)/).join('.');
-	// 	return numero.join(',');
-	// };
 
 	return (
 		<>
@@ -34,8 +27,9 @@ const ItemContent = ({ items, title, column, getItem }) => {
 								<div className="item__title">{item.description}</div>
 								{item.detail}
 								<div className="item__price">
-									<h4>{item.price}</h4>
-									<button className="item__add" onClick={handleClick}></button>
+									<button className="item__add" onClick={handleClick}>
+										{toReal(item.price)}
+									</button>
 								</div>
 							</div>
 						</div>
@@ -60,7 +54,7 @@ const ItemContent = ({ items, title, column, getItem }) => {
 									</p>
 									<div className="item__price">
 										<button className="item__add" onClick={handleClick}>
-											{item.price}
+											{toReal(item.price)}
 										</button>
 									</div>
 								</div>

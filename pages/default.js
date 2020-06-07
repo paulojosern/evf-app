@@ -3,19 +3,25 @@ import { useRouter } from 'next/router';
 import { ShopCardProvider } from '~/context/shopcard.context';
 import DefaultMenu from '~/components/default.menu';
 import DefaultFooter from '~/components/default.footer';
-import ItemContent from '~/components/item.content';
+import DefaultItem from '~/components/default.item';
 import ShopCardList from '~/components/shopcard.list';
-
-import { json } from '~/services/json';
 
 const Default = () => {
 	const [addpay, setAddpay] = useState(false);
 	const [list, setList] = useState();
 	const router = useRouter();
 	const querie = router.asPath;
+	const [fixed, setFixed] = useState(false);
+	const [fixedTop, setFixedTop] = useState();
 
 	useEffect(() => {
-		document.querySelector('body').style.overflowY = 'auto';
+		document.body.style.overflow = 'auto';
+		window.addEventListener('scroll', () => {
+			window.scrollY >= 150 ? setFixed(true) : setFixed(false);
+		});
+	}, [fixed]);
+
+	useEffect(() => {
 		setTimeout(() => {
 			window.scrollTo({
 				top: querie.offsetTop,
@@ -23,14 +29,6 @@ const Default = () => {
 			});
 		}, 300);
 	}, [querie]);
-
-	const Item = ({ children, id }) => {
-		return (
-			<article className="default__item" id={id}>
-				{children}
-			</article>
-		);
-	};
 
 	const getItem = (items) => {
 		setAddpay(!addpay);
@@ -45,33 +43,45 @@ const Default = () => {
 
 	const closeList = () => setAddpay(!addpay);
 
+	let toReal = (numero) => {
+		const number =
+			numero &&
+			numero.toLocaleString('pt-BR', {
+				style: 'currency',
+				currency: 'BRL',
+			});
+		return number;
+	};
+
 	return (
 		<ShopCardProvider>
-			<ShopCardList list={list} addpay={addpay} closeList={closeList} />
-
-			<header className="default__header">
-				<div className="header__avatar"></div>
+			<ShopCardList
+				list={list}
+				addpay={addpay}
+				closeList={closeList}
+				toReal={toReal}
+			/>
+			<header className="default__header ">
+				<input type="checkbox" className="header__input" id="nav" />
+				<label className="header__btn" htmlFor="nav"></label>
+				<div className="header__nav"></div>
 				<div className="header__content">
 					<h3>Coco Verde Food</h3>
 					<p>Comida Saudável</p>
-					<DefaultMenu />
 				</div>
 			</header>
-
+			<div className={fixed === true ? 'default__nav--fixed' : 'default__nav'}>
+				<DefaultMenu fixedTop={fixedTop} />
+			</div>
 			<div className="default">
-				{json.map((categ, i) => (
-					<Item id={categ.slug} key={i}>
-						<ItemContent
-							items={categ.items}
-							title={categ.title}
-							getItem={getItem}
-							column={categ.column ? categ.column : false}
-						/>
-					</Item>
-				))}
+				<DefaultItem
+					toReal={toReal}
+					getItem={getItem}
+					setFixedTop={setFixedTop}
+				/>
 				<div className="default__footer2"></div>
 			</div>
-			<DefaultFooter />
+			<DefaultFooter toReal={toReal} />
 		</ShopCardProvider>
 	);
 };

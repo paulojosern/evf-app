@@ -4,11 +4,13 @@ import { useShopCardContext } from '~/context/shopcard.context';
 import useLocalStorage from '~/effects/useLocalStorage';
 import useGetCep from '~/effects/useGetCep';
 import AddressForm from '~/components/address.form';
+import ShopCardCart from '~/components/shopcard.cart';
 import IconShop from '~/assets/logos/icon-shop.svg';
 
-const DefaultFooter = () => {
+const DefaultFooter = ({ toReal }) => {
 	const [name, setName] = useLocalStorage('address');
 	const [address, setAddress] = useState();
+	const [openCart, setOpenCart] = useState(false);
 	const input = useRef();
 	const {
 		addressState: { cep, rua, bairro, numero, complemento, visible },
@@ -18,7 +20,7 @@ const DefaultFooter = () => {
 	const [{ data }, getCep] = useGetCep();
 	//ShopCard
 	const {
-		ShopCardState: { total },
+		shopCardState: { total, item },
 	} = useShopCardContext();
 
 	// total && console.log(total);
@@ -42,90 +44,103 @@ const DefaultFooter = () => {
 		}
 	};
 
-	return (
-		<div className="default__footer">
-			<div className="default__location">
-				<input
-					type="checkbox"
-					id="location__input"
-					className="location__input"
-					ref={input}
-				/>
+	const handleOpenCart = () => setOpenCart(!openCart);
 
-				<div className="location__content">
-					{address !== undefined ? (
-						<div className="content__address active">
-							<div className="address__detail">
-								<label className="hidden">Entregar em:</label>
-								<p>
-									{address.rua}, {address.numero}
-								</p>
-								<p className="show">
-									{address.complemento}
-									{address.complemento && ' - '}
-									{address.bairro}
-								</p>
+	item && console.log(item);
+	total && console.log(total);
+	return (
+		<>
+			<div className="default__footer">
+				<div className="default__location">
+					<input
+						type="checkbox"
+						id="location__input"
+						className="location__input"
+						ref={input}
+					/>
+
+					<div className="location__content">
+						{address !== undefined ? (
+							<div className="content__address active">
+								<div className="address__detail">
+									<label className="hidden">Entregar em:</label>
+									<p className="hidden">
+										{(address.rua + ', ' + address.numero).substr(0, 28) +
+											' ...'}
+									</p>
+									<p className="show">
+										{address.rua + ', ' + address.numero}
+										{address.complemento && ' - '}
+										{address.complemento}
+									</p>
+									<p className="show">{address.bairro}</p>
+								</div>
+								<button
+									className="address__change btn show"
+									onClick={handleAddress}
+								>
+									Trocar
+								</button>
+								<label
+									className={
+										address !== undefined
+											? 'location__btn'
+											: 'location__btn location__btn--add'
+									}
+									htmlFor="location__input"
+								></label>
 							</div>
-							<button
-								className="address__change btn show"
-								onClick={handleAddress}
-							>
-								Trocar
-							</button>
-							<label
-								className={
-									address !== undefined
-										? 'location__btn'
-										: 'location__btn location__btn--add'
-								}
-								htmlFor="location__input"
-							></label>
-						</div>
-					) : (
-						<div className="content__address">
-							<div className="hidden">Nenhum endereço</div>
-							<div className="show">
-								<div className="form__group address">
-									<label>Informe seu cep</label>
-									<input
-										type="text"
-										className="form__input"
-										onChange={handleCEP}
-										// ref={cepInput}
-									/>
-									{data &&
-										(data.erro ? (
-											<div className="address__detail address__detail--form">
-												Não encontrado :(
-											</div>
-										) : (
-											<>
+						) : (
+							<div className="content__address">
+								<div className="hidden">Nenhum endereço</div>
+								<div className="show">
+									<div className="form__group address">
+										<label>Informe seu cep</label>
+										<input
+											type="text"
+											className="form__input"
+											onChange={handleCEP}
+											// ref={cepInput}
+										/>
+										{data &&
+											(data.erro ? (
 												<div className="address__detail address__detail--form">
-													{data.logradouro}
-													<span>
-														{data.bairro}, {data.uf}
-													</span>
+													Não encontrado :(
 												</div>
-												<AddressForm
-													cep={data.cep}
-													rua={data.logradouro}
-													bairro={data.bairro}
-													href={undefined}
-													input={input}
-												/>
-											</>
-										))}
+											) : (
+												<>
+													<div className="address__detail address__detail--form">
+														{data.logradouro}
+														<span>
+															{data.bairro}, {data.uf}
+														</span>
+													</div>
+													<AddressForm
+														cep={data.cep}
+														rua={data.logradouro}
+														bairro={data.bairro}
+														href={undefined}
+														input={input}
+													/>
+												</>
+											))}
+									</div>
 								</div>
 							</div>
-						</div>
-					)}
-				</div>
-				<div className="location__card">
-					<IconShop />
-					{total ? total : 'vazio'}
+						)}
+					</div>
+					<button className="location__card" onClick={total && handleOpenCart}>
+						<IconShop />
+						{total ? toReal(total) : 'vazio'}
+					</button>
 				</div>
 			</div>
-		</div>
+			<ShopCardCart
+				openCart={openCart}
+				toReal={toReal}
+				handleOpenCart={handleOpenCart}
+			/>
+		</>
 	);
 };
 

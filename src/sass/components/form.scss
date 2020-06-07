@@ -110,7 +110,8 @@
 .btn {
 	min-height: 36px;
 	width: auto;
-	background-color: $blue;
+	background-color: white;
+
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -118,10 +119,10 @@
 	color: $color;
 	position: relative;
 	margin: 10px;
-	border-radius: 6px;
+	border-radius: 25px;
 	text-decoration: none;
 	padding: 0 15px;
-	border: 1px solid $blue;
+	border: 1px solid $yellow;
 	@include font($color, 1em, 600);
 	transition: all 0.3s ease-in-out;
 	cursor: pointer;

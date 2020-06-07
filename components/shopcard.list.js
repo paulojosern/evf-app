@@ -1,9 +1,14 @@
 import { useState, useEffect } from 'react';
+import { useShopCardContext } from '~/context/shopcard.context';
 import OptionItem from '~/components/option.item';
 
-const ShopCardList = ({ addpay, list, closeList }) => {
+const ShopCardList = ({ addpay, list, closeList, toReal }) => {
 	const [card, setCard] = useState({});
 	const [indent, setIndent] = useState(1);
+	const {
+		shopCardState: { total, item },
+		inputShopCard,
+	} = useShopCardContext();
 
 	useEffect(() => {
 		list && setCard({ total: list.price, item: list.price });
@@ -11,27 +16,47 @@ const ShopCardList = ({ addpay, list, closeList }) => {
 
 	const addItem = () => {
 		const newTotal = card.total + card.item;
+		setIndent(indent + 1);
 		setCard({
 			...card,
 			total: newTotal,
 		});
-		setIndent(indent + 1);
 	};
 	const removeItem = () => {
-		const newTotal =
-			card.total >= card.item ? card.item : card.total - card.item;
-		setCard({
-			...card,
-			total: newTotal,
-		});
-		indent !== 1 && setIndent(indent - 1);
+		if (indent !== 1) {
+			setIndent(indent - 1);
+			setCard({
+				...card,
+				total: card.total - card.item,
+			});
+		} else {
+			setCard({
+				...card,
+				total: card.total,
+			});
+		}
 	};
 
-	// const numberToReal = (numero) => {
-	// 	var numero = numero.toFixed(2).split('.');
-	// 	numero[0] = 'R$ ' + numero[0].split(/(?=(?:...)*$)/).join('.');
-	// 	return numero.join(',');
-	// };
+	const backClear = () => {
+		setCard({});
+		setIndent(1);
+		closeList();
+	};
+
+	const handleConfirm = () => {
+		let arr = item || [];
+		arr.push({
+			description: list.description,
+			unity: indent,
+			price: card.total,
+		});
+		const values = {
+			item: arr,
+			total: total ? total + card.total : card.total,
+		};
+		inputShopCard(values);
+		backClear();
+	};
 
 	return (
 		<div className={addpay ? 'card__list card__list--show' : 'card__list'}>
@@ -56,7 +81,7 @@ const ShopCardList = ({ addpay, list, closeList }) => {
 										className="counter__price-image"
 										style={{ backgroundImage: `url(${list.image})` }}
 									/>
-									{list.price}
+									{toReal(list.price)}
 								</div>
 								<div className="counter">
 									<button
@@ -68,13 +93,19 @@ const ShopCardList = ({ addpay, list, closeList }) => {
 								</div>
 							</div>
 							<div className="content__title">Escolha uma das opções</div>
-							<OptionItem list={list} card={card} setCard={setCard} />
+							{addpay && (
+								<OptionItem
+									list={list}
+									card={card}
+									setCard={setCard}
+									toReal={toReal}
+								/>
+							)}
 						</div>
 						<div className="list__btn">
-							<button className="btn__close" onClick={closeList}></button>
-							<button className="btn__add">
-								<span>Total: {card.total}</span>
-								Confirmar
+							<button className="btn__close" onClick={backClear}></button>
+							<button className="btn__add" onClick={handleConfirm}>
+								Total: <b>{toReal(card.total)}</b>
 							</button>
 						</div>
 					</div>

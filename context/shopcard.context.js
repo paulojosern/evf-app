@@ -3,7 +3,7 @@ import React, { createContext, useContext, useState } from 'react';
 const ShopCardContext = createContext({});
 
 const ShopCardProvider = ({ children }) => {
-	const [ShopCardState, setShopCard] = useState({ visible: false });
+	const [shopCardState, setShopCard] = useState({ visible: false });
 
 	const inputShopCard = (payload) => {
 		setShopCard({ ...payload, visible: true });
@@ -13,7 +13,7 @@ const ShopCardProvider = ({ children }) => {
 	};
 	return (
 		<ShopCardContext.Provider
-			value={{ ShopCardState, inputShopCard, changeShopCard }}
+			value={{ shopCardState, inputShopCard, changeShopCard }}
 		>
 			{children}
 		</ShopCardContext.Provider>

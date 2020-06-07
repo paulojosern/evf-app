@@ -1,42 +1,23 @@
-// import React, { useState } from 'react';
-const OptionItem = ({ list, card, setCard }) => {
-	// const [state, setState] = useState();
-
-	// const numberToReal = (numero) => {
-	// 	var numero = numero.toFixed(2).split('.');
-	// 	numero[0] = 'R$ ' + numero[0].split(/(?=(?:...)*$)/).join('.');
-	// 	return numero.join(',');
-	// };
-	const addOption = (price, option) => {
-		const optionDefault = option;
+const OptionItem = ({ list, card, setCard, toReal }) => {
+	const addOption = (price) => {
 		setCard({
 			...card,
-			total: card.total + price,
+			total: price,
 		});
 	};
 
-	const removeOption = (price, option) => {
-		const optionDefault = option;
-		setCard({
-			...card,
-			total: card.total - price,
-		});
-	};
-
-	// console.log(card);
 	return (
 		<>
 			{list.options &&
 				list.options.map((el, i) => {
 					const option = 'option0' + i;
-					//console.log(classe);
-					const handleClick = () => addOption(el.price, option);
-					const handleClickRemove = () => removeOption(el.price, option);
+					const handleClick = () => addOption(card.total + el.price);
+					const handleClickRemove = () => addOption(card.total - el.price);
 
 					return (
 						<div className="content__item content__item--option" key={i}>
 							<div className="counter__price">
-								<span>{el.detail}</span> + {el.price}
+								<span>{el.detail}</span> + {toReal(el.price)}
 							</div>
 							<div className="counter">
 								<input type="checkbox" className="counter--input" id={option} />

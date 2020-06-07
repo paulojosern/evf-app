@@ -1,6 +1,6 @@
 $blue: rgb(14, 217, 231);
-$yellow: rgb(255, 238, 0);
-$background: #e8eef1;
+$yellow: rgb(235, 218, 63);
+$background: #f1f6f8;
 $red: rgb(255, 0, 85);
 $color: rgb(39, 45, 56);
 $border: rgb(141, 149, 158);
@@ -8,9 +8,8 @@ $placeholder: $color;
 @import url('https://fonts.googleapis.com/css2?family=Cabin:wght@400;500;600;700&display=swap');
 //@import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap');
 //$font: 'Hind Siliguri', sans-serif;
-//@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700&display=swap');
-//@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap');
-$font: 'Cabin', sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800&display=swap');
+$font: 'Nunito Sans', sans-serif;
 @mixin font($color, $size, $type) {
 	color: $color;
 	font-family: $font;
@@ -102,7 +101,7 @@ body {
 	// 	background-color: rgba(255, 238, 0, 0.829);
 	// }
 	@include font($color, 13px, 400);
-	overflow: hidden;
+	//overflow: hidden;
 }
 .main {
 	transition: all 0.3s ease-in-out;
@@ -116,7 +115,7 @@ body {
 
 h3 {
 	font-size: 1.3em;
-	font-weight: 600;
+	font-weight: 700;
 }
 h4 {
 	font-size: 1.1em;
