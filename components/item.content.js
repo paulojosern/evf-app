@@ -28,7 +28,7 @@ const ItemContent = ({ items, column, getItem, toReal }) => {
 								{item.detail}
 								<div className="item__price">
 									<button className="item__add" onClick={handleClick}>
-										{toReal(item.price)}
+										{item.price && toReal(item.price)}
 									</button>
 								</div>
 							</div>
@@ -54,7 +54,7 @@ const ItemContent = ({ items, column, getItem, toReal }) => {
 									</p>
 									<div className="item__price">
 										<button className="item__add" onClick={handleClick}>
-											{toReal(item.price)}
+											{item.price && toReal(item.price)}
 										</button>
 									</div>
 								</div>

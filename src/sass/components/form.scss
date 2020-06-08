@@ -27,8 +27,8 @@
 	}
 	&__input {
 		@include font($color, 1.1em, 500);
-		background: transparent;
-		border: 1px solid $color;
+		background: rgba($color, 0.15);
+		border: 0px solid $color;
 		border-radius: 6px;
 		-webkit-box-sizing: border-box;
 		-moz-box-sizing: border-box;
@@ -41,7 +41,6 @@
 		width: calc(100% - 0px);
 		text-align: left !important;
 		margin: 0 0 10px;
-		letter-spacing: 0.05em;
 		@include size(tablet) {
 			width: calc(100% - 0px);
 			&:hover {
@@ -80,7 +79,7 @@
 		// }
 	}
 	&__btn {
-		width: 50px;
+		width: 45px;
 		height: 45px;
 		background-color: $blue;
 		display: flex;
@@ -91,9 +90,9 @@
 		position: relative;
 		z-index: 30;
 		left: 0;
-		border-radius: 6px;
+		border-radius: 30px;
 		text-decoration: none;
-		@include font($color, 0.7em, 700);
+		@include font($color, 0.6em, 700);
 		transform: translateX(-150%);
 		opacity: 0;
 		visibility: hidden;
@@ -119,7 +118,7 @@
 	color: $color;
 	position: relative;
 	margin: 10px;
-	border-radius: 25px;
+	border-radius: 30px;
 	text-decoration: none;
 	padding: 0 15px;
 	border: 1px solid $yellow;

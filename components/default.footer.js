@@ -49,8 +49,8 @@ const DefaultFooter = ({ toReal, setScroll }) => {
 		setScroll(openCart ? 'auto' : 'hidden');
 	};
 
-	item && console.log(item);
-	total && console.log(total);
+	// item && console.log(item);
+	// total && console.log(total);
 	return (
 		<>
 			<div className="default__footer">
@@ -142,6 +142,7 @@ const DefaultFooter = ({ toReal, setScroll }) => {
 				openCart={openCart}
 				toReal={toReal}
 				handleCart={handleCart}
+				address={address}
 			/>
 		</>
 	);

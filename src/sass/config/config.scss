@@ -121,7 +121,9 @@ h4 {
 	font-size: 1.1em;
 	font-weight: 600;
 }
-
+b {
+	font-weight: 600;
+}
 .flex {
 	display: flex;
 }
@@ -131,3 +133,18 @@ h4 {
 .between {
 	justify-content: space-between;
 }
+// .box {
+// 	background: #eee;
+// }
+
+// @media (prefers-color-scheme: dark) {
+// 	.box {
+// 		background: $color !important;
+// 	}
+// }
+
+// @media (prefers-color-scheme: light) {
+// 	.box {
+// 		background: #fff !important;
+// 	}
+// }

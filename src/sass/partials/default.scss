@@ -83,10 +83,26 @@
 			display: flex;
 			justify-content: center;
 			flex-direction: column;
-			height: 150px;
+			height: 100px;
+			background-color: $yellow;
+			&--image {
+				position: absolute;
+				height: 100%;
+				width: 100%;
+				top: 0;
+				left: 0;
+				z-index: 1;
+				background-size: 100%;
+				background-position: center;
+				filter: opacity(0.4);
+				display: none;
+			}
 			h3,
 			p {
 				padding: 2px 15px;
+				position: relative;
+				z-index: 2;
+				//color: white;
 			}
 		}
 		.header__avatar {
@@ -823,6 +839,7 @@
 	border-radius: 50px;
 	transition: all 0.4s ease-in-out;
 	z-index: 20;
+	overflow-y: auto;
 	&--show {
 		width: 100vw;
 		min-height: 100%;
@@ -832,6 +849,38 @@
 		bottom: 0;
 		box-shadow: 0 -10px 10px 15px rgba(black, 0.1);
 		//overflow-y: auto;
+	}
+	&__back {
+		position: absolute;
+		appearance: none;
+		user-select: none;
+		top: 15px;
+		left: 18px;
+		border-radius: 50%;
+		z-index: 5;
+		border: 1px solid rgba($color, 0.8);
+		@include font($color, 1.1em, 400);
+		padding: 0;
+		height: 25px;
+		width: 25px;
+		background: transparent;
+		transform: rotate(-90deg);
+		&::before,
+		&::after {
+			height: 2px;
+			width: 8px;
+			content: '';
+			position: absolute;
+			top: 8px;
+			left: 7px;
+			transform: rotate(-45deg);
+			background: $color;
+			border-radius: 1px;
+		}
+		&::after {
+			transform: rotate(45deg);
+			top: 13px;
+		}
 	}
 	&__container {
 		background: white;
@@ -847,19 +896,124 @@
 		padding: 20px;
 		.content__item {
 			background: white;
-			box-shadow: 0px 0px 14px 8px rgba($color, 0.1);
+			box-shadow: 0px 0px 12px 8px rgba($color, 0.05);
 			border-radius: 12px;
 			.item {
-				padding: 14px 16px;
+				padding: 12px 16px;
 				border-bottom: 1px solid rgba(black, 0.1);
 				line-height: 140%;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
 				&:last-of-type {
 					border: 0;
 				}
+				&__delete {
+					position: relative;
+					background: white;
+					border-radius: 50%;
+					z-index: 5;
+					border: 1px solid $red;
+					@include font($color, 1.1em, 400);
+					padding: 0;
+					height: 20px;
+					width: 20px;
+					&::before,
+					&::after {
+						height: 1px;
+						width: 10px;
+						content: '';
+						position: absolute;
+						top: 50%;
+						left: 50%;
+						transform: translateY(-50%) translateX(-50%) rotate(45deg);
+						background: $red;
+						border-radius: 1px;
+					}
+					&::after {
+						transform: translateY(-50%) translateX(-50%) rotate(-45deg);
+					}
+				}
+			}
+		}
+	}
+	&__order {
+		margin: 0 20px;
+		border-bottom: 1px solid rgba($yellow, 0.3);
+		padding: 10px 0;
+		.order__item {
+			padding: 3px 0;
+			display: flex;
+			justify-content: space-between;
+		}
+	}
+	&__payment {
+		margin: 0 20px;
+		border-bottom: 1px solid rgba($yellow, 0.3);
+		padding: 10px 0;
+		.payment__btn {
+			display: flex;
+			flex-flow: row wrap;
+			margin: 5px -3px;
+			&--label {
+				border: 1px solid rgba($color, 0.7);
+				border-radius: 20px;
+				padding: 6px 8px;
+				white-space: nowrap;
+				margin: 3px;
+				font-size: 0.95em;
+			}
+			&--input {
+				display: none;
+				&:checked + label {
+					border: 1px solid rgba($blue, 0.7);
+					background-color: $blue;
+				}
+			}
+		}
+	}
+	&__delivery {
+		margin: 0 20px;
+		border-bottom: 1px solid rgba($yellow, 0.3);
+		padding: 10px 0;
+		.delivery__detail {
+			padding: 6px 0 15px;
+			line-height: 125%;
+			p {
+				padding-top: 2px;
 			}
 		}
 	}
 	&__footer {
 		background: white;
+		padding: 20px;
+		.btn__confirm {
+			padding: 10px;
+			background: $yellow;
+			text-align: center;
+			border: 0;
+			width: calc(100% - 20px);
+			appearance: none;
+			user-select: none;
+			border-radius: 30px;
+			@include font($color, 1.1em, 600);
+			position: relative;
+			&::before,
+			&::after {
+				height: 2px;
+				width: 9px;
+				content: '';
+				position: absolute;
+				top: 14px;
+				right: 12px;
+				transform: rotate(45deg);
+				background: $color;
+				border-radius: 1px;
+			}
+			&::after {
+				transform: rotate(-45deg);
+				top: 20px;
+			}
+		}
 	}
 }

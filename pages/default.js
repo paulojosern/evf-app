@@ -15,6 +15,9 @@ const Default = () => {
 	const [fixedTop, setFixedTop] = useState();
 	const [scroll, setScroll] = useState('auto');
 
+	const image =
+		'https://cdn.pixabay.com/photo/2017/06/06/22/46/mediterranean-cuisine-2378758_960_720.jpg';
+
 	useEffect(() => {
 		document.body.style.overflow = scroll;
 		window.addEventListener('scroll', () => {
@@ -49,13 +52,11 @@ const Default = () => {
 	};
 
 	let toReal = (numero) => {
-		const number =
-			numero &&
-			numero.toLocaleString('pt-BR', {
-				style: 'currency',
-				currency: 'BRL',
-			});
-		return number;
+		const number = parseFloat(numero)
+			.toFixed(2)
+			.replace('.', ',')
+			.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
+		return 'R$ ' + number;
 	};
 
 	return (
@@ -73,12 +74,16 @@ const Default = () => {
 				<div className="header__content">
 					<h3>Coco Verde Food</h3>
 					<p>Comida Saudável</p>
+					<div
+						className="header__content--image"
+						style={{ backgroundImage: `url(${image})` }}
+					></div>
 				</div>
 			</header>
 			<div className={fixed === true ? 'default__nav--fixed' : 'default__nav'}>
 				<DefaultMenu fixedTop={fixedTop} />
 			</div>
-			<div className="default">
+			<div className="default box">
 				<DefaultItem
 					toReal={toReal}
 					getItem={getItem}

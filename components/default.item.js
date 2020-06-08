@@ -16,26 +16,24 @@ const DefaultItem = ({ getItem, toReal, setFixedTop }) => {
 	}, []);
 
 	return json.map((categ, i) => (
-		<>
-			<article
-				className={
-					categ.column ? 'default__item default__item--column' : 'default__item'
-				}
-				data-id={categ.slug}
-				id={categ.slug}
-				key={i}
-			>
-				<h3 className="section__title">{categ.title}</h3>
-				<div className={categ.column ? 'column' : ''}>
-					<ItemContent
-						items={categ.items}
-						getItem={getItem}
-						toReal={toReal}
-						column={categ.column ? categ.column : false}
-					/>
-				</div>
-			</article>
-		</>
+		<article
+			className={
+				categ.column ? 'default__item default__item--column' : 'default__item'
+			}
+			data-id={categ.slug}
+			id={categ.slug}
+			key={i}
+		>
+			<h3 className="section__title">{categ.title}</h3>
+			<div className={categ.column ? 'column' : ''}>
+				<ItemContent
+					items={categ.items}
+					getItem={getItem}
+					toReal={toReal}
+					column={categ.column ? categ.column : false}
+				/>
+			</div>
+		</article>
 	));
 };
 
