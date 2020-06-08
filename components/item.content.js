@@ -1,6 +1,6 @@
 import Slider from 'react-slick';
 
-const ItemContent = ({ items, title, column, getItem, toReal }) => {
+const ItemContent = ({ items, column, getItem, toReal }) => {
 	const settings = {
 		className: 'slider variable-width',
 		dots: false,
@@ -9,11 +9,11 @@ const ItemContent = ({ items, title, column, getItem, toReal }) => {
 		slidesToShow: 1,
 		slidesToScroll: 1,
 		variableWidth: true,
+		arrows: false,
 	};
 
 	return (
 		<>
-			<h3 className="section__title">{title}</h3>
 			{column ? (
 				items.map((item, i) => {
 					const handleClick = () => getItem(item);

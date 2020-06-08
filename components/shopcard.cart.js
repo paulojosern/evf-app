@@ -1,6 +1,6 @@
 import { useShopCardContext } from '~/context/shopcard.context';
 
-const ShopCardCart = ({ toReal, openCart, handleOpenCart }) => {
+const ShopCardCart = ({ toReal, openCart, handleCart }) => {
 	const {
 		shopCardState: { total, item },
 	} = useShopCardContext();
@@ -44,7 +44,7 @@ const ShopCardCart = ({ toReal, openCart, handleOpenCart }) => {
 					</div>
 
 					<div className="cart__footer"></div>
-					<button onClick={handleOpenCart}>Fechar</button>
+					<button onClick={handleCart}>Fechar</button>
 				</div>
 			)}
 		</div>

@@ -7,7 +7,7 @@ import AddressForm from '~/components/address.form';
 import ShopCardCart from '~/components/shopcard.cart';
 import IconShop from '~/assets/logos/icon-shop.svg';
 
-const DefaultFooter = ({ toReal }) => {
+const DefaultFooter = ({ toReal, setScroll }) => {
 	const [name, setName] = useLocalStorage('address');
 	const [address, setAddress] = useState();
 	const [openCart, setOpenCart] = useState(false);
@@ -44,7 +44,10 @@ const DefaultFooter = ({ toReal }) => {
 		}
 	};
 
-	const handleOpenCart = () => setOpenCart(!openCart);
+	const handleCart = () => {
+		setOpenCart(!openCart);
+		setScroll(openCart ? 'auto' : 'hidden');
+	};
 
 	item && console.log(item);
 	total && console.log(total);
@@ -129,7 +132,7 @@ const DefaultFooter = ({ toReal }) => {
 							</div>
 						)}
 					</div>
-					<button className="location__card" onClick={total && handleOpenCart}>
+					<button className="location__card" onClick={total && handleCart}>
 						<IconShop />
 						{total ? toReal(total) : 'vazio'}
 					</button>
@@ -138,7 +141,7 @@ const DefaultFooter = ({ toReal }) => {
 			<ShopCardCart
 				openCart={openCart}
 				toReal={toReal}
-				handleOpenCart={handleOpenCart}
+				handleCart={handleCart}
 			/>
 		</>
 	);

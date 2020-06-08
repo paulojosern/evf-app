@@ -74,33 +74,31 @@ const ShopCardList = ({ addpay, list, closeList, toReal }) => {
 
 					<div className="list__content">
 						<div className="content__separate"></div>
-						<div className="content__conteiner">
+						<div className="content__container">
 							<div className="content__item">
-								<div className="counter__price">
-									<div
-										className="counter__price-image"
-										style={{ backgroundImage: `url(${list.image})` }}
-									/>
+								<div className="item">
 									{toReal(list.price)}
-								</div>
-								<div className="counter">
-									<button
-										className="counter__remove"
-										onClick={removeItem}
-									></button>
-									<div className="counter__item">{indent}</div>
-									<button className="counter__add" onClick={addItem}></button>
+									<div className="counter">
+										<button
+											className="counter__remove"
+											onClick={removeItem}
+										></button>
+										<div className="counter__item">{indent}</div>
+										<button className="counter__add" onClick={addItem}></button>
+									</div>
 								</div>
 							</div>
 							<div className="content__title">Escolha uma das opções</div>
-							{addpay && (
-								<OptionItem
-									list={list}
-									card={card}
-									setCard={setCard}
-									toReal={toReal}
-								/>
-							)}
+							<div className="content__item">
+								{addpay && (
+									<OptionItem
+										list={list}
+										card={card}
+										setCard={setCard}
+										toReal={toReal}
+									/>
+								)}
+							</div>
 						</div>
 						<div className="list__btn">
 							<button className="btn__close" onClick={backClear}></button>

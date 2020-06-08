@@ -15,7 +15,7 @@ const OptionItem = ({ list, card, setCard, toReal }) => {
 					const handleClickRemove = () => addOption(card.total - el.price);
 
 					return (
-						<div className="content__item content__item--option" key={i}>
+						<div className="item" key={i}>
 							<div className="counter__price">
 								<span>{el.detail}</span> + {toReal(el.price)}
 							</div>

@@ -13,13 +13,14 @@ const Default = () => {
 	const querie = router.asPath;
 	const [fixed, setFixed] = useState(false);
 	const [fixedTop, setFixedTop] = useState();
+	const [scroll, setScroll] = useState('auto');
 
 	useEffect(() => {
-		document.body.style.overflow = 'auto';
+		document.body.style.overflow = scroll;
 		window.addEventListener('scroll', () => {
 			window.scrollY >= 150 ? setFixed(true) : setFixed(false);
 		});
-	}, [fixed]);
+	}, [fixed, scroll]);
 
 	useEffect(() => {
 		setTimeout(() => {
@@ -39,9 +40,13 @@ const Default = () => {
 			detail: items.detail,
 			options: items.options,
 		});
+		setScroll('hidden');
 	};
 
-	const closeList = () => setAddpay(!addpay);
+	const closeList = () => {
+		setAddpay(!addpay);
+		setScroll('auto');
+	};
 
 	let toReal = (numero) => {
 		const number =
@@ -78,10 +83,11 @@ const Default = () => {
 					toReal={toReal}
 					getItem={getItem}
 					setFixedTop={setFixedTop}
+					setScroll={setScroll}
 				/>
 				<div className="default__footer2"></div>
 			</div>
-			<DefaultFooter toReal={toReal} />
+			<DefaultFooter toReal={toReal} setScroll={setScroll} />
 		</ShopCardProvider>
 	);
 };

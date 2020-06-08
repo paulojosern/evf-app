@@ -11,6 +11,7 @@ const DefaultMenu = ({ fixedTop }) => {
 		slidesToShow: 1,
 		slidesToScroll: 1,
 		variableWidth: true,
+		arrows: false,
 	};
 
 	useEffect(() => {
