@@ -66,38 +66,6 @@ const Default = () => {
 
 	return (
 		<ShopCardProvider>
-			{/* <ShopCardList
-				list={list}
-				addpay={addpay}
-				closeList={closeList}
-				toReal={toReal}
-			/>
-			<header className="default__header ">
-				<input type="checkbox" className="header__input" id="nav" />
-				<label className="header__btn" htmlFor="nav"></label>
-				<div className="header__nav"></div>
-				<div className="header__content">
-					<h3>Coco Verde Food</h3>
-					<p>Comida Saudável</p>
-					<div
-						className="header__content--image"
-						style={{ backgroundImage: `url(${image})` }}
-					></div>
-				</div>
-			</header>
-			<div className={fixed === true ? 'default__nav--fixed' : 'default__nav'}>
-				<DefaultMenu fixedTop={fixedTop} />
-			</div>
-			<div className="default">
-				<DefaultItem
-					toReal={toReal}
-					getItem={getItem}
-					setFixedTop={setFixedTop}
-					setScroll={setScroll}
-				/>
-				<div className="default__footer2"></div>
-			</div>
-			<DefaultFooter toReal={toReal} setScroll={setScroll} /> */}
 			<ShopCardList
 				list={list}
 				addpay={addpay}

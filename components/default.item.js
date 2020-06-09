@@ -8,7 +8,7 @@ const DefaultItem = ({ getItem, toReal, setFixedTop }) => {
 		window.addEventListener('scroll', () => {
 			el.forEach((el) => {
 				const id = el.getAttribute('data-id');
-				el.getBoundingClientRect().top <= 0
+				el.getBoundingClientRect().top <= 100
 					? (el.classList.add('default__item--fixed'), setFixedTop(id))
 					: el.classList.remove('default__item--fixed');
 			});
@@ -21,10 +21,13 @@ const DefaultItem = ({ getItem, toReal, setFixedTop }) => {
 				categ.column ? 'default__item default__item--column' : 'default__item'
 			}
 			data-id={categ.slug}
-			id={categ.slug}
+			// id={categ.slug}
 			key={i}
 		>
-			<h3 className="section__title">{categ.title}</h3>
+			<div id="ctn">
+				<a name={categ.slug}>&nbsp;</a>
+				<h3 className="section__title target-label">{categ.title}</h3>
+			</div>
 
 			<ItemContent
 				items={categ.items}
