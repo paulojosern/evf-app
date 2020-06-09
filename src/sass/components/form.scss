@@ -27,20 +27,21 @@
 	}
 	&__input {
 		@include font($color, 1.1em, 500);
-		background: rgba($color, 0.15);
+		background: rgba($color, 0.1);
 		border: 0px solid $color;
-		border-radius: 6px;
+		border-radius: 30px;
 		-webkit-box-sizing: border-box;
 		-moz-box-sizing: border-box;
 		box-sizing: border-box;
 		appearance: none;
 		-webkit-appearance: none;
 		-moz-appearance: none;
-		padding: 10px 12px;
+		padding: 10px 20px 11px;
 		outline: 0;
 		width: calc(100% - 0px);
 		text-align: left !important;
 		margin: 0 0 10px;
+		letter-spacing: 0.5px;
 		@include size(tablet) {
 			width: calc(100% - 0px);
 			&:hover {
@@ -50,22 +51,22 @@
 		&::-webkit-input-placeholder {
 			/* Chrome/Opera/Safari */
 			color: $placeholder;
-			font-weight: 300;
+			font-weight: 400;
 		}
 		&::-moz-placeholder {
 			/* Firefox 19+ */
 			color: $placeholder;
-			font-weight: 300;
+			font-weight: 400;
 		}
 		&:-ms-input-placeholder {
 			/* IE 10+ */
 			color: $placeholder;
-			font-weight: 300;
+			font-weight: 400;
 		}
 		&:-moz-placeholder {
 			/* Firefox 18- */
 			color: $placeholder;
-			font-weight: 300;
+			font-weight: 400;
 		}
 		// &:focus {
 		// 	border: 1px solid black;

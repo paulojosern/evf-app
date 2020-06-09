@@ -16,7 +16,7 @@ const DefaultItem = ({ getItem, toReal, setFixedTop }) => {
 	}, []);
 
 	return json.map((categ, i) => (
-		<article
+		<section
 			className={
 				categ.column ? 'default__item default__item--column' : 'default__item'
 			}
@@ -32,7 +32,7 @@ const DefaultItem = ({ getItem, toReal, setFixedTop }) => {
 				toReal={toReal}
 				column={categ.column ? categ.column : false}
 			/>
-		</article>
+		</section>
 	));
 };
 

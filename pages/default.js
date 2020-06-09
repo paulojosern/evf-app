@@ -15,15 +15,20 @@ const Default = () => {
 	const [fixedTop, setFixedTop] = useState();
 	const [scroll, setScroll] = useState('auto');
 
-	const image =
-		'https://cdn.pixabay.com/photo/2017/06/06/22/46/mediterranean-cuisine-2378758_960_720.jpg';
+	('https://cdn.pixabay.com/photo/2017/06/06/22/46/mediterranean-cuisine-2378758_960_720.jpg');
 
 	useEffect(() => {
 		document.body.style.overflow = scroll;
+		var d = document.getElementById('menu');
+		var menu = d.offsetTop;
 		window.addEventListener('scroll', () => {
-			window.scrollY >= 150 ? setFixed(true) : setFixed(false);
+			if (document.documentElement.scrollTop >= menu) {
+				setFixed(true);
+			} else {
+				setFixed(false);
+			}
 		});
-	}, [fixed, scroll]);
+	}, [scroll]);
 
 	useEffect(() => {
 		setTimeout(() => {
@@ -61,7 +66,7 @@ const Default = () => {
 
 	return (
 		<ShopCardProvider>
-			<ShopCardList
+			{/* <ShopCardList
 				list={list}
 				addpay={addpay}
 				closeList={closeList}
@@ -83,7 +88,7 @@ const Default = () => {
 			<div className={fixed === true ? 'default__nav--fixed' : 'default__nav'}>
 				<DefaultMenu fixedTop={fixedTop} />
 			</div>
-			<div className="default box">
+			<div className="default">
 				<DefaultItem
 					toReal={toReal}
 					getItem={getItem}
@@ -92,6 +97,34 @@ const Default = () => {
 				/>
 				<div className="default__footer2"></div>
 			</div>
+			<DefaultFooter toReal={toReal} setScroll={setScroll} /> */}
+			<ShopCardList
+				list={list}
+				addpay={addpay}
+				closeList={closeList}
+				toReal={toReal}
+			/>
+			<main className="default">
+				<header className="default__header">
+					<div className="header__content">
+						<input type="checkbox" className="header__input" id="nav" />
+						<label className="header__btn" htmlFor="nav"></label>
+						<div className="header__nav"></div>
+					</div>
+
+					<DefaultMenu fixedTop={fixedTop} fixed={fixed} />
+				</header>
+
+				<article className="default__content">
+					<DefaultItem
+						toReal={toReal}
+						getItem={getItem}
+						setFixedTop={setFixedTop}
+						setScroll={setScroll}
+					/>
+				</article>
+				<footer className="default__footer2">footer</footer>
+			</main>
 			<DefaultFooter toReal={toReal} setScroll={setScroll} />
 		</ShopCardProvider>
 	);

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { json } from '~/services/json';
 import Slider from 'react-slick';
 
-const DefaultMenu = ({ fixedTop }) => {
+const DefaultMenu = ({ fixedTop, fixed }) => {
 	const settings = {
 		className: 'slider variable-width',
 		dots: false,
@@ -24,7 +24,10 @@ const DefaultMenu = ({ fixedTop }) => {
 	}, [fixedTop]);
 
 	return (
-		<nav className="default__menu">
+		<nav
+			className={fixed ? 'default__menu default__menu--fixo' : 'default__menu'}
+			id="menu"
+		>
 			<Slider {...settings}>
 				{json.map((link, i) => (
 					<a

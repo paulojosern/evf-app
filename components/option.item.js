@@ -1,7 +1,11 @@
+import { useState } from 'react';
+
 const OptionItem = ({ list, card, setCard, toReal }) => {
+	const [details, setDetails] = useState([]);
 	const addOption = (price) => {
 		setCard({
 			...card,
+			detail: details,
 			total: price,
 		});
 	};
@@ -11,8 +15,25 @@ const OptionItem = ({ list, card, setCard, toReal }) => {
 			{list.options &&
 				list.options.map((el, i) => {
 					const option = 'option0' + i;
-					const handleClick = () => addOption(card.total + el.price);
-					const handleClickRemove = () => addOption(card.total - el.price);
+					const handleClick = () => {
+						// const values = {
+						// 	[i]: el.detail,
+						// };
+						let arr = details;
+						arr.push(el.detail);
+						setDetails(arr);
+						addOption(card.total + el.price);
+					};
+
+					const handleClickRemove = () => {
+						const allowed = el.detail;
+						let arr = details;
+						arr = arr.filter(function (el) {
+							return el !== allowed;
+						});
+						setDetails(arr);
+						addOption(card.total - el.price);
+					};
 
 					return (
 						<div className="item" key={i}>

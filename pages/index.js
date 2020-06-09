@@ -68,85 +68,83 @@ const Index = () => {
 
 	data && console.log('data,', data);
 	return (
-		<main className="main">
-			<div className="home">
-				<div
-					className={
-						!data.logradouro ? 'home__logo' : 'home__logo home__logo--hide'
-					}
-				>
-					<LogoEvf />
-				</div>
-				<div
-					className={
-						data.empty
-							? 'home__cep'
-							: !data.logradouro
-							? data.erro
-								? 'home__cep home__cep--erro'
-								: 'home__cep home__cep--show'
+		<main className="home">
+			<div
+				className={
+					!data.logradouro ? 'home__logo' : 'home__logo home__logo--hide'
+				}
+			>
+				<LogoEvf />
+			</div>
+			<div
+				className={
+					data.empty
+						? 'home__cep'
+						: !data.logradouro
+						? data.erro
+							? 'home__cep home__cep--erro'
 							: 'home__cep home__cep--show'
-					}
-				>
-					<div className="form__group">
-						{address !== undefined ? (
-							<div className="cep__address">
-								<label>Entregar nesse endereço?</label>
-								<h3>
-									{address.rua}, {address.numero}
-								</h3>
-								<h4>{address.complemento}</h4>
-								<h4>{address.bairro}</h4>
-								<div className="flex center">
-									<button className="btn btn--default" onClick={handleAddress}>
-										Não
-									</button>
-									<button className="btn" onClick={handleConfirm}>
-										Sim
-									</button>
-								</div>
+						: 'home__cep home__cep--show'
+				}
+			>
+				<div className="form__group">
+					{address !== undefined ? (
+						<div className="cep__address">
+							<label>Entregar nesse endereço?</label>
+							<h3>
+								{address.rua}, {address.numero}
+							</h3>
+							<h4>{address.complemento}</h4>
+							<h4>{address.bairro}</h4>
+							<div className="flex center">
+								<button className="btn btn--default" onClick={handleAddress}>
+									Não
+								</button>
+								<button className="btn" onClick={handleConfirm}>
+									Sim
+								</button>
 							</div>
-						) : (
-							<>
-								<label>Informe seu cep</label>
-								<input
-									type="text"
-									className="form__input"
-									onChange={handleCEP}
-									ref={cepInput}
-								/>
-							</>
-						)}
+						</div>
+					) : (
+						<>
+							<label>Informe seu cep</label>
+							<input
+								type="text"
+								className="form__input"
+								onChange={handleCEP}
+								ref={cepInput}
+							/>
+						</>
+					)}
 
-						{data.erro && <div className="cep__erro">Não encontrado :(</div>}
-						<input
-							type="submit"
-							value="buscar"
-							onClick={handleSubmit}
-							className={!btn ? 'home__btn' : 'home__btn home__btn--open'}
-						/>
-					</div>
-				</div>
-				<div
-					className={
-						data.erro
-							? 'home__detail  home__detail--erro'
-							: !data.logradouro
-							? 'home__detail'
-							: 'home__detail home__detail--show'
-					}
-				>
-					<h4>{data.logradouro}</h4>
-					<h5>
-						{data.bairro}, {data.uf}
-					</h5>
-					<AddressForm
-						cep={inputCep}
-						rua={data.logradouro}
-						bairro={data.bairro}
-						href="/default"
+					{data.erro && <div className="cep__erro">Não encontrado :(</div>}
+					<input
+						type="submit"
+						value="buscar"
+						onClick={handleSubmit}
+						className={!btn ? 'home__btn' : 'home__btn home__btn--open'}
 					/>
 				</div>
+			</div>
+			<div
+				className={
+					data.erro
+						? 'home__detail  home__detail--erro'
+						: !data.logradouro
+						? 'home__detail'
+						: 'home__detail home__detail--show'
+				}
+			>
+				<h4>{data.logradouro}</h4>
+				<h5>
+					{data.bairro}, {data.uf}
+				</h5>
+				<AddressForm
+					cep={inputCep}
+					rua={data.logradouro}
+					bairro={data.bairro}
+					href="/default"
+				/>
 			</div>
 		</main>
 	);

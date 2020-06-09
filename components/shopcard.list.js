@@ -47,6 +47,7 @@ const ShopCardList = ({ addpay, list, closeList, toReal }) => {
 		let arr = item || [];
 		arr.push({
 			description: list.description,
+			detail: card.detail,
 			unity: indent,
 			price: card.total,
 		});
@@ -62,6 +63,7 @@ const ShopCardList = ({ addpay, list, closeList, toReal }) => {
 		<div className={addpay ? 'card__list card__list--show' : 'card__list'}>
 			{list !== undefined && (
 				<>
+					<button className="list__btn--close" onClick={backClear}></button>
 					<div className="list__image">
 						<div className="list__description">{list.description}</div>
 						<div className="list__destail">{list.detail}</div>
@@ -71,13 +73,14 @@ const ShopCardList = ({ addpay, list, closeList, toReal }) => {
 							style={{ backgroundImage: `url(${list.image})` }}
 						/>
 					</div>
-
 					<div className="list__content">
 						<div className="content__separate"></div>
 						<div className="content__container">
 							<div className="content__item">
 								<div className="item">
-									{toReal(list.price)}
+									<div className="counter__price">
+										<span>Unidade: </span> {toReal(list.price)}
+									</div>
 									<div className="counter">
 										<button
 											className="counter__remove"
@@ -101,9 +104,8 @@ const ShopCardList = ({ addpay, list, closeList, toReal }) => {
 							</div>
 						</div>
 						<div className="list__btn">
-							<button className="btn__close" onClick={backClear}></button>
 							<button className="btn__add" onClick={handleConfirm}>
-								Total: <b>{toReal(card.total)}</b>
+								Adicionar produto: <b>{toReal(card.total)}</b>
 							</button>
 						</div>
 					</div>

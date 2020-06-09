@@ -29,12 +29,17 @@ const ShopCardCart = ({ toReal, openCart, handleCart, address }) => {
 						<section className="content__item">
 							{Object.keys(item).map((i, el) => {
 								const handleClick = () => handleDelete(i, item[el].price);
+								console.log(item[el]);
+								const itemDetail =
+									item[el].detail !== undefined &&
+									item[el].detail.map((d, index) => <p key={index}>{d} </p>);
 								return (
 									<article className="item" key={i}>
 										<div className="item__detail">
 											<h4>
 												{item[el].unity}x {item[el].description}
 											</h4>
+											<small>{itemDetail}</small>
 											{toReal(item[el].price)}
 										</div>
 
@@ -132,7 +137,7 @@ const ShopCardCart = ({ toReal, openCart, handleCart, address }) => {
 					</div>
 
 					<div className="cart__footer">
-						<button className="btn__confirm">Enviar pedido</button>
+						<button className="btn__confirm">Enviar meu pedido</button>
 					</div>
 					<button onClick={handleCart} className="cart__back"></button>
 				</div>
