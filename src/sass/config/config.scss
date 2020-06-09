@@ -73,12 +73,14 @@ div#__next,
 
 main {
 	height: 100%;
+	scroll-behavior: smooth;
 }
 html {
 	scroll-behavior: smooth;
 }
 body {
 	background-color: $yellow;
+	scroll-behavior: smooth;
 	// @include size(mobile) {
 	// 	background-color: rgb(0, 255, 0);
 	// }

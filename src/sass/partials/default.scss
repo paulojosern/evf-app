@@ -205,11 +205,11 @@
 		width: calc(100% - 10px);
 		.menu__link {
 			text-decoration: none;
-			@include font($color, 0.95em, 400);
+			@include font($color, 1.1em, 400);
 			//border: 1px solid rgba($color, 0.2);
 			border-radius: 15px;
-			padding: 8px;
-			margin: 4px 5px !important;
+			padding: 8px 10px;
+			margin: 4px 7px !important;
 			width: auto !important;
 
 			background: rgba($color, 0.06);
@@ -273,7 +273,7 @@
 				}
 			}
 			&__title {
-				@include font($color, 1.3em, 700);
+				@include font($color, 1.5em, 700);
 				padding: 0 0 5px;
 			}
 			&__price {
@@ -288,7 +288,7 @@
 				z-index: 5;
 				border: 1px solid rgba($color, 0.7);
 				padding: 8px 26px 8px 12px;
-				font-weight: 500;
+				font-weight: 600;
 				font-family: $font;
 				color: $color;
 				cursor: pointer;
@@ -320,7 +320,7 @@
 				box-shadow: none;
 				position: relative;
 				z-index: 3;
-				padding: 14px 0;
+				padding: 15px 0;
 				box-shadow: none;
 				border-bottom: 1px solid $background;
 				&:last-of-type {
@@ -342,7 +342,7 @@
 				}
 				.item__detail {
 					flex: auto;
-					padding: 0 0 0 14px;
+					padding: 5px 0 0 14px;
 					margin: 0;
 					@include font($color, 0.9em, 400);
 					border-right: 0;
