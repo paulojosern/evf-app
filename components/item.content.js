@@ -25,7 +25,11 @@ const ItemContent = ({ items, column, getItem, toReal }) => {
 							></div>
 							<div className="item__detail">
 								<div className="item__title">{item.description}</div>
-								{item.detail}
+								<p>
+									{item.detail.length > 60
+										? item.detail.substr(0, 60) + '...'
+										: item.detail}
+								</p>
 								<div className="item__price">
 									<button className="item__add" onClick={handleClick}>
 										{item.price && toReal(item.price)}
@@ -48,8 +52,8 @@ const ItemContent = ({ items, column, getItem, toReal }) => {
 								<div className="item__detail">
 									<div className="item__title">{item.description}</div>
 									<p>
-										{item.detail.length > 50
-											? item.detail.substr(0, 50) + '...'
+										{item.detail.length > 60
+											? item.detail.substr(0, 60) + '...'
 											: item.detail}
 									</p>
 									<div className="item__price">

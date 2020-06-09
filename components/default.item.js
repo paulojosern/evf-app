@@ -25,14 +25,13 @@ const DefaultItem = ({ getItem, toReal, setFixedTop }) => {
 			key={i}
 		>
 			<h3 className="section__title">{categ.title}</h3>
-			<div className={categ.column ? 'column' : ''}>
-				<ItemContent
-					items={categ.items}
-					getItem={getItem}
-					toReal={toReal}
-					column={categ.column ? categ.column : false}
-				/>
-			</div>
+
+			<ItemContent
+				items={categ.items}
+				getItem={getItem}
+				toReal={toReal}
+				column={categ.column ? categ.column : false}
+			/>
 		</article>
 	));
 };
