@@ -25,7 +25,7 @@ const DefaultMenu = ({ fixedTop, fixed }) => {
 
 	return (
 		<nav
-			className={fixed ? 'default__menu default__menu--fixo' : 'default__menu'}
+			className={fixed ? 'default__menu default__menu--fixed' : 'default__menu'}
 			id="menu"
 		>
 			<Slider {...settings}>

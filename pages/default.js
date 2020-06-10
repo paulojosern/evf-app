@@ -20,7 +20,7 @@ const Default = () => {
 	useEffect(() => {
 		document.body.style.overflow = scroll;
 		var d = document.getElementById('menu');
-		var menu = d.offsetTop;
+		var menu = d.offsetTop - 50;
 		window.addEventListener('scroll', () => {
 			if (document.documentElement.scrollTop >= menu) {
 				setFixed(true);
@@ -74,7 +74,13 @@ const Default = () => {
 			/>
 			<main className="default">
 				<header className="default__header">
-					<div className="header__content">
+					<div
+						className={
+							fixed
+								? 'header__content header__content--fixed'
+								: ' header__content'
+						}
+					>
 						<input type="checkbox" className="header__input" id="nav" />
 						<label className="header__btn" htmlFor="nav"></label>
 						<div className="header__nav"></div>
@@ -83,7 +89,13 @@ const Default = () => {
 					<DefaultMenu fixedTop={fixedTop} fixed={fixed} />
 				</header>
 
-				<article className="default__content">
+				<article
+					className={
+						fixed
+							? 'default__content default__content--fixed'
+							: ' default__content'
+					}
+				>
 					<DefaultItem
 						toReal={toReal}
 						getItem={getItem}
