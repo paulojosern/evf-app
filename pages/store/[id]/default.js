@@ -5,8 +5,9 @@ import DefaultMenu from '~/components/default.menu';
 import DefaultFooter from '~/components/default.footer';
 import DefaultItem from '~/components/default.item';
 import ShopCardList from '~/components/shopcard.list';
+import { firebase } from '~/pages/api/firebase';
 
-const Default = () => {
+const Default = ({ store }) => {
 	const [addpay, setAddpay] = useState(false);
 	const [list, setList] = useState();
 	const router = useRouter();
@@ -14,8 +15,6 @@ const Default = () => {
 	const [fixed, setFixed] = useState(false);
 	const [fixedTop, setFixedTop] = useState();
 	const [scroll, setScroll] = useState('auto');
-
-	('https://cdn.pixabay.com/photo/2017/06/06/22/46/mediterranean-cuisine-2378758_960_720.jpg');
 
 	useEffect(() => {
 		document.body.style.overflow = scroll;
@@ -64,7 +63,7 @@ const Default = () => {
 		return 'R$ ' + number;
 	};
 
-	return (
+	return store ? (
 		<ShopCardProvider>
 			<ShopCardList
 				list={list}
@@ -73,22 +72,34 @@ const Default = () => {
 				toReal={toReal}
 			/>
 			<main className="default">
-				<header className="default__header">
+				<header
+					className="default__header"
+					style={{ backgroundColor: `${store.colors.color1}` }}
+				>
 					<div
 						className={
 							fixed
 								? 'header__content header__content--fixed'
 								: ' header__content'
 						}
+						style={{ backgroundColor: `${store.colors.color1}` }}
 					>
 						<input type="checkbox" className="header__input" id="nav" />
 						<label className="header__btn" htmlFor="nav"></label>
-						<div className="header__nav"></div>
+						<div
+							className="header__nav"
+							style={{ backgroundColor: `${store.colors.color1}` }}
+						></div>
+						<h2>{store.title}</h2>
+						<h3>{store.subtitle}</h3>
 					</div>
 
-					<DefaultMenu fixedTop={fixedTop} fixed={fixed} />
+					<DefaultMenu
+						fixedTop={fixedTop}
+						fixed={fixed}
+						store={store.sessions}
+					/>
 				</header>
-
 				<article
 					className={
 						fixed
@@ -101,13 +112,24 @@ const Default = () => {
 						getItem={getItem}
 						setFixedTop={setFixedTop}
 						setScroll={setScroll}
+						store={store}
 					/>
 				</article>
 				<footer className="default__footer2">footer</footer>
 			</main>
 			<DefaultFooter toReal={toReal} setScroll={setScroll} />
 		</ShopCardProvider>
+	) : (
+		<di>carregando</di>
 	);
 };
 
 export default Default;
+
+Default.getInitialProps = async ({ query }) => {
+	const pid = query.id;
+	const data = await firebase;
+	const id = Object.keys(data).find((item) => data[item].slug === pid);
+	const store = data[id];
+	return { store };
+};

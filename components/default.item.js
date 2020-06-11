@@ -1,8 +1,7 @@
 import { useEffect } from 'react';
 import ItemContent from '~/components/item.content';
-import { json } from '~/services/json';
 
-const DefaultItem = ({ getItem, toReal, setFixedTop }) => {
+const DefaultItem = ({ store, getItem, toReal, setFixedTop }) => {
 	useEffect(() => {
 		const el = document.querySelectorAll('.default__item');
 		window.addEventListener('scroll', () => {
@@ -15,31 +14,35 @@ const DefaultItem = ({ getItem, toReal, setFixedTop }) => {
 		});
 	}, []);
 
-	return json.map((categ, i) => (
-		<section
-			className={
-				categ.column ? 'default__item default__item--column' : 'default__item'
-			}
-			data-id={categ.slug}
-			// id={categ.slug}
-			key={i}
-		>
-			{/* <div id="ctn">
+	return store !== undefined ? (
+		store.sessions.map((categ, i) => (
+			<section
+				className={
+					categ.column ? 'default__item default__item--column' : 'default__item'
+				}
+				data-id={categ.slug}
+				// id={categ.slug}
+				key={i}
+			>
+				{/* <div id="ctn">
 				<a name={categ.slug}>&nbsp;</a>
 				<h3 className="section__title target-label">{categ.title}</h3>
 			</div> */}
-			<h3 className="default__item-title" id={categ.slug}>
-				{categ.title}
-			</h3>
+				<h3 className="default__item-title" id={categ.slug}>
+					{categ.title}
+				</h3>
 
-			<ItemContent
-				items={categ.items}
-				getItem={getItem}
-				toReal={toReal}
-				column={categ.column ? categ.column : false}
-			/>
-		</section>
-	));
+				<ItemContent
+					items={categ.items}
+					getItem={getItem}
+					toReal={toReal}
+					column={categ.column ? categ.column : false}
+				/>
+			</section>
+		))
+	) : (
+		<div>Carregando</div>
+	);
 };
 
 export default DefaultItem;

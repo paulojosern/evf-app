@@ -4,9 +4,11 @@ export const firebase = [
 		title: 'Coco Verde',
 		subtitle: 'Alimentação saudavel',
 		slug: 'cocoverde',
-		color1: '#58d18f',
-		color2: '#fff',
-		color3: '#57503e',
+		colors: {
+			color1: '#58d18f',
+			color2: '#fff',
+			color3: '#57503e',
+		},
 		logo: '',
 		payments: [1, 2, 3, 4],
 		address: {
@@ -77,9 +79,11 @@ export const firebase = [
 		title: 'Terrinha Saudavel',
 		subtitle: 'Comida caseira',
 		slug: 'terrinhasaudavel',
-		color1: '#ff0',
-		color2: '#fff',
-		color3: '#f00',
+		colors: {
+			color1: '#ff0',
+			color2: '#fff',
+			color3: '#f00',
+		},
 		logo: '',
 		payments: [1, 2, 3, 5],
 		address: {

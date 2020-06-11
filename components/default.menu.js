@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
-import { json } from '~/services/json';
 import Slider from 'react-slick';
 
-const DefaultMenu = ({ fixedTop, fixed }) => {
+const DefaultMenu = ({ fixedTop, fixed, store }) => {
 	const settings = {
 		className: 'slider variable-width',
 		dots: false,
@@ -29,7 +28,7 @@ const DefaultMenu = ({ fixedTop, fixed }) => {
 			id="menu"
 		>
 			<Slider {...settings}>
-				{json.map((link, i) => (
+				{store.map((link, i) => (
 					<a
 						className="menu__link"
 						href={`#${link.slug}`}
