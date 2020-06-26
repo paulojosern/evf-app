@@ -1,0 +1,9 @@
+{
+  "hosting": {
+    "site": "euvoufacil",
+    "public": "public"
+  },
+  "database": {
+    "rules": "database.rules.json"
+  }
+}

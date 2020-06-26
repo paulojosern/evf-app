@@ -3,6 +3,8 @@ import Head from 'next/head';
 import App from 'next/app';
 import { AddressProvider } from '~/context/address.context';
 import { StoreProvider } from '~/context/store.context';
+import Store from '../store';
+import { initialState as auth } from '../store/Session';
 import { ThemeProvider } from 'styled-components';
 import '~/src/sass/style.scss';
 import '../node_modules/slick-carousel/slick/slick.css';
@@ -53,9 +55,11 @@ class MyApp extends App {
 						<link rel="shortcut icon" href="/favicons/favicon.ico" />
 						<title>Eu Vou facil</title>
 					</Head>
-					<ThemeProvider theme={theme}>
-						<Component {...pageProps} />
-					</ThemeProvider>
+					<Store.Provider initialState={auth}>
+						<ThemeProvider theme={theme}>
+							<Component {...pageProps} />
+						</ThemeProvider>
+					</Store.Provider>
 				</StoreProvider>
 			</AddressProvider>
 		);

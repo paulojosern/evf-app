@@ -14,7 +14,7 @@ const StoreAddress = ({ setState, state, theme, slug }) => {
 	const [name] = useLocalStorage('address');
 	const [address, setAddress] = useState();
 	const router = useRouter();
-	console.log(theme);
+	// console.log(theme);
 
 	const {
 		addressState: { cep },
@@ -38,7 +38,7 @@ const StoreAddress = ({ setState, state, theme, slug }) => {
 	const handleConfirm = (e) => {
 		e.preventDefault();
 		setState(!state);
-		router.push(`/store/${slug}/default`);
+		router.push(`/loja/${slug}/default`);
 	};
 
 	const getCep = (newcep) => {
@@ -145,7 +145,7 @@ const StoreAddress = ({ setState, state, theme, slug }) => {
 					cep={inputCep}
 					rua={data.logradouro}
 					bairro={data.bairro}
-					href="/default"
+					href={`/loja/${slug}/default`}
 				/>
 			</div>
 		</>

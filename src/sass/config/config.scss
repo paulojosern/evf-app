@@ -1,9 +1,11 @@
 $blue: rgb(14, 217, 231);
 $yellow: rgb(235, 218, 63);
-$background: #f1f6f8;
+$background: #e9eff1;
 $red: rgb(255, 0, 85);
 $color: rgb(0, 0, 0);
-$border: rgb(141, 149, 158);
+$border: rgb(129, 138, 150);
+$silver: rgb(195, 202, 211);
+$grey: rgb(107, 117, 126);
 $placeholder: rgba($color, 0.7);
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
 //@import url('https://fonts.googleapis.com/css2?family=Cabin:wght@400;500;600;700&display=swap');
@@ -117,17 +119,34 @@ body {
 		transform: translateY(-100%);
 	}
 }
-
+h1 {
+	font-size: 1.7em;
+	font-weight: 700;
+	padding-bottom: 5px;
+}
+h2 {
+	font-size: 1.5em;
+	font-weight: 700;
+}
 h3 {
 	font-size: 1.3em;
 	font-weight: 700;
+	padding: 5px 0;
 }
 h4 {
 	font-size: 1.1em;
 	font-weight: 600;
+	padding: 5px 0;
+}
+h5 {
+	font-size: 1em;
+	font-weight: 500;
 }
 b {
 	font-weight: 600;
+}
+.hidden {
+	display: none;
 }
 .flex {
 	display: flex;
@@ -137,6 +156,23 @@ b {
 }
 .between {
 	justify-content: space-between;
+}
+.bottom {
+	align-items: flex-end;
+}
+.middle {
+	align-items: center;
+}
+.end {
+	justify-content: flex-end;
+}
+.right {
+	text-align: right;
+}
+.line {
+	margin: 15px 0;
+	border-bottom: 1px solid rgba($silver, 0.5);
+	display: block;
 }
 // .box {
 // 	background: #eee;
@@ -170,5 +206,64 @@ b {
 		color: black;
 		border-radius: 30px;
 		font-size: 1.4em;
+	}
+}
+//loader
+.loader {
+	display: flex;
+	align-items: center;
+	&--position {
+		display: flex;
+		align-items: center;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translateX(-50%) translateY(-50%);
+		z-index: 3;
+	}
+	&__text {
+		margin-left: 10px;
+		font-size: 0.9em;
+	}
+	&__circle {
+		display: inline-block;
+		position: relative;
+		width: 16px;
+		height: 16px;
+		border: 3px solid rgba($silver, 0.8);
+		border-radius: 50%;
+		&::before,
+		&::after {
+			content: '';
+			box-sizing: border-box;
+			display: block;
+			position: absolute;
+			width: 22px;
+			height: 22px;
+			margin: -3px;
+			border: 3px solid black;
+			border-radius: 50%;
+			animation: loader 1s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+			border-color: black transparent transparent;
+		}
+		&::before {
+			animation-delay: -0.45s;
+		}
+		&::after {
+			animation-delay: -0.36s;
+		}
+		&--mini {
+			transform: scale(0.8);
+			transform-origin: center center;
+			margin: -4px 0;
+		}
+	}
+	@keyframes loader {
+		0% {
+			transform: rotate(0deg);
+		}
+		100% {
+			transform: rotate(360deg);
+		}
 	}
 }

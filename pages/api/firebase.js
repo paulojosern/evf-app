@@ -102,20 +102,24 @@ export const firebase = [
 				items: [
 					{
 						image:
-							'https://bk-latam-prod.s3.amazonaws.com/sites/burgerking.com.br/files/Site-300x270-Crisp_0.jpg',
-						description: 'Sanduiche de presunto',
+							'https://www.dicasdemulher.com.br/wp-content/uploads/2017/04/bolo-morango-2-1200x738.jpg',
+						description: 'Delícioso bolo de morango',
 						detail:
-							'Sanduiche de presunto 200g de uma carne de qualidade superior ao hambúrguer convencional',
+							'O morango se destaca por proporcionar um sabor azedinho, além de deixar o bolo (branco ou de chocolate) muito mais bonito',
 						price: 32.5,
 						url: '',
 						options: [
 							{
-								detail: 'Com Maiones',
-								price: 2.5,
+								detail: '800 gramas',
+								price: 0,
 							},
 							{
-								detail: '+ 1 Hambuguer',
-								price: 12.5,
+								detail: '1.2 kilos',
+								price: 32.5,
+							},
+							{
+								detail: '2 kilos',
+								price: 52.5,
 							},
 						],
 					},
@@ -139,8 +143,8 @@ export const firebase = [
 					},
 					{
 						image:
-							'https://bk-latam-prod.s3.amazonaws.com/sites/burgerking.com.br/files/Site-300x270-Crisp_0.jpg',
-						description: 'Sanduiche de Mortadela',
+							'https://www.receitadevovo.com.br/gbau/sistema/receitas/img/bolo-floresta-negra.jpg',
+						description: 'Bolo Floresta Negra',
 						detail: 'Sanduiche de mortadela 200g de uma carne de big',
 						price: 29,
 						url: '',

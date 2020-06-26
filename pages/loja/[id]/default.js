@@ -16,17 +16,21 @@ const Default = ({ store }) => {
 	const [fixedTop, setFixedTop] = useState();
 	const [scroll, setScroll] = useState('auto');
 
-	useEffect(() => {
-		document.body.style.overflow = scroll;
-		var d = document.getElementById('menu');
-		var menu = d.offsetTop - 50;
+	const scrolling = (value) => {
+		var id = document.getElementById(value);
+		var item = id.offsetTop - 50;
 		window.addEventListener('scroll', () => {
-			if (document.documentElement.scrollTop >= menu) {
+			if (document.documentElement.scrollTop >= item) {
 				setFixed(true);
 			} else {
 				setFixed(false);
 			}
 		});
+	};
+
+	useEffect(() => {
+		document.body.style.overflow = scroll;
+		scrolling('menu');
 	}, [scroll]);
 
 	useEffect(() => {
@@ -74,6 +78,11 @@ const Default = ({ store }) => {
 			<main className="default">
 				<header
 					className="default__header"
+					className={
+						fixed
+							? 'default__header default__header--fixed'
+							: ' default__header'
+					}
 					style={{ backgroundColor: `${store.colors.color1}` }}
 				>
 					<div
@@ -82,7 +91,6 @@ const Default = ({ store }) => {
 								? 'header__content header__content--fixed'
 								: ' header__content'
 						}
-						style={{ backgroundColor: `${store.colors.color1}` }}
 					>
 						<input type="checkbox" className="header__input" id="nav" />
 						<label className="header__btn" htmlFor="nav"></label>
@@ -90,8 +98,10 @@ const Default = ({ store }) => {
 							className="header__nav"
 							style={{ backgroundColor: `${store.colors.color1}` }}
 						></div>
-						<h2>{store.title}</h2>
-						<h3>{store.subtitle}</h3>
+						<div className="header__title">
+							<h1>{store.title}</h1>
+							<h4>{store.subtitle}</h4>
+						</div>
 					</div>
 
 					<DefaultMenu

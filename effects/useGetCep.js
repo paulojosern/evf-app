@@ -12,6 +12,20 @@ const useGetCep = () => {
 			})
 			.catch((error) => console.log(error));
 	};
+
+	// const getCepStore = (newcep) => {
+	// 	const [cep, setCep] = useState();
+	// 	axios
+	// 		.get(`https://viacep.com.br/ws/${newcep}/json/`)
+	// 		.then(function (response) {
+	// 			setCep(response.data);
+	// 		})
+	// 		.catch((error) => {
+	// 			setCep(error);
+	// 		});
+	// 	return cep;
+	// };
+
 	return [{ data }, getCep];
 };
 
