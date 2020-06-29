@@ -12,7 +12,8 @@ $placeholder: rgba($color, 0.7);
 //@import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap');
 //$font: 'Hind Siliguri', sans-serif;
 //@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800&display=swap');
-$font: 'Lato', sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Muli:wght@300;400;500;600;700;800&display=swap');
+$font: 'Muli', sans-serif;
 @mixin font($color, $size, $type) {
 	color: $color;
 	font-family: $font;
@@ -148,26 +149,28 @@ b {
 .hidden {
 	display: none;
 }
-.flex {
-	display: flex;
-}
-.center {
-	justify-content: center;
-}
-.between {
-	justify-content: space-between;
-}
-.bottom {
-	align-items: flex-end;
-}
-.middle {
-	align-items: center;
-}
-.end {
-	justify-content: flex-end;
-}
-.right {
-	text-align: right;
+@include size(tablet) {
+	.flex {
+		display: flex;
+	}
+	.center {
+		justify-content: center;
+	}
+	.between {
+		justify-content: space-between;
+	}
+	.bottom {
+		align-items: flex-end;
+	}
+	.middle {
+		align-items: center;
+	}
+	.end {
+		justify-content: flex-end;
+	}
+	.right {
+		text-align: right;
+	}
 }
 .line {
 	margin: 15px 0;

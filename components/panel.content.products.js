@@ -127,7 +127,7 @@ const PanelContentProducts = ({ currentCategorie }) => {
 
 			<div className="content__initial item">
 				<div className="panel__item panel__item--inline">
-					<div className="item item--medium">
+					<div className="item">
 						<label className="panel__label">Titulo da categoria</label>
 						<input
 							type="text"
@@ -170,8 +170,8 @@ const PanelContentProducts = ({ currentCategorie }) => {
 					</div>
 				</div>
 
-				<div className={!valide.toogleProduct ? ' ' : 'hidden'}>
-					Produtos:
+				<div className={!valide.toogleProduct ? 'panel__item' : 'hidden'}>
+					<label className="panel__label">Produtos:</label>
 					{categorie.products &&
 						categorie.products
 							// .sort(
@@ -189,7 +189,11 @@ const PanelContentProducts = ({ currentCategorie }) => {
 								);
 							})}
 				</div>
-				<div className={!valide.toogleProduct ? 'flex between ' : 'hidden'}>
+				<div
+					className={
+						!valide.toogleProduct ? 'panel__item panel__item--btn' : 'hidden'
+					}
+				>
 					<button
 						className="btn"
 						onClick={() => setValide({ ...valide, toogleProduct: true })}
@@ -198,7 +202,7 @@ const PanelContentProducts = ({ currentCategorie }) => {
 					</button>
 				</div>
 				<div className={valide.toogleProduct ? 'product__content' : 'hidden'}>
-					<h3>Novo produto:</h3>
+					<h3 className="panel__item">Novo produto:</h3>
 					<br></br>
 					<form onSubmit={saveNewProduct}>
 						<div className="panel__item">
@@ -223,30 +227,29 @@ const PanelContentProducts = ({ currentCategorie }) => {
 								required
 							/>
 						</div>
-						<div className="panel__item panel__item--inline flexbetween bottom">
+						<div className="panel__item panel__item--inline between bottom">
 							<div className="item item--small">
 								<label className="panel__label">Preço do produto</label>
 								<input
 									type="text"
 									name="price"
 									className="panel__input"
-									placeholder="R$"
 									onChange={ValidePrice}
 									onBlur={handleInput}
 									onKeyUp={handleUp}
 									required
 								/>
 							</div>
-							<div className="item flex right end">
+							<div className="item flex right end reverse">
+								<button type="submit" className="btn">
+									Salvar produto
+								</button>
 								<button
 									type="button"
 									className="btn btn--delete"
 									onClick={() => setValide({ ...valide, toogleProduct: false })}
 								>
 									excluir
-								</button>
-								<button type="submit" className="btn">
-									Salvar produto
 								</button>
 							</div>
 						</div>

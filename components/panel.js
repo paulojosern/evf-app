@@ -17,7 +17,7 @@ const Panel = () => {
 		type: '',
 		message: '',
 	});
-	const about = useRef();
+	const panel = useRef();
 
 	// const scrolling = () => {
 	// 	const top = about.current.getBoundingClientRect().y;
@@ -36,6 +36,10 @@ const Panel = () => {
 	useEffect(() => {
 		getStoreFromDB(currentUser.email);
 	}, [currentUser]);
+
+	useEffect(() => {
+		panel.current.scrollTop = 0;
+	}, [toogleStore]);
 
 	const handleCloseMsg = () => {
 		setMsg({
@@ -75,30 +79,57 @@ const Panel = () => {
 	};
 
 	return (
-		<div className="panel">
+		<div className="panel" ref={panel}>
 			<Msg />
 			<div className="panel__header">
-				<div className="header">
-					{!panelState ? (
-						<div className="loader">
-							<div className="loader__circle"></div>
-						</div>
-					) : (
-						<h1>{panelState.name && panelState.name}</h1>
-					)}
-					<div className="flex middle">
-						<button onClick={() => setToogleStore(false)}>Minha Loja</button>
-						<button onClick={() => setToogleStore(true)}>Meus produtos</button>
-						<Link href="/account">
-							<a className="store">Conta</a>
-						</Link>{' '}
+				{!panelState ? (
+					<div className="header__loader loader">
+						<div className="loader__circle"></div>
 					</div>
-				</div>
+				) : (
+					<div className="header">
+						<div className="header__title">
+							{panelState.logo && (
+								<div
+									className="header__logo"
+									style={{ backgroundImage: `url(${panelState.logo})` }}
+								>
+									{' '}
+								</div>
+							)}
+							{panelState.name && panelState.name}
+						</div>
+
+						<div
+							className={
+								toogleStore
+									? 'header__buttons'
+									: 'header__buttons header__buttons--store'
+							}
+						>
+							<button
+								className="header__btn"
+								onClick={() => setToogleStore(true)}
+							>
+								Meus produtos
+							</button>
+							<button
+								className="header__btn"
+								onClick={() => setToogleStore(false)}
+							>
+								Minha loja
+							</button>
+							{/* <Link href="/account">
+							<a className="store">Conta</a>
+						</Link> */}
+						</div>
+					</div>
+				)}
 			</div>
 			<div className="panel__content">
 				<PanelStore
 					fixed={fixed}
-					about={about}
+					// about={about}
 					user={currentUser.email}
 					setMsg={setMsg}
 					toogleStore={toogleStore}

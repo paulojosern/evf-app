@@ -128,9 +128,7 @@ const PanelContent = ({ user, setMsg, toogleStore }) => {
 					))}
 			<div
 				className={
-					valide.toogleCategorie
-						? 'item item--none'
-						: 'item flex between animation--categorie'
+					valide.toogleCategorie ? 'panel__item item--none' : 'content__btn'
 				}
 			>
 				<button
@@ -162,7 +160,7 @@ const PanelContent = ({ user, setMsg, toogleStore }) => {
 			>
 				<form onSubmit={handleProduct}>
 					<div className="panel__item panel__item--inline">
-						<div className="item item--medium">
+						<div className="item">
 							<label className="panel__label">Titulo da categoria</label>
 							<input
 								type="text"

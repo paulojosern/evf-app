@@ -105,160 +105,171 @@ const PanelStore = ({ toogleStore, user, setMsg }) => {
 							<div className="loader__circle"></div>
 						</div>
 					) : (
-						<>
-							<PanelBase64 setMsg={setMsg} />
-							<br />
-							<div className="panel__item">
-								<label className="panel__label">Nome da loja</label>
-								<input
-									type="text"
-									name="name"
-									className="panel__input"
-									onChange={handleChange}
-									onFocus={handlefocus}
-									onBlur={handleBlur}
-									placeholder={panelState && panelState.name}
-								/>
+						<div className="panel__item panel__item--inline">
+							<div className="item item--triple">
+								<PanelBase64 setMsg={setMsg} />
 							</div>
-							<div className="panel__item ">
-								<label className="panel__label">Descrição da loja</label>
-								<input
-									type="text"
-									name="description"
-									className="panel__input"
-									onChange={handleChange}
-									onFocus={handlefocus}
-									onBlur={handleBlur}
-									placeholder={panelState && panelState.description}
-								/>
-							</div>
-							<div className="panel__item " style={{ zIndex: '9999' }}>
-								<label className="panel__label">Cores</label>
-								{colors.color1 && (
-									<div className="flex">
-										<ColorPicker
-											colorCurrent="color1"
-											values={panelState}
-											setValues={inputStatePanel}
-											setColors={setColors}
-											color={colors.color1 && formatColor(colors.color1)}
-										/>
-
-										<ColorPicker
-											colorCurrent="color2"
-											values={panelState}
-											setValues={inputStatePanel}
-											setColors={setColors}
-											color={colors.color2 && formatColor(colors.color2)}
-										/>
-
-										<ColorPicker
-											colorCurrent="color3"
-											values={panelState}
-											setValues={inputStatePanel}
-											setColors={setColors}
-											color={colors.color3 && formatColor(colors.color3)}
-										/>
-									</div>
-								)}
-							</div>
-							<div className="panel__item ">
-								<label className="panel__label">Formas de pagamento</label>
-								<div className="panel__btn">
-									<input
-										type="checkbox"
-										id="deb"
-										className="panel__btn--input"
-										name="Crédito"
-										defaultChecked={
-											panelState.payments && panelState.payments.Crédito
-										}
-										onChange={handleCheckbox}
-									/>
-									<label className="panel__btn--label" htmlFor="deb" id="btn">
-										Cartão Crédito
-									</label>
-									<input
-										type="checkbox"
-										id="cred"
-										className="panel__btn--input"
-										name="Débito"
-										defaultChecked={
-											panelState.payments && panelState.payments.Débito
-										}
-										onChange={handleCheckbox}
-									/>
-									<label className="panel__btn--label" htmlFor="cred" id="btn">
-										Cartão de Débito
-									</label>
-
-									<input
-										type="checkbox"
-										id="ref"
-										className="panel__btn--input"
-										name="Refeição"
-										defaultChecked={
-											panelState.payments && panelState.payments.Refeição
-										}
-										onChange={handleCheckbox}
-									/>
-									<label className="panel__btn--label" htmlFor="ref" id="btn">
-										Refeição
-									</label>
-									<input
-										type="checkbox"
-										id="money"
-										className="panel__btn--input"
-										name="Dinheiro"
-										defaultChecked={
-											panelState.payments && panelState.payments.Dinheiro
-										}
-										onChange={handleCheckbox}
-									/>
-									<label className="panel__btn--label" htmlFor="money" id="btn">
-										Dinheiro
-									</label>
-								</div>
-							</div>
-							<div className="panel__item ">
-								<div className="item item--medium">
-									<label className="panel__label">Cep</label>
+							<div className="item ">
+								<div className="panel__item">
+									<label className="panel__label">Nome da loja</label>
 									<input
 										type="text"
-										name="cep"
+										name="name"
 										className="panel__input"
-										onChange={handleCEP}
-										onBlur={handleBlurCEP}
-										placeholder={
-											(panelState.address && panelState.address.cep) || ''
-										}
+										onChange={handleChange}
 										onFocus={handlefocus}
+										onBlur={handleBlur}
+										placeholder={panelState && panelState.name}
 									/>
 								</div>
-							</div>
-							<div className="panel__item  panel__item--address">
-								{panelState.address && (
-									<>
-										<h3>{panelState.address.logradouro}</h3>
-										<p>{panelState.address.bairro}</p>
-									</>
-								)}
-							</div>
-							<br />
-							<button
-								type="submit"
-								className="btn "
-								onClick={(e) => saveStore(e)}
-							>
-								{!loading ? (
-									'Salvar'
-								) : (
-									<div className="loader">
-										<div className="loader__circle loader__circle--mini"></div>
+								<div className="panel__item">
+									<label className="panel__label">Descrição da loja</label>
+									<input
+										type="text"
+										name="description"
+										className="panel__input"
+										onChange={handleChange}
+										onFocus={handlefocus}
+										onBlur={handleBlur}
+										placeholder={panelState && panelState.description}
+									/>
+								</div>
+								<div className="panel__item" style={{ zIndex: '9999' }}>
+									<label className="panel__label">Cores</label>
+									{colors.color1 && (
+										<div className="flex">
+											<ColorPicker
+												colorCurrent="color1"
+												values={panelState}
+												setValues={inputStatePanel}
+												setColors={setColors}
+												color={colors.color1 && formatColor(colors.color1)}
+											/>
+
+											<ColorPicker
+												colorCurrent="color2"
+												values={panelState}
+												setValues={inputStatePanel}
+												setColors={setColors}
+												color={colors.color2 && formatColor(colors.color2)}
+											/>
+
+											<ColorPicker
+												colorCurrent="color3"
+												values={panelState}
+												setValues={inputStatePanel}
+												setColors={setColors}
+												color={colors.color3 && formatColor(colors.color3)}
+											/>
+										</div>
+									)}
+								</div>
+								<div className="panel__item">
+									<label className="panel__label">Formas de pagamento</label>
+									<div className="panel__btn">
+										<input
+											type="checkbox"
+											id="deb"
+											className="panel__btn--input"
+											name="Crédito"
+											defaultChecked={
+												panelState.payments && panelState.payments.Crédito
+											}
+											onChange={handleCheckbox}
+										/>
+										<label className="panel__btn--label" htmlFor="deb" id="btn">
+											Cartão Crédito
+										</label>
+										<input
+											type="checkbox"
+											id="cred"
+											className="panel__btn--input"
+											name="Débito"
+											defaultChecked={
+												panelState.payments && panelState.payments.Débito
+											}
+											onChange={handleCheckbox}
+										/>
+										<label
+											className="panel__btn--label"
+											htmlFor="cred"
+											id="btn"
+										>
+											Cartão de Débito
+										</label>
+
+										<input
+											type="checkbox"
+											id="ref"
+											className="panel__btn--input"
+											name="Refeição"
+											defaultChecked={
+												panelState.payments && panelState.payments.Refeição
+											}
+											onChange={handleCheckbox}
+										/>
+										<label className="panel__btn--label" htmlFor="ref" id="btn">
+											Refeição
+										</label>
+										<input
+											type="checkbox"
+											id="money"
+											className="panel__btn--input"
+											name="Dinheiro"
+											defaultChecked={
+												panelState.payments && panelState.payments.Dinheiro
+											}
+											onChange={handleCheckbox}
+										/>
+										<label
+											className="panel__btn--label"
+											htmlFor="money"
+											id="btn"
+										>
+											Dinheiro
+										</label>
 									</div>
-								)}
-							</button>
-						</>
+								</div>
+								<div className="panel__item">
+									<div className="item item--small">
+										<label className="panel__label">Cep</label>
+										<input
+											type="text"
+											name="cep"
+											className="panel__input"
+											onChange={handleCEP}
+											onBlur={handleBlurCEP}
+											placeholder={
+												(panelState.address && panelState.address.cep) || ''
+											}
+											onFocus={handlefocus}
+										/>
+									</div>
+								</div>
+								<div className="panel__item  panel__item--address">
+									{panelState.address && (
+										<>
+											<h3>{panelState.address.logradouro}</h3>
+											<p>{panelState.address.bairro}</p>
+										</>
+									)}
+								</div>
+								<br />
+								<button
+									type="submit"
+									className="btn "
+									onClick={(e) => saveStore(e)}
+								>
+									{!loading ? (
+										'Salvar'
+									) : (
+										<div className="loader">
+											<div className="loader__circle loader__circle--mini"></div>
+										</div>
+									)}
+								</button>
+							</div>
+						</div>
 					)}
 				</div>
 			)}

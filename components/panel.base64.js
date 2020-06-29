@@ -43,22 +43,24 @@ const PanelBase64 = ({ setMsg }) => {
 	};
 
 	return (
-		<div className="panel__item panel__item--inline top between">
-			<div className="item ">
-				{panelState.logo && <img src={panelState.logo} className="logo" />}
+		<div className="about__logo">
+			<div
+				className="logo"
+				style={{ backgroundImage: `url(${panelState.logo})` }}
+			>
+				{/* {panelState.logo && <img src={panelState.logo} className="logo" />} */}
 			</div>
-			<div className="item right">
-				<input
-					type="file"
-					name="description"
-					className="panel__input hidden"
-					onChange={upload}
-					id="file"
-				/>
-				<label className=" btn--file" htmlFor="file">
-					{panelState.logo ? 'Trocar' : 'Inserir'} logo
-				</label>
-			</div>
+
+			<input
+				type="file"
+				name="description"
+				className="hidden"
+				onChange={upload}
+				id="file"
+			/>
+			<label className="logo__btn" htmlFor="file">
+				<span>{panelState.logo ? 'Trocar' : 'Inserir'} logo</span>
+			</label>
 		</div>
 	);
 };
