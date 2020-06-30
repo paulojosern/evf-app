@@ -149,6 +149,14 @@ b {
 .hidden {
 	display: none;
 }
+.flex {
+	@include size(tablet) {
+		display: flex;
+	}
+	&--row {
+		display: flex;
+	}
+}
 @include size(tablet) {
 	.flex {
 		display: flex;
@@ -170,6 +178,14 @@ b {
 	}
 	.right {
 		text-align: right;
+	}
+	.reverse {
+		flex-direction: row-reverse;
+		.btn {
+			&:first-of-type {
+				margin-left: 15px !important;
+			}
+		}
 	}
 }
 .line {

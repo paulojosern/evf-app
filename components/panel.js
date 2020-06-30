@@ -1,23 +1,23 @@
 import { useEffect, useState, useRef } from 'react';
 import { database } from '../services/config';
-import Link from 'next/link';
 import { useSession } from '~/store/Session';
 import { usePanelContext } from '~/context/panel.context';
 import PanelStore from '~/components/panel.store';
 import PanelContent from '~/components/panel.content';
+import { useAuth } from '../store/Auth';
 
 const Panel = () => {
 	const { currentUser } = useSession();
 	const { panelState, inputStatePanel } = usePanelContext();
 	const [fixed, setFixed] = useState(false);
 	const [toogleStore, setToogleStore] = useState(true);
-
 	const [msg, setMsg] = useState({
 		active: false,
 		type: '',
 		message: '',
 	});
 	const panel = useRef();
+	const { signout } = useAuth();
 
 	// const scrolling = () => {
 	// 	const top = about.current.getBoundingClientRect().y;
@@ -108,13 +108,21 @@ const Panel = () => {
 							}
 						>
 							<button
-								className="header__btn"
+								className={
+									!toogleStore
+										? 'header__btn'
+										: 'header__btn header__btn--active'
+								}
 								onClick={() => setToogleStore(true)}
 							>
 								Meus produtos
 							</button>
 							<button
-								className="header__btn"
+								className={
+									toogleStore
+										? 'header__btn'
+										: 'header__btn header__btn--active'
+								}
 								onClick={() => setToogleStore(false)}
 							>
 								Minha loja
@@ -123,6 +131,10 @@ const Panel = () => {
 							<a className="store">Conta</a>
 						</Link> */}
 						</div>
+
+						<button className="header__account" onClick={() => signout()}>
+							Sair
+						</button>
 					</div>
 				)}
 			</div>

@@ -101,17 +101,14 @@ const PanelContentProducts = ({ currentCategorie }) => {
 	};
 
 	return categorie ? (
-		<div className="content__product animation--categorie">
+		<div className="content__product">
 			<input
 				type="radio"
 				name="categ"
 				className="content__input"
 				id={`categ${key}`}
 			/>
-			<label
-				className="content__label item item--btn between flex middle"
-				htmlFor={`categ${key}`}
-			>
+			<label className="content__label " htmlFor={`categ${key}`}>
 				<div className="item__header">
 					{categorie.category && categorie.category}
 				</div>
@@ -125,7 +122,7 @@ const PanelContentProducts = ({ currentCategorie }) => {
 				</div>
 			</label>
 
-			<div className="content__initial item">
+			<div className="content__initial">
 				<div className="panel__item panel__item--inline">
 					<div className="item">
 						<label className="panel__label">Titulo da categoria</label>
@@ -185,15 +182,12 @@ const PanelContentProducts = ({ currentCategorie }) => {
 										state={products}
 										setCategorie={setCategorie}
 										categorie={categorie}
+										id={index}
 									/>
 								);
 							})}
 				</div>
-				<div
-					className={
-						!valide.toogleProduct ? 'panel__item panel__item--btn' : 'hidden'
-					}
-				>
+				<div className={!valide.toogleProduct ? 'panel__item' : 'hidden'}>
 					<button
 						className="btn"
 						onClick={() => setValide({ ...valide, toogleProduct: true })}
@@ -227,8 +221,8 @@ const PanelContentProducts = ({ currentCategorie }) => {
 								required
 							/>
 						</div>
-						<div className="panel__item panel__item--inline between bottom">
-							<div className="item item--small">
+						<div className="panel__item panel__item--inline between bottom reverse">
+							<div className="item--ti">
 								<label className="panel__label">Preço do produto</label>
 								<input
 									type="text"
@@ -240,7 +234,7 @@ const PanelContentProducts = ({ currentCategorie }) => {
 									required
 								/>
 							</div>
-							<div className="item flex right end reverse">
+							<div className="item flex reverse">
 								<button type="submit" className="btn">
 									Salvar produto
 								</button>

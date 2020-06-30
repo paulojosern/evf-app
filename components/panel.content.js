@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { database } from '~/services/config';
 import { usePanelContext } from '~/context/panel.context';
 import PanelContentProducts from '~/components/panel.content.products';
+import { price, handleInput, handleUp } from '~/effects/mask';
 
 const PanelContent = ({ user, setMsg, toogleStore }) => {
 	const [categories, setCategories] = useState([]);
@@ -14,6 +15,7 @@ const PanelContent = ({ user, setMsg, toogleStore }) => {
 		toogleCategorie: false,
 	});
 	const { panelCategories, panelState, inputCategories } = usePanelContext();
+	const categorieTitle = useRef();
 
 	useEffect(() => {
 		panelState && inputCategories(panelState.categories);
@@ -79,7 +81,8 @@ const PanelContent = ({ user, setMsg, toogleStore }) => {
 
 	const closeCategorie = (e) => {
 		e.preventDefault();
-		setValide({ ...valide, toogleCategorie: false });
+		categorieTitle.current.value = '';
+		setValide({ ...valide, toogleCategorie: false, addProduct: false });
 	};
 
 	const saveStore = async (e) => {
@@ -104,16 +107,18 @@ const PanelContent = ({ user, setMsg, toogleStore }) => {
 			});
 	};
 
+	const ValidePrice = (e) => {
+		handleChangeProduct(e);
+		e.target.value = price(e.target.value);
+	};
+
 	return !panelState ? (
 		<div className="content">
-			<div className="item">
-				<div className="item__header">
-					<div className="loader">
-						<div className="loader__circle"></div>
-					</div>
+			<div className="content__categorie">
+				<div className="loader">
+					<div className="loader__circle"></div>
 				</div>
 			</div>
-			<br />
 		</div>
 	) : (
 		<div className={toogleStore ? 'content' : 'content content--hidden'}>
@@ -126,11 +131,7 @@ const PanelContent = ({ user, setMsg, toogleStore }) => {
 					.map((item, id) => (
 						<PanelContentProducts currentCategorie={item} key={id} />
 					))}
-			<div
-				className={
-					valide.toogleCategorie ? 'panel__item item--none' : 'content__btn'
-				}
-			>
+			<div className={valide.toogleCategorie ? 'hidden' : 'content__btn'}>
 				<button
 					className="btn"
 					onClick={() => setValide({ ...valide, toogleCategorie: true })}
@@ -153,11 +154,7 @@ const PanelContent = ({ user, setMsg, toogleStore }) => {
 					</button>
 				)}
 			</div>
-			<div
-				className={
-					valide.toogleCategorie ? 'item item--show' : 'item item--hide'
-				}
-			>
+			<div className={valide.toogleCategorie ? 'content__categorie' : 'hidden'}>
 				<form onSubmit={handleProduct}>
 					<div className="panel__item panel__item--inline">
 						<div className="item">
@@ -166,6 +163,7 @@ const PanelContent = ({ user, setMsg, toogleStore }) => {
 								type="text"
 								name="category"
 								className="panel__input"
+								ref={categorieTitle}
 								onChange={handleChange}
 							/>
 						</div>
@@ -203,7 +201,9 @@ const PanelContent = ({ user, setMsg, toogleStore }) => {
 						</div>
 					</div>
 					<div className="line"></div>
-					<div className={valide.addProduct ? 'hidden' : 'flex between'}>
+					<div
+						className={valide.addProduct ? 'hidden' : 'flex between reverse'}
+					>
 						{valide.toogleProduct && (
 							<button className="btn" onClick={(e) => handleNewProduct(e)}>
 								Adicionar produto
@@ -242,18 +242,25 @@ const PanelContent = ({ user, setMsg, toogleStore }) => {
 							/>
 						</div>
 						<div className="panel__item panel__item--inline between bottom">
-							<div className="item item--small">
+							<div className="item--thin">
 								<label className="panel__label">Preço do produto</label>
 								<input
 									type="text"
 									name="price"
 									className="panel__input"
-									onChange={handleChangeProduct}
+									onChange={ValidePrice}
+									onBlur={handleInput}
 								/>
 							</div>
-							<div className="item item--small right">
+							<div className="flex between reverse right">
 								<button type="submit" className="btn">
 									Salvar produto
+								</button>
+								<button
+									className="btn btn--delete"
+									onClick={(e) => closeCategorie(e)}
+								>
+									Excluir categoria
 								</button>
 							</div>
 						</div>

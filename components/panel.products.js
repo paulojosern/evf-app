@@ -1,20 +1,28 @@
 import { useState, useEffect } from 'react';
 import { usePanelContext } from '~/context/panel.context';
+import ProductImages from '~/components/panel.products.images';
 import OptionAdd from '~/components/panel.products.option.add';
 import Option from '~/components/panel.products.option';
 import IconPlus from '~/assets/logos/icon-plus.svg';
 import IconTop from '~/assets/logos/icon-top.svg';
 import { price, handleInput, handleUp } from '~/effects/mask';
 
-const ProductContent = ({ state, categorie, setCategorie }) => {
+const ProductContent = ({ state, categorie, setCategorie, id }) => {
 	const [product, setProduct] = useState();
 	const [toogle, setToogle] = useState(false);
 	const [toogleOption, setToogleOption] = useState(false);
+	const [pics, setPics] = useState([]);
 	const { panelCategories, inputCategories } = usePanelContext();
+	const sub = product && product.description.substr(0, 5);
+	const newid = `${id}${sub}`;
 
 	useEffect(() => {
 		state && setProduct(state);
 	}, [state]);
+
+	useEffect(() => {
+		product && setPics(product.pics);
+	}, [product]);
 
 	const handleChangeProduct = (event) => {
 		const auxValues = { ...product };
@@ -37,7 +45,7 @@ const ProductContent = ({ state, categorie, setCategorie }) => {
 			(prod) => prod.id === product.id
 		);
 
-		const updatedProd = { ...product };
+		const updatedProd = { ...product, pics };
 
 		products = [
 			...categorie.products.slice(0, prodIndex),
@@ -56,6 +64,7 @@ const ProductContent = ({ state, categorie, setCategorie }) => {
 			updatedObj,
 			...panelCategories.slice(objIndex + 1),
 		];
+		// console.log(updatedProd);
 
 		inputCategories(updatedCateg);
 
@@ -144,6 +153,10 @@ const ProductContent = ({ state, categorie, setCategorie }) => {
 				</button>
 				<div className={toogle ? 'product__content' : 'hidden'}>
 					<form onSubmit={saveProduct}>
+						<div className="panel__item">
+							<label className="panel__label">Fotos</label>
+							<ProductImages id={newid} pics={pics} setPics={setPics} />
+						</div>
 						<div className="panel__item">
 							<label className="panel__label">Descrição</label>
 							<input
