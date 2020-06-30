@@ -17,11 +17,12 @@ const ItemContent = ({ items, column, getItem, toReal }) => {
 			{column ? (
 				items.map((item, i) => {
 					const handleClick = () => getItem(item);
+					const img = item.pics && item.pics[0].image;
 					return (
 						<div className="item item--column" key={i}>
 							<div
 								className="item__image"
-								style={{ backgroundImage: `url(${item.image})` }}
+								style={{ backgroundImage: `url(${img})` }}
 							></div>
 							<div className="item__detail">
 								<div className="item__title">{item.description}</div>
@@ -43,11 +44,12 @@ const ItemContent = ({ items, column, getItem, toReal }) => {
 				<Slider {...settings}>
 					{items.map((item, i) => {
 						const handleClick = () => getItem(item);
+						const img = item.pics && item.pics[0].image;
 						return (
 							<div className="item" key={i}>
 								<div
 									className="item__image"
-									style={{ backgroundImage: `url(${item.image})` }}
+									style={{ backgroundImage: `url(${img})` }}
 								></div>
 								<div className="item__detail">
 									<div className="item__title">{item.description}</div>

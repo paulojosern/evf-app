@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 import { useStoreContext } from '~/context/store.context';
 import StoreAddress from '~/components/store.address';
-import { firebase } from '~/pages/api/firebase';
+import { database } from '~/services/config';
 
 const Store = ({ store }) => {
 	const { inputStore } = useStoreContext();
 	const [state, setState] = useState(false);
+	store && console.log(store);
 	useEffect(() => {
 		inputStore({ store });
 	}, [store]);
@@ -25,8 +26,16 @@ export default Store;
 
 Store.getInitialProps = async ({ query }) => {
 	const pid = query.id;
-	const data = await firebase;
-	const id = Object.keys(data).find((item) => data[item].slug === pid);
-	const store = data[id];
+	const firebase = await database;
+	let store = {};
+	await firebase
+		.collection('stores')
+		.where('slug', '==', pid)
+		.get()
+		.then((snapshot) => {
+			snapshot.forEach((doc) => {
+				store = doc.data();
+			});
+		});
 	return { store };
 };

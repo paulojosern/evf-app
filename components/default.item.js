@@ -14,29 +14,26 @@ const DefaultItem = ({ store, getItem, toReal, setFixedTop }) => {
 		});
 	}, []);
 
+	store && console.log(store);
 	return store !== undefined ? (
-		store.sessions.map((categ, i) => (
+		store.categories.map((categ, i) => (
 			<section
 				className={
 					categ.column ? 'default__item default__item--column' : 'default__item'
 				}
-				data-id={categ.slug}
+				data-id={categ.category}
 				// id={categ.slug}
 				key={i}
 			>
-				{/* <div id="ctn">
-				<a name={categ.slug}>&nbsp;</a>
-				<h3 className="section__title target-label">{categ.title}</h3>
-			</div> */}
-				<h3 className="default__item-title" id={categ.slug}>
-					{categ.title}
+				<h3 className="default__item-title" id={categ.category}>
+					{categ.category}
 				</h3>
 
 				<ItemContent
-					items={categ.items}
+					items={categ.products}
 					getItem={getItem}
 					toReal={toReal}
-					column={categ.column ? categ.column : false}
+					column={categ.layout && categ.layout === 'vertical' ? false : true}
 				/>
 			</section>
 		))

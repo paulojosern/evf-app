@@ -70,11 +70,7 @@ $font: 'Muli', sans-serif;
 html,
 body,
 body > div:first-child,
-div#__next,
-// div#__next > div,
-// div#__next > div > div,
-
-main {
+div#__next {
 	height: 100%;
 	scroll-behavior: smooth;
 }

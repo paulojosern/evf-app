@@ -5,6 +5,7 @@ const ProductImages = ({ id, pics, setPics }) => {
 		type: '',
 		message: '',
 	});
+	pics && console.log(pics);
 
 	const upload = (e) => {
 		e.preventDefault();
@@ -21,18 +22,8 @@ const ProductImages = ({ id, pics, setPics }) => {
 				reader.onloadend = function () {
 					if (fileSizeInKB < fileLimit) {
 						var resultado = reader.result;
-						setPics([
-							...pics,
-							{
-								image: resultado,
-							},
-						]);
-						console.log(pics);
-						// setMsg({
-						// 	active: true,
-						// 	type: 'sucesso',
-						// 	message: 'Alterado com sucesso',
-						// });
+						const newPics = pics.concat({ image: resultado });
+						setPics(newPics);
 					} else {
 						setMsg({
 							active: true,

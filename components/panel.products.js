@@ -21,7 +21,7 @@ const ProductContent = ({ state, categorie, setCategorie, id }) => {
 	}, [state]);
 
 	useEffect(() => {
-		product && setPics(product.pics);
+		product && setPics(product.pics || []);
 	}, [product]);
 
 	const handleChangeProduct = (event) => {

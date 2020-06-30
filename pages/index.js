@@ -1,17 +1,16 @@
 import Link from 'next/link';
 //import { firebase } from '~/pages/api/firebase';
-import { database, auth } from '../services/config';
+import { database } from '../services/config';
 // import { loadFirebase } from '../services/firebase';
 
-const Index = ({ data }) => {
-	// console.log(data);
+const Index = ({ store }) => {
 	return (
 		<main className="main">
 			{/* <div>{JSON.stringify(data)}</div> */}
-			{data.map((store, i) => {
+			{store.map((store, i) => {
 				return (
 					<Link key={i} href={`/loja/${store.slug}`}>
-						<a className="store">{store.title}</a>
+						<a className="store">{store.name}</a>
 					</Link>
 				);
 			})}
@@ -23,19 +22,18 @@ const Index = ({ data }) => {
 };
 
 Index.getInitialProps = async () => {
-	//const firebase = await loadFirebase();
 	const firebase = await database;
-	let data = [];
+	let store = [];
 	await firebase
 		.collection('stores')
-		// .where('state', '==', 'published')
 		.get()
 		.then((snapshot) => {
 			snapshot.forEach((doc) => {
-				data.push(doc.data());
+				store.push(doc.data());
 			});
 		});
-	return { data };
+
+	return { store };
 };
 
 export default Index;

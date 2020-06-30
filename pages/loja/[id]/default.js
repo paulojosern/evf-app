@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 import { ShopCardProvider } from '~/context/shopcard.context';
 import DefaultMenu from '~/components/default.menu';
 import DefaultFooter from '~/components/default.footer';
 import DefaultItem from '~/components/default.item';
 import ShopCardList from '~/components/shopcard.list';
-import { firebase } from '~/pages/api/firebase';
+import { database } from '~/services/config';
 
 const Default = ({ store }) => {
 	const [addpay, setAddpay] = useState(false);
@@ -16,10 +16,13 @@ const Default = ({ store }) => {
 	const [fixedTop, setFixedTop] = useState();
 	const [scroll, setScroll] = useState('auto');
 
+	const menu = useRef();
+	// store && console.log('minha loja: ', store);
 	const scrolling = (value) => {
 		var id = document.getElementById(value);
-		var item = id.offsetTop - 50;
+		var item = id.offsetTop;
 		window.addEventListener('scroll', () => {
+			// console.log(document.documentElement.scrollTop);
 			if (document.documentElement.scrollTop >= item) {
 				setFixed(true);
 			} else {
@@ -29,7 +32,7 @@ const Default = ({ store }) => {
 	};
 
 	useEffect(() => {
-		document.body.style.overflow = scroll;
+		document.body.style.overflow = 'scroll';
 		scrolling('menu');
 	}, [scroll]);
 
@@ -83,7 +86,7 @@ const Default = ({ store }) => {
 							? 'default__header default__header--fixed'
 							: ' default__header'
 					}
-					style={{ backgroundColor: `${store.colors.color1}` }}
+					style={{ backgroundColor: `rgba(${store.colors.color1})` }}
 				>
 					<div
 						className={
@@ -99,15 +102,22 @@ const Default = ({ store }) => {
 							style={{ backgroundColor: `${store.colors.color1}` }}
 						></div>
 						<div className="header__title">
-							<h1>{store.title}</h1>
-							<h4>{store.subtitle}</h4>
+							<div
+								className="title__logo"
+								style={{ backgroundImage: `url(${store.logo})` }}
+							></div>
+							<div className="title__content">
+								<h1>{store.name}</h1>
+								<p>{store.description}</p>
+							</div>
 						</div>
 					</div>
 
 					<DefaultMenu
 						fixedTop={fixedTop}
 						fixed={fixed}
-						store={store.sessions}
+						store={store.categories}
+						ref={menu}
 					/>
 				</header>
 				<article
@@ -138,8 +148,16 @@ export default Default;
 
 Default.getInitialProps = async ({ query }) => {
 	const pid = query.id;
-	const data = await firebase;
-	const id = Object.keys(data).find((item) => data[item].slug === pid);
-	const store = data[id];
+	const firebase = await database;
+	let store = {};
+	await firebase
+		.collection('stores')
+		.where('slug', '==', pid)
+		.get()
+		.then((snapshot) => {
+			snapshot.forEach((doc) => {
+				store = doc.data();
+			});
+		});
 	return { store };
 };

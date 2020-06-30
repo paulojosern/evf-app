@@ -31,11 +31,11 @@ const DefaultMenu = ({ fixedTop, fixed, store }) => {
 				{store.map((link, i) => (
 					<a
 						className="menu__link"
-						href={`#${link.slug}`}
-						data-id={link.slug}
+						href={`#${link.category}`}
+						data-id={link.category}
 						key={i}
 					>
-						{link.title}
+						{link.category}
 					</a>
 				))}
 			</Slider>
