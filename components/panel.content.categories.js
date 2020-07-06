@@ -2,24 +2,20 @@ import { useState, useEffect } from 'react';
 import { usePanelContext } from '~/context/panel.context';
 import ProductContent from '~/components/panel.products';
 import IconDelete from '~/assets/logos/icon-garbage.svg';
-import IconTop from '~/assets/logos/icon-top.svg';
-import { price, handleInput, handleUp } from '~/effects/mask';
+import { price, priceData, handleInput, handleUp, rnd } from '~/effects/mask';
 
-const PanelContentProducts = ({ currentCategorie }) => {
+const PanelCategories = ({ currentCategorie, id }) => {
 	const [categorie, setCategorie] = useState();
 	const [newProduct, setNewProduct] = useState();
 	const { panelCategories, inputCategories } = usePanelContext();
 
+	// panelCategories && console.log(panelCategories);
 	const [valide, setValide] = useState({
 		addProduct: false,
 		toogleProduct: false,
 		addCategorie: false,
 		toogleOptions: false,
 	});
-
-	function rnd() {
-		return Math.floor(Math.random() * (9000 - 100 + 1) + 100);
-	}
 
 	useEffect(() => {
 		currentCategorie && setCategorie(currentCategorie);
@@ -41,7 +37,9 @@ const PanelContentProducts = ({ currentCategorie }) => {
 	const handleChangeNewProduct = (event) => {
 		const auxValues = { ...newProduct };
 		if (event.target.name === 'price') {
-			auxValues[event.target.name] = price(event.target.value);
+			let price = priceData(event.target.value);
+			price = parseFloat(price);
+			auxValues[event.target.name] = price;
 		} else {
 			auxValues[event.target.name] = event.target.value;
 		}
@@ -100,6 +98,11 @@ const PanelContentProducts = ({ currentCategorie }) => {
 		e.target.value = price(e.target.value);
 	};
 
+	const handleFocus = (e) => {
+		const auxValues = { ...categorie };
+		e.target.value = auxValues[event.target.name];
+	};
+
 	return categorie ? (
 		<div className="content__product">
 			<input
@@ -112,9 +115,14 @@ const PanelContentProducts = ({ currentCategorie }) => {
 				<div className="item__header">
 					{categorie.category && categorie.category}
 				</div>
-				<div className="flex">
-					<button onClick={setFirstItem} className="btn--icon">
-						<IconTop />
+				<div className="flex--row middle end">
+					<button
+						onClick={setFirstItem}
+						className="content__order"
+						flow="left"
+						tooltip={id > 0 ? 'Colocar em primeiro' : 'Primeiro da lista'}
+					>
+						{id + 1}
 					</button>
 					<button onClick={removeCategorie} className="btn--icon-delete">
 						<IconDelete />
@@ -131,6 +139,7 @@ const PanelContentProducts = ({ currentCategorie }) => {
 							name="category"
 							className="panel__input"
 							onChange={handleChangeCategorie}
+							onFocus={handleFocus}
 							placeholder={categorie.category && categorie.category}
 						/>
 					</div>
@@ -189,7 +198,7 @@ const PanelContentProducts = ({ currentCategorie }) => {
 				</div>
 				<div className={!valide.toogleProduct ? 'panel__item' : 'hidden'}>
 					<button
-						className="btn"
+						className="btn btn--green"
 						onClick={() => setValide({ ...valide, toogleProduct: true })}
 					>
 						Adicionar produto
@@ -255,4 +264,4 @@ const PanelContentProducts = ({ currentCategorie }) => {
 		<div>loading</div>
 	);
 };
-export default PanelContentProducts;
+export default PanelCategories;

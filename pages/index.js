@@ -1,6 +1,7 @@
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 //import { firebase } from '~/pages/api/firebase';
-import { database } from '../services/config';
+import { database, storage } from '../services/config';
 // import { loadFirebase } from '../services/firebase';
 
 const Index = ({ store }) => {

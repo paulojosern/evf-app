@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, memo } from 'react';
 import ItemContent from '~/components/item.content';
 
 const DefaultItem = ({ store, getItem, toReal, setFixedTop }) => {
@@ -14,7 +14,6 @@ const DefaultItem = ({ store, getItem, toReal, setFixedTop }) => {
 		});
 	}, []);
 
-	store && console.log(store);
 	return store !== undefined ? (
 		store.categories.map((categ, i) => (
 			<section
@@ -25,9 +24,7 @@ const DefaultItem = ({ store, getItem, toReal, setFixedTop }) => {
 				// id={categ.slug}
 				key={i}
 			>
-				<h3 className="default__item-title" id={categ.category}>
-					{categ.category}
-				</h3>
+				<h2 id={categ.category}>{categ.category}</h2>
 
 				<ItemContent
 					items={categ.products}
@@ -42,4 +39,4 @@ const DefaultItem = ({ store, getItem, toReal, setFixedTop }) => {
 	);
 };
 
-export default DefaultItem;
+export default memo(DefaultItem);

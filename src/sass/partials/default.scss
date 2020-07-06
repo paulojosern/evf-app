@@ -1,8 +1,6 @@
 .default {
 	width: 100%;
-	overflow: hidden;
-	position: relative;
-	top: 0;
+	overflow-x: hidden !important;
 	// transform: translateY(100%);
 	// top: 100%;
 	// animation: fadein;
@@ -10,7 +8,6 @@
 	// animation-delay: 0.1s;
 	// animation-fill-mode: both;
 	// position: relative;
-
 	&__header {
 		//background-color: $yellow;
 		position: absolute;
@@ -36,10 +33,10 @@
 				top: 60px;
 				display: flex;
 				align-items: center;
-				@include font($color, 1em, 300);
+				@include font(rgba($color, 0.8), 1em, 600);
 				border-bottom: 1px solid $background;
 				h1 {
-					@include font($color, 1.3em, 600);
+					@include font($color, 1.3em, 800);
 					padding: 0;
 					margin: 2px 0 6px;
 				}
@@ -167,49 +164,52 @@
 		}
 		.menu__link {
 			text-decoration: none;
-			@include font($color, 1em, 400);
+			@include font($color, 1em, 600);
 			//border: 1px solid rgba($color, 0.2);
-			border-radius: 15px;
-			padding: 9px 12px;
+			border-radius: 25px;
+			padding: 8px 12px;
 			margin: 4px 8px !important;
 			width: auto !important;
-			background-color: $background;
+			background-color: rgba($background, 0.6);
+			border: 1px solid $background;
 			&:first-of-type {
 				margin: 4px 6px 4px 0 !important;
 			}
 			&--active {
-				background-color: $yellow;
+				background-color: white;
+				border: 1px solid rgba($color, 0.7);
 			}
 		}
 	}
 	&__content {
 		padding: 0;
 		background-color: $background;
-		padding-top: 200px;
+		padding-top: 189px;
 		// &--fixed {
 		// 	padding-top: 200px;
 		// 	//padding-top: 50px;
 		// }
 	}
 	&__item {
-		padding: 25px 0 10px 20px;
+		padding: 20px 0 10px 20px;
 		margin: 10px 0;
 		transition: all 0.4s ease;
 		background: white;
-		position: relative;
-		&-title {
+
+		h2 {
 			font-size: 1.4em;
 			padding-bottom: 5px;
-			&:target::before {
-				content: ' ';
-				z-index: 2;
-				display: block;
-				height: 130px;
-				margin-top: -130px;
-			}
+			font-weight: 800;
+		}
+		h2:target::before {
+			content: ' ';
+			z-index: 2;
+			display: block;
+			height: 80px;
+			margin-top: -80px;
 		}
 		.item {
-			width: 250px !important;
+			width: 150px !important;
 			margin-right: 14px;
 			outline: none !important;
 			position: relative;
@@ -231,26 +231,28 @@
 				margin: 0;
 				border-radius: 12px 12px;
 			}
+
+			&__title {
+				@include font($color, 1.3em, 700);
+				padding: 0 0 5px;
+				line-height: 110%;
+			}
 			&__detail {
 				padding: 15px 5px;
 				margin: 0;
-				@include font(rgba($color, 0.8), 0.9em, 400);
+				@include font(rgba($color, 0.5), 0.9em, 600);
 				line-height: 120%;
 				min-height: 110px;
 				display: flex;
 				flex-direction: column;
-				box-shadow: 0 15px 14px -5px rgba($color, 0.05);
-				border-radius: 0 0 14px 14px;
+				// box-shadow: 0 15px 14px -5px rgba($color, 0.05);
+				// border-radius: 0 0 14px 14px;
 				p {
 					padding: 5px 0;
 				}
 			}
-			&__title {
-				@include font($color, 1.5em, 700);
-				padding: 0 0 5px;
-			}
 			&__price {
-				@include font($color, 1.4em, 600);
+				@include font($color, 1.4em, 700);
 				text-align: center;
 				padding: 0;
 			}
@@ -261,7 +263,7 @@
 				z-index: 5;
 				border: 0px solid rgba($color, 0.7);
 				padding: 8px 26px 8px 12px;
-				font-weight: 600;
+				font-weight: 700;
 				font-family: $font;
 				color: $color;
 				cursor: pointer;
@@ -303,11 +305,11 @@
 				}
 				.item__image {
 					background-color: $background;
-					flex: 100px;
-					min-width: 100px;
-					width: 100px;
-					max-width: 100px;
-					height: 100px;
+					flex: 130px;
+					min-width: 130px;
+					width: 130px;
+					max-width: 130px;
+					height: 130px;
 					border-radius: 8px;
 					position: relative;
 					z-index: 2;
@@ -319,11 +321,14 @@
 					flex: auto;
 					padding: 5px 0 0 14px;
 					margin: 0;
-					@include font($color, 0.9em, 400);
+					@include font(rgba($color, 0.5), 0.9em, 600);
 					border-right: 0;
 					min-height: auto;
 					// border-radius: 0 8px 8px 0;
 					box-shadow: none;
+					p {
+						min-height: 45px;
+					}
 				}
 				.item__price {
 					text-align: right;
@@ -335,9 +340,8 @@
 			}
 		}
 	}
-
 	&__footer2 {
-		height: 1000px;
+		height: 100px;
 		background-color: $background;
 	}
 	&__footer {
@@ -394,13 +398,13 @@
 				align-items: center;
 				justify-content: space-between;
 				.address {
-					@include font($color, 1.2em, 400);
+					@include font($color, 1.2em, 500);
 					line-height: 125%;
 					&__detail {
-						@include font($color, 1em, 400);
+						@include font($color, 1em, 500);
 
 						label {
-							@include font($color, 0.9em, 700);
+							@include font(rgba($color, 0.4), 0.9em, 700);
 							display: block;
 						}
 						span {
@@ -418,6 +422,9 @@
 				}
 				.show {
 					display: none;
+				}
+				.hidden {
+					display: block;
 				}
 			}
 		}
@@ -467,8 +474,8 @@
 			padding: 10px 15px;
 			appearance: none;
 			user-select: none;
-			background-color: $yellow;
-			@include font($color, 1.25em, 600);
+			background: $background;
+			@include font($color, 1.25em, 700);
 			justify-content: space-between;
 			border-radius: 20px;
 			border: 0;

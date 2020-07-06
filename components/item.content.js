@@ -1,3 +1,5 @@
+import { memo } from 'react';
+
 import Slider from 'react-slick';
 
 const ItemContent = ({ items, column, getItem, toReal }) => {
@@ -17,7 +19,8 @@ const ItemContent = ({ items, column, getItem, toReal }) => {
 			{column ? (
 				items.map((item, i) => {
 					const handleClick = () => getItem(item);
-					const img = item.pics && item.pics[0].image;
+					const img = item.pics[0] && item.pics[0].url;
+					// item.pics[0].image ||
 					return (
 						<div className="item item--column" key={i}>
 							<div
@@ -44,7 +47,8 @@ const ItemContent = ({ items, column, getItem, toReal }) => {
 				<Slider {...settings}>
 					{items.map((item, i) => {
 						const handleClick = () => getItem(item);
-						const img = item.pics && item.pics[0].image;
+						const img = item.pics && item.pics[0].url;
+
 						return (
 							<div className="item" key={i}>
 								<div
@@ -73,4 +77,4 @@ const ItemContent = ({ items, column, getItem, toReal }) => {
 	);
 };
 
-export default ItemContent;
+export default memo(ItemContent);

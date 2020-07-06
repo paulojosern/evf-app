@@ -4,6 +4,7 @@ import { usePanelContext } from '~/context/panel.context';
 import useGetCep from '~/effects/useGetCep';
 import ColorPicker from '~/components/panel.picker';
 import PanelBase64 from '~/components/panel.base64';
+import PanelStoreImage from '~/components/panel.store.image';
 
 const PanelStore = ({ toogleStore, user, setMsg }) => {
 	const [colors, setColors] = useState({});
@@ -109,6 +110,7 @@ const PanelStore = ({ toogleStore, user, setMsg }) => {
 					<div className="about__item panel__item--inline between">
 						<div className="item--small">
 							<PanelBase64 setMsg={setMsg} />
+							<PanelStoreImage />
 						</div>
 						<div className="item--large">
 							<div className="panel__item">
@@ -250,11 +252,11 @@ const PanelStore = ({ toogleStore, user, setMsg }) => {
 							<div className="line"></div>
 							<button
 								type="submit"
-								className="btn "
+								className="btn btn--save"
 								onClick={(e) => saveStore(e)}
 							>
 								{!loading ? (
-									'Salvar'
+									'Publicar'
 								) : (
 									<div className="loader">
 										<div className="loader__circle loader__circle--mini"></div>

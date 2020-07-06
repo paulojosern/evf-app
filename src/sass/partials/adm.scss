@@ -66,6 +66,7 @@
 				margin-right: 0;
 			}
 		}
+
 		&--delete {
 			background: $red;
 			color: white;
@@ -122,12 +123,19 @@
 			border: 0;
 			background: transparent;
 			cursor: pointer;
+			margin-bottom: -2px;
 			svg {
 				width: 23px;
 				min-width: 23px;
 				height: auto;
 				fill: $red;
 			}
+		}
+		&--green {
+			background: $green;
+		}
+		&--pink {
+			background: $pink;
 		}
 
 		&[disabled] {
@@ -438,7 +446,6 @@
 			padding-bottom: 4px;
 		}
 	}
-
 	&__signin {
 		width: 100%;
 		height: 100%;
@@ -671,6 +678,9 @@
 					right: 30px;
 					@include font(rgba($color, 0.4), 1.2em, 700);
 				}
+				&:hover {
+					color: $red;
+				}
 			}
 		}
 	}
@@ -763,6 +773,149 @@
 					padding: 20px 30px;
 				}
 			}
+			&__image {
+				.image {
+					width: calc(50% - 20px);
+					height: 100px;
+					margin: 10px;
+					background-size: 120% auto;
+					background-repeat: no-repeat;
+					background-position: center center;
+					border-radius: 6px;
+					background-color: $silver;
+					position: relative;
+					@include size(tablet) {
+						width: 140px;
+						height: 100px;
+						margin: 0 10px;
+						background-size: 110% auto;
+						&:first-child {
+							margin-left: 0;
+						}
+						&:last-of-type {
+							margin-right: 20px;
+						}
+					}
+					&__primary {
+						position: absolute;
+						width: 20px;
+						height: 20px;
+						top: 10px;
+						left: 10px;
+						background-color: rgba(black, 0.6);
+						border-radius: 50%;
+						border: 2px solid white;
+						appearance: none;
+						position: relative;
+						cursor: pointer;
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						span {
+							position: relative;
+							z-index: 2;
+							@include font(white, 1em, 700);
+						}
+
+						&--selected {
+							span {
+								position: relative;
+								z-index: 2;
+								@include font($color, 0.85em, 700);
+							}
+
+							&::before {
+								content: '';
+								width: 13px;
+								height: 13px;
+								top: 50%;
+								left: 50%;
+								transform: translateX(-50%) translateY(-50%);
+								position: absolute;
+								background-color: white;
+								border-radius: 50%;
+							}
+						}
+					}
+					&__delete {
+						position: absolute;
+						width: 22px;
+						min-width: 22px;
+						height: 22px;
+						top: 9px;
+						right: 14px;
+						border: 0;
+						background: transparent;
+						appearance: none;
+						cursor: pointer;
+						svg {
+							width: 22px;
+							fill: white;
+							height: 22px;
+						}
+					}
+
+					&__add {
+						width: calc(50% - 22px);
+						height: 98px;
+						display: flex;
+						flex-direction: column;
+						align-items: center;
+						justify-content: center;
+						// background-color: $background;
+						border-radius: 6px;
+						border: 1px solid $background;
+						cursor: pointer;
+						position: relative;
+						transition: all 0.2s ease-in-out;
+						margin: 10px;
+						@include size(tablet) {
+							margin: 0px;
+							width: 140px;
+						}
+						&::before,
+						&::after {
+							position: absolute;
+							content: '';
+							top: 50%;
+							left: 50%;
+							width: 34px;
+							height: 8px;
+							border-radius: 2px;
+							background-color: $background;
+							transform: translateX(-50%) translateY(-50%);
+							transition: all 0.2s ease-in-out;
+						}
+						&::after {
+							transform: translateX(-50%) translateY(-50%) rotate(90deg);
+						}
+						@include size(tablet) {
+							&:hover {
+								border: 1px solid $blue;
+								&::before,
+								&::after {
+									background-color: $blue;
+								}
+							}
+						}
+					}
+					&__msg {
+						border: 2px solid $background;
+						padding: 10px 12px;
+						width: calc(100% - 40px);
+						margin: 0 10px 15px;
+						font-weight: 700;
+						@include size(tablet) {
+							margin: 0 0 15px;
+							padding: 15px 20px;
+						}
+						&--error {
+							border-color: $red;
+							color: $red;
+						}
+					}
+				}
+			}
 		}
 		.content {
 			padding: 110px 20px 20px;
@@ -781,11 +934,11 @@
 				display: flex;
 				justify-content: space-between;
 				align-items: center;
-				padding: 15px;
+				padding: 15px 8px 15px 15px;
 				@include font($color, 1.2em, 700);
 				border-bottom: 1px solid rgba($silver, 0.6);
 				@include size(tablet) {
-					@include font($color, 1.4em, 700);
+					@include font($color, 1.6em, 700);
 					padding: 20px 30px;
 				}
 			}
@@ -804,17 +957,42 @@
 					}
 				}
 			}
-			&__product {
-				margin-bottom: 15px;
-				background-color: white;
-				//padding-bottom: 15px;
-			}
+
 			&__categorie {
 				margin-bottom: 15px;
 				background-color: white;
 				padding: 20px;
 				@include size(tablet) {
 					padding: 25px 30px;
+				}
+			}
+			&__product {
+				margin-bottom: 15px;
+				background-color: white;
+				//padding-bottom: 15px;
+			}
+			&__order {
+				width: 20px;
+				height: 20px;
+				padding-bottom: 1px;
+				background-color: transparent;
+				border-radius: 50%;
+				border: 2px solid rgba($blue, 0.8);
+				appearance: none;
+				position: relative;
+				cursor: pointer;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				@include font($color, 10px, 700);
+				@include size(tablet) {
+					width: 24px;
+					height: 24px;
+					@include font($color, 13px, 700);
+					padding-bottom: 2px;
+				}
+				&--product {
+					border: 2px solid rgba($green, 0.8);
 				}
 			}
 			&__btn {
@@ -825,12 +1003,12 @@
 			}
 			.product {
 				border: 0px solid rgba($silver, 0.4);
-				padding: 12px 15px;
+				padding: 12px 5px;
 				margin: 5px 0 15px;
 				border-radius: 5px;
 				box-shadow: 0 4px 12px 2px rgba($silver, 0.4);
 				@include size(tablet) {
-					padding: 20px 25px;
+					padding: 20px 15px;
 				}
 				&__label {
 					cursor: pointer;
@@ -849,32 +1027,36 @@
 					text-align: left;
 					@include font($color, 1.1em, 700);
 					@include size(tablet) {
-						@include font($color, 1.3em, 700);
+						@include font($color, 1.4em, 700);
 					}
 				}
 				&__content {
-					padding-top: 20px;
+					padding: 5px 10px;
 					transition: all 0.4s ease-in-out;
 				}
-				&__icon {
-					svg {
-						width: 15px;
-						min-width: 15px;
-						height: auto;
-						fill: $silver;
-						transition: all 0.4s ease-in-out;
-						@include size(tablet) {
-							width: 20px;
-							min-width: 20px;
-						}
-					}
-					&--show {
-						svg {
-							transform: rotate(45deg);
-							fill: $color;
-						}
-					}
-				}
+				// &__icon {
+				// 	svg {
+				// 		width: 20px;
+				// 		min-width: 20px;
+				// 		height: auto;
+				// 		fill: $silver;
+				// 		transition: all 0.4s ease-in-out;
+				// 		margin-bottom: -4px;
+				// 		margin-left: 6px;
+				// 		@include size(tablet) {
+				// 			width: 24px;
+				// 			min-width: 24px;
+				// 			margin-bottom: -5px;
+				// 			margin-left: 8px;
+				// 		}
+				// 	}
+				// 	&--show {
+				// 		svg {
+				// 			transform: rotate(45deg);
+				// 			fill: $color;
+				// 		}
+				// 	}
+				// }
 				&__images {
 					padding: 0px 0 10px 0;
 					display: flex;
@@ -887,13 +1069,13 @@
 					.image {
 						width: calc(50% - 20px);
 						height: 100px;
-
 						margin: 10px;
 						background-size: 120% auto;
 						background-repeat: no-repeat;
 						background-position: center center;
 						border-radius: 6px;
 						background-color: $silver;
+						position: relative;
 						@include size(tablet) {
 							width: 140px;
 							height: 100px;
@@ -904,6 +1086,64 @@
 							}
 							&:last-of-type {
 								margin-right: 20px;
+							}
+						}
+						&__primary {
+							position: absolute;
+							width: 20px;
+							height: 20px;
+							top: 10px;
+							left: 10px;
+							background-color: rgba(black, 0.6);
+							border-radius: 50%;
+							border: 2px solid white;
+							appearance: none;
+							position: relative;
+							cursor: pointer;
+							display: flex;
+							align-items: center;
+							justify-content: center;
+							span {
+								position: relative;
+								z-index: 2;
+								@include font(white, 1em, 700);
+							}
+
+							&--selected {
+								span {
+									position: relative;
+									z-index: 2;
+									@include font($color, 0.85em, 700);
+								}
+
+								&::before {
+									content: '';
+									width: 13px;
+									height: 13px;
+									top: 50%;
+									left: 50%;
+									transform: translateX(-50%) translateY(-50%);
+									position: absolute;
+									background-color: white;
+									border-radius: 50%;
+								}
+							}
+						}
+						&__delete {
+							position: absolute;
+							width: 22px;
+							min-width: 22px;
+							height: 22px;
+							top: 9px;
+							right: 14px;
+							border: 0;
+							background: transparent;
+							appearance: none;
+							cursor: pointer;
+							svg {
+								width: 22px;
+								fill: white;
+								height: 22px;
 							}
 						}
 

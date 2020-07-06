@@ -32,7 +32,7 @@ const Default = ({ store }) => {
 	};
 
 	useEffect(() => {
-		document.body.style.overflow = 'scroll';
+		document.body.style.overflowY = 'scroll';
 		scrolling('menu');
 	}, [scroll]);
 
@@ -112,13 +112,13 @@ const Default = ({ store }) => {
 							</div>
 						</div>
 					</div>
-
-					<DefaultMenu
-						fixedTop={fixedTop}
-						fixed={fixed}
-						store={store.categories}
-						ref={menu}
-					/>
+					<div ref={menu}>
+						<DefaultMenu
+							fixedTop={fixedTop}
+							fixed={fixed}
+							store={store.categories}
+						/>
+					</div>
 				</header>
 				<article
 					className={
@@ -140,6 +140,60 @@ const Default = ({ store }) => {
 			<DefaultFooter toReal={toReal} setScroll={setScroll} />
 		</ShopCardProvider>
 	) : (
+		// <div className="default">
+		// 	<div id="menu">
+		// 		<a href="#one">CLICK HERE</a>
+		// 		<a href="#two">CLICK HERE</a>
+		// 	</div>
+
+		// 	<div id="content">
+		// 		<p>Scroll this page</p>
+		// 		<p>Scroll this page</p>
+		// 		<h3 id="one">This is the first anchor.</h3>
+		// 		<p>Scroll this page</p>
+		// 		<p>Scroll this page</p>
+		// 		<p>Scroll this page</p>
+		// 		<p>Scroll this page</p>
+		// 		<h3 id="two">This is the secondth anchor.</h3>
+		// 		<p>Scroll this page</p>
+		// 		<p>Scroll this page</p>
+		// 		<p>Scroll this page</p>
+		// 		<p>Scroll this page</p>
+		// 		<p>Scroll this page</p>
+		// 		<p>Scroll this page</p>
+		// 		<p>Scroll this page</p>
+		// 		<p>Scroll this page</p>
+		// 		<p>Scroll this page</p>
+		// 		<p>Scroll this page</p>
+		// 		<p>Scroll this page</p>
+		// 		<p>Scroll this page</p>
+		// 		<p>Scroll this page</p>
+		// 		<p>Scroll this page</p>
+		// 		<p>Scroll this page</p>
+		// 		<p>Scroll this page</p>
+		// 		<p>Scroll this page</p>
+		// 		<p>Scroll this page</p>
+		// 		<p>Scroll this page</p>
+		// 		<p>Scroll this page</p>
+		// 		<p>Scroll this page</p>
+		// 		<p>Scroll this page</p>
+		// 		<p>Scroll this page</p>
+		// 		<p>Scroll this page</p>
+		// 		<p>Scroll this page</p>
+		// 		<p>Scroll this page</p>
+		// 		<p>Scroll this page</p>
+		// 		<p>Scroll this page</p>
+		// 		<p>Scroll this page</p>
+		// 		<p>Scroll this page</p>
+		// 		<p>Scroll this page</p>
+		// 		<p>Scroll this page</p>
+		// 		<p>Scroll this page</p>
+		// 		<p>Scroll this page</p>
+		// 		<p>Scroll this page</p>
+		// 		<p>Scroll this page</p>
+		// 		<p>Scroll this page</p>
+		// 	</div>
+		// </div>
 		<di>carregando</di>
 	);
 };

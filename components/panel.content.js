@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { database } from '~/services/config';
 import { usePanelContext } from '~/context/panel.context';
-import PanelContentProducts from '~/components/panel.content.products';
+import PanelCategories from '~/components/panel.content.categories';
 import { price, handleInput, handleUp } from '~/effects/mask';
 
 const PanelContent = ({ user, setMsg, toogleStore }) => {
@@ -129,7 +129,7 @@ const PanelContent = ({ user, setMsg, toogleStore }) => {
 						return b.yes - a.yes;
 					})
 					.map((item, id) => (
-						<PanelContentProducts currentCategorie={item} key={id} />
+						<PanelCategories currentCategorie={item} key={id} id={id} />
 					))}
 			<div className={valide.toogleCategorie ? 'hidden' : 'content__btn'}>
 				<button
@@ -205,7 +205,10 @@ const PanelContent = ({ user, setMsg, toogleStore }) => {
 						className={valide.addProduct ? 'hidden' : 'flex between reverse'}
 					>
 						{valide.toogleProduct && (
-							<button className="btn" onClick={(e) => handleNewProduct(e)}>
+							<button
+								className="btn btn--green"
+								onClick={(e) => handleNewProduct(e)}
+							>
 								Adicionar produto
 							</button>
 						)}
@@ -242,18 +245,25 @@ const PanelContent = ({ user, setMsg, toogleStore }) => {
 							/>
 						</div>
 						<div className="panel__item panel__item--inline between bottom">
-							<div className="item--thin">
-								<label className="panel__label">Preço do produto</label>
-								<input
-									type="text"
-									name="price"
-									className="panel__input"
-									onChange={ValidePrice}
-									onBlur={handleInput}
-								/>
+							<div className="flex middle">
+								<div className="item--thin">
+									<label className="panel__label">Preço do produto</label>
+									<input
+										type="text"
+										name="price"
+										className="panel__input"
+										onChange={ValidePrice}
+										onBlur={handleInput}
+									/>
+								</div>
+								<div className="item">
+									<br />
+									<p>Digite somente números</p>
+								</div>
 							</div>
+
 							<div className="flex between reverse right">
-								<button type="submit" className="btn">
+								<button type="submit" className="btn btn--green">
 									Salvar produto
 								</button>
 								<button

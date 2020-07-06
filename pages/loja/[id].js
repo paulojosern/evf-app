@@ -10,7 +10,13 @@ const Store = ({ store }) => {
 	useEffect(() => {
 		inputStore({ store });
 	}, [store]);
-	return (
+	return !store ? (
+		<div className="home">
+			<div className="loader--position">
+				<div className="loader__circle"></div>
+			</div>
+		</div>
+	) : (
 		!state && (
 			<main className="home">
 				<StoreAddress

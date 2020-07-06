@@ -1,5 +1,7 @@
 $blue: rgb(14, 217, 231);
+$green: rgb(41, 230, 182);
 $yellow: rgb(235, 218, 63);
+$pink: rgb(247, 176, 217);
 $background: #e9eff1;
 $red: rgb(255, 0, 85);
 $color: rgb(0, 0, 0);
@@ -72,7 +74,6 @@ body,
 body > div:first-child,
 div#__next {
 	height: 100%;
-	scroll-behavior: smooth;
 }
 html {
 	scroll-behavior: smooth;
@@ -105,7 +106,7 @@ body {
 	// 	background-color: rgba(255, 238, 0, 0.829);
 	// }
 	@include font($color, 13px, 400);
-	//overflow: hidden;
+	overflow-x: hidden !important;
 }
 .main {
 	transition: all 0.3s ease-in-out;
@@ -154,27 +155,6 @@ b {
 	}
 }
 @include size(tablet) {
-	.flex {
-		display: flex;
-	}
-	.center {
-		justify-content: center;
-	}
-	.between {
-		justify-content: space-between;
-	}
-	.bottom {
-		align-items: flex-end;
-	}
-	.middle {
-		align-items: center;
-	}
-	.end {
-		justify-content: flex-end;
-	}
-	.right {
-		text-align: right;
-	}
 	.reverse {
 		flex-direction: row-reverse;
 		.btn {
@@ -183,7 +163,30 @@ b {
 			}
 		}
 	}
+
+	.between {
+		justify-content: space-between;
+	}
+	.bottom {
+		align-items: flex-end;
+	}
+	.end {
+		justify-content: flex-end;
+	}
 }
+.left {
+	text-align: left;
+}
+.right {
+	text-align: right;
+}
+.center {
+	justify-content: center;
+}
+.middle {
+	align-items: center;
+}
+
 .line {
 	margin: 15px 0;
 	border-bottom: 1px solid rgba($silver, 0.5);

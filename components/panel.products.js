@@ -3,11 +3,9 @@ import { usePanelContext } from '~/context/panel.context';
 import ProductImages from '~/components/panel.products.images';
 import OptionAdd from '~/components/panel.products.option.add';
 import Option from '~/components/panel.products.option';
-import IconPlus from '~/assets/logos/icon-plus.svg';
-import IconTop from '~/assets/logos/icon-top.svg';
-import { price, handleInput, handleUp } from '~/effects/mask';
+import { price, priceData, handleInput } from '~/effects/mask';
 
-const ProductContent = ({ state, categorie, setCategorie, id }) => {
+const ProductContent = ({ state, categorie, id }) => {
 	const [product, setProduct] = useState();
 	const [toogle, setToogle] = useState(false);
 	const [toogleOption, setToogleOption] = useState(false);
@@ -27,7 +25,9 @@ const ProductContent = ({ state, categorie, setCategorie, id }) => {
 	const handleChangeProduct = (event) => {
 		const auxValues = { ...product };
 		if (event.target.name === 'price') {
-			auxValues[event.target.name] = price(event.target.value);
+			let price = priceData(event.target.value);
+			price = parseFloat(price);
+			auxValues[event.target.name] = price;
 		} else {
 			auxValues[event.target.name] = event.target.value;
 		}
@@ -92,9 +92,16 @@ const ProductContent = ({ state, categorie, setCategorie, id }) => {
 		let options = product.options;
 		options = options.filter((op) => op.id !== id);
 
+		const updatedProd = { ...product, options };
+
 		let products = categorie.products;
-		products = products.filter((prod) => prod.id !== product.id);
-		products = products.concat([{ ...product, options }]);
+		const prodIndex = products.findIndex((prod) => prod.id === product.id);
+
+		products = [
+			...categorie.products.slice(0, prodIndex),
+			updatedProd,
+			...categorie.products.slice(prodIndex + 1),
+		];
 
 		const updatedObj = { ...categorie, products };
 
@@ -113,6 +120,11 @@ const ProductContent = ({ state, categorie, setCategorie, id }) => {
 	const ValidePrice = (e) => {
 		handleChangeProduct(e);
 		e.target.value = price(e.target.value);
+	};
+
+	const handleFocus = (e) => {
+		const auxValues = { ...product };
+		e.target.value = auxValues[event.target.name];
 	};
 
 	const setFirst = () => {
@@ -134,28 +146,41 @@ const ProductContent = ({ state, categorie, setCategorie, id }) => {
 		setToogle(false);
 	};
 
+	const createSlug = (str) => {
+		const slug =
+			str &&
+			str
+				.normalize('NFD')
+				.replace(/[\u0300-\u036f]/g, '')
+				.replaceAll(' ', '-')
+				.toLowerCase();
+		return slug;
+	};
+
+	const str =
+		categorie &&
+		product &&
+		createSlug(categorie.category) + '_' + createSlug(product.description);
+
 	return (
 		<div className="product">
 			<label className="product__label " htmlFor="pro1">
-				<button
+				<label
 					className="product__btn between flex middle"
 					onClick={() => setToogle(!toogle)}
 				>
 					<div className="item__header">{product && product.description}</div>
-
-					<div
-						className={
-							toogle ? 'product__icon product__icon--show' : 'product__icon'
-						}
-					>
-						<IconPlus />
-					</div>
-				</button>
+				</label>
 				<div className={toogle ? 'product__content' : 'hidden'}>
 					<form onSubmit={saveProduct}>
 						<div className="panel__item">
 							<label className="panel__label">Fotos</label>
-							<ProductImages id={newid} pics={pics} setPics={setPics} />
+							<ProductImages
+								id={newid}
+								pics={pics}
+								setPics={setPics}
+								slug={str}
+							/>
 						</div>
 						<div className="panel__item">
 							<label className="panel__label">Descrição</label>
@@ -164,6 +189,7 @@ const ProductContent = ({ state, categorie, setCategorie, id }) => {
 								name="description"
 								className="panel__input"
 								placeholder={product && product.description}
+								onFocus={handleFocus}
 								onChange={handleChangeProduct}
 							/>
 						</div>
@@ -174,6 +200,7 @@ const ProductContent = ({ state, categorie, setCategorie, id }) => {
 								name="detail"
 								className="panel__input"
 								placeholder={product && product.detail}
+								onFocus={handleFocus}
 								onChange={handleChangeProduct}
 							/>
 						</div>
@@ -186,14 +213,12 @@ const ProductContent = ({ state, categorie, setCategorie, id }) => {
 									className="panel__input"
 									placeholder={product && product.price}
 									onChange={ValidePrice}
+									onFocus={handleFocus}
 									onBlur={handleInput}
 									// onKeyUp={handleUp}
 								/>
 							</div>
 							<div className="item flex right end">
-								<button onClick={setFirst} className="btn--icon">
-									<IconTop />
-								</button>
 								<button
 									type="button"
 									className={
@@ -203,7 +228,19 @@ const ProductContent = ({ state, categorie, setCategorie, id }) => {
 								>
 									excluir
 								</button>
-								<button type="submit" className="btn">
+								{id > 0 && (
+									<button
+										onClick={setFirst}
+										className="btn btn--green"
+										tooltip={
+											id > 0 ? 'Colocar em primeiro' : 'Primeiro da lista'
+										}
+										flow="left"
+									>
+										Subir
+									</button>
+								)}
+								<button type="submit" className="btn btn--green">
 									Salvar
 								</button>
 							</div>
@@ -211,7 +248,7 @@ const ProductContent = ({ state, categorie, setCategorie, id }) => {
 					</form>
 					<Option product={product} removeOption={removeOption} />
 					<button
-						className={!toogleOption ? 'btn' : 'hidden'}
+						className={!toogleOption ? 'btn btn--pink' : 'hidden'}
 						onClick={() => setToogleOption(!toogleOption)}
 					>
 						Adicionar Opção

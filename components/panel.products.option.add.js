@@ -1,20 +1,17 @@
 import { useState } from 'react';
 import { usePanelContext } from '~/context/panel.context';
-import { price, handleInput, handleUp } from '~/effects/mask';
+import { price, priceData, handleInput, handleUp, rnd } from '~/effects/mask';
 
 const OptionAdd = ({ categorie, product, toogleOption, setToogleOption }) => {
 	const [option, setOption] = useState();
 	const { panelCategories, inputCategories } = usePanelContext();
-	function rnd() {
-		return Math.floor(Math.random() * (9000 - 100 + 1) + 100);
-	}
-
-	option && console.log(option);
 
 	const handleChangeOption = (event) => {
 		const auxValues = { ...option };
 		if (event.target.name === 'price') {
-			auxValues[event.target.name] = price(event.target.value);
+			let price = priceData(event.target.value);
+			price = parseFloat(price);
+			auxValues[event.target.name] = price;
 		} else {
 			auxValues[event.target.name] = event.target.value;
 		}
@@ -26,17 +23,21 @@ const OptionAdd = ({ categorie, product, toogleOption, setToogleOption }) => {
 
 		let options = product.options || [];
 		options = options.concat([{ id: rnd(), ...option }]);
+		const updatedProd = { ...product, options };
 
 		let products = categorie.products;
-		products = products.filter((prod) => prod.id !== product.id);
-		products = products.concat([{ ...product, options }]);
+		const prodIndex = products.findIndex((prod) => prod.id === product.id);
+
+		products = [
+			...categorie.products.slice(0, prodIndex),
+			updatedProd,
+			...categorie.products.slice(prodIndex + 1),
+		];
 
 		const updatedObj = { ...categorie, products };
-
 		const objIndex = panelCategories.findIndex(
 			(obj) => obj.id === categorie.id
 		);
-
 		const updatedProjects = [
 			...panelCategories.slice(0, objIndex),
 			updatedObj,

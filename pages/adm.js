@@ -1,4 +1,3 @@
-import React from 'react';
 import { useSession } from '../store/Session';
 import Panel from '~/components/panel';
 import { PanelProvider } from '~/context/panel.context';

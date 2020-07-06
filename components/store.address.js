@@ -98,7 +98,7 @@ const StoreAddress = ({ setState, state, theme, slug }) => {
 							</h3>
 							<h4>{address.complemento}</h4>
 							<h4>{address.bairro}</h4>
-							<div className="flex center">
+							<div className="flex--row center">
 								<button className="btn btn--default" onClick={handleAddress}>
 									Não
 								</button>
