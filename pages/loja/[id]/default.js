@@ -32,7 +32,7 @@ const Default = ({ store }) => {
 	};
 
 	useEffect(() => {
-		document.body.style.overflowY = 'scroll';
+		document.body.style.overflowY = scroll;
 		scrolling('menu');
 	}, [scroll]);
 
@@ -86,7 +86,10 @@ const Default = ({ store }) => {
 							? 'default__header default__header--fixed'
 							: ' default__header'
 					}
-					style={{ backgroundColor: `rgba(${store.colors.color1})` }}
+					style={{
+						// backgroundColor: `rgba(${store.colors.color1})`,
+						backgroundImage: `url(${store.image})`,
+					}}
 				>
 					<div
 						className={

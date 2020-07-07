@@ -77,6 +77,7 @@ div#__next {
 }
 html {
 	scroll-behavior: smooth;
+	// overflow-x: hidden !important;
 }
 body {
 	background-color: $background;
@@ -106,7 +107,7 @@ body {
 	// 	background-color: rgba(255, 238, 0, 0.829);
 	// }
 	@include font($color, 13px, 400);
-	overflow-x: hidden !important;
+	// overflow-x: hidden !important;
 }
 .main {
 	transition: all 0.3s ease-in-out;
