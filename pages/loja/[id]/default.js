@@ -48,7 +48,7 @@ const Default = ({ store }) => {
 	const getItem = (items) => {
 		setAddpay(!addpay);
 		setList({
-			image: items.image,
+			pics: items.pics,
 			description: items.description,
 			price: items.price,
 			detail: items.detail,

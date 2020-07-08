@@ -14,8 +14,15 @@ const PanelContent = ({ user, setMsg, toogleStore }) => {
 		addCategorie: false,
 		toogleCategorie: false,
 	});
-	const { panelCategories, panelState, inputCategories } = usePanelContext();
+	const {
+		panelCategories,
+		panelState,
+		inputCategories,
+		showLoading,
+	} = usePanelContext();
 	const categorieTitle = useRef();
+
+	panelCategories && console.log(panelCategories);
 
 	useEffect(() => {
 		panelState && inputCategories(panelState.categories);
@@ -87,6 +94,7 @@ const PanelContent = ({ user, setMsg, toogleStore }) => {
 
 	const saveStore = async (e) => {
 		setLoading(true);
+		showLoading(true);
 		e.preventDefault();
 		const db = await database;
 		return db
@@ -104,6 +112,7 @@ const PanelContent = ({ user, setMsg, toogleStore }) => {
 					message: 'Alterado com sucesso',
 				});
 				setLoading(false);
+				showLoading(false);
 			});
 	};
 

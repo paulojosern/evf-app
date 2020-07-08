@@ -66,15 +66,15 @@ const ShopCardList = ({ addpay, list, closeList, toReal }) => {
 					<button className="list__btn--close" onClick={backClear}></button>
 					<div className="list__image">
 						<div className="list__description">{list.description}</div>
-						<div className="list__destail">{list.detail}</div>
 						<div className="list__image-overlay"></div>
 						<div
 							className="list__image-img"
-							style={{ backgroundImage: `url(${list.image})` }}
+							style={{ backgroundImage: `url(${list.pics[0]})` }}
 						/>
 					</div>
 					<div className="list__content">
 						<div className="content__separate"></div>
+						<div className="content__detail">{list.detail}</div>
 						<div className="content__container">
 							<div className="content__item">
 								<div className="item">
@@ -91,7 +91,7 @@ const ShopCardList = ({ addpay, list, closeList, toReal }) => {
 									</div>
 								</div>
 							</div>
-							<div className="content__title">Escolha uma das opções</div>
+							<div className="content__title">Opções disponíveis</div>
 							<div className="content__item">
 								{addpay && (
 									<OptionItem

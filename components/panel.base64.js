@@ -58,9 +58,8 @@ const PanelBase64 = ({ setMsg }) => {
 				onChange={upload}
 				id="file"
 			/>
-			<label className="logo__btn" htmlFor="file">
-				<span>{panelState.logo ? 'Trocar' : 'Inserir'} logo</span>
-			</label>
+			<label className="logo__btn" htmlFor="file"></label>
+			{/* <span>{panelState.logo ? 'Trocar' : 'Inserir'} logo</span> */}
 		</div>
 	);
 };

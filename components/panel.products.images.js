@@ -1,60 +1,56 @@
 import { useState, useEffect, memo } from 'react';
+import { usePanelContext } from '~/context/panel.context';
 import IconDelete from '../assets/logos/icon-garbage.svg';
 import { storage } from '../services/config';
-import { rnd } from '~/effects/mask';
 
-const ProductImages = ({ id, pics, setPics, slug }) => {
+const ProductImages = ({ id, slug, pics, setPics }) => {
 	const [msg, setMsg] = useState({
 		active: false,
 		type: '',
 		message: '',
 	});
+	// const [images, setImages] = useState([]);
+	const { showLoading } = usePanelContext();
 	const storageRef = storage.ref();
 
-	// useEffect(() => {
-	// 	slug && !pics[0] && console.log(slug);
-	// }, []);
+	useEffect(() => {
+		slug && loadImages();
+	}, [slug]);
 
-	// useEffect(() => {
-	// 	slug && loadImages();
-	// }, []);
+	const loadImages = () => {
+		const imagesRef = storageRef.child(`/${slug}`);
+		imagesRef.listAll().then((res) => {
+			res.items.forEach((resItem) => {
+				resItem.getDownloadURL().then((url) => {
+					setPics((oldArray) => [...oldArray, url]); // This line has changed!
+				});
+			});
+		});
+	};
 
-	// function loadImages() {
-	// 	const imagesRef = storageRef.child(`/${slug}`);
-	// 	imagesRef.listAll().then((res) => {
-	// 		res.items.forEach((resItem) => {
-	// 			resItem.getDownloadURL().then((url) => {
-	// 				setImages((oldArray) => [...oldArray, url]); // This line has changed!
-	// 			});
-	// 		});
-	// 	});
-	// }
-
-	const removeImage = (name) => {
-		let img = pics.filter((pic) => pic.name !== name);
-		setPics(img);
-		// console.log(name);
-		// storageRef
-		// 	.child(`/${slug}/${name}`)
-		// 	.delete()
-		// 	.then(function () {
-
-		// 	})
-		// 	.catch(function (error) {
-		// 		console.log('deu ruim');
-		// 	});
+	const removeImage = (url) => {
+		showLoading(true);
+		storage
+			.refFromURL(url)
+			.delete()
+			.then(() => {
+				let img = images.filter((pic) => pic !== url);
+				setPics(img);
+				showLoading(false);
+			})
+			.catch((err) => console.error(err));
 	};
 
 	const handleFireBaseUpload = (e) => {
 		const image = e.target.files[0];
 		console.log('start of upload');
+		showLoading(true);
 		// async magic goes here...
 		if (image === '') {
 			console.error(`not an image, the image file is a ${typeof image}`);
 		}
 		const uploadTask = storage.ref(`/${slug}/${image.name}`).put(image);
 
-		//initiates the firebase side uploading
 		uploadTask.on(
 			'state_changed',
 			(snapShot) => {
@@ -63,7 +59,7 @@ const ProductImages = ({ id, pics, setPics, slug }) => {
 			},
 			(err) => {
 				//catches the errors
-				console.log(err);
+				console.log('erro????', err);
 			},
 			() => {
 				// gets the functions from storage refences the image storage in firebase by the children
@@ -72,24 +68,25 @@ const ProductImages = ({ id, pics, setPics, slug }) => {
 					.child(`/${slug}/${image.name}`)
 					.getDownloadURL()
 					.then((fireBaseUrl) => {
-						setPics((oldArray) => [
-							...oldArray,
-							{ id: rnd(), name: image.name, url: fireBaseUrl },
-						]);
+						setPics((oldArray) => [...oldArray, fireBaseUrl]);
+					})
+					.then(() => {
+						// pics[0] && saveProductAndPics();
+						showLoading(false);
 					});
 			}
 		);
 	};
 
-	const setFirst = (id) => {
-		let images = pics;
-		images = images.reduce((acc, element) => {
-			if (element.id === id) {
+	const setFirst = (url) => {
+		let img = pics;
+		img = img.reduce((acc, element) => {
+			if (element === url) {
 				return [element, ...acc];
 			}
 			return [...acc, element];
 		}, []);
-		setPics(images);
+		setPics(img);
 	};
 
 	return (
@@ -104,7 +101,7 @@ const ProductImages = ({ id, pics, setPics, slug }) => {
 					<div
 						key={i}
 						className="image"
-						style={{ backgroundImage: `url(${img.url})` }}
+						style={{ backgroundImage: `url(${img})` }}
 					>
 						<button
 							className={
@@ -112,14 +109,11 @@ const ProductImages = ({ id, pics, setPics, slug }) => {
 									? 'image__primary image__primary--selected'
 									: 'image__primary'
 							}
-							onClick={() => setFirst(img.id)}
+							onClick={() => setFirst(img)}
 						>
 							{/* <span>{i + 1}</span> */}
 						</button>
-						<button
-							className="image__delete"
-							onClick={() => removeImage(img.name)}
-						>
+						<button className="image__delete" onClick={() => removeImage(img)}>
 							<IconDelete />
 						</button>
 					</div>

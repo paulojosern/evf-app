@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { useRouter } from 'next/router';
 import { usePanelContext } from '~/context/panel.context';
 import ProductImages from '~/components/panel.products.images';
 import OptionAdd from '~/components/panel.products.option.add';
@@ -13,14 +14,27 @@ const ProductContent = ({ state, categorie, id }) => {
 	const { panelCategories, inputCategories } = usePanelContext();
 	const sub = product && product.description.substr(0, 5);
 	const newid = `${id}${sub}`;
+	const router = useRouter();
+	const querie = router.asPath;
 
 	useEffect(() => {
 		state && setProduct(state);
 	}, [state]);
 
 	useEffect(() => {
-		product && setPics(product.pics || []);
-	}, [product]);
+		setTimeout(() => {
+			window.scrollTo({
+				top: querie.offsetTop,
+				behavior: 'smooth',
+			});
+		}, 300);
+	}, [querie]);
+
+	// pics && console.log(pics);
+
+	// useEffect(() => {
+	// 	product && setPics(product.pics || []);
+	// }, [product]);
 
 	const handleChangeProduct = (event) => {
 		const auxValues = { ...product };
@@ -162,16 +176,34 @@ const ProductContent = ({ state, categorie, id }) => {
 		product &&
 		createSlug(categorie.category) + '_' + createSlug(product.description);
 
+	const $input = useRef();
+
+	const labelClick = () => {
+		$input.current.click();
+	};
+
 	return (
 		<div className="product">
-			<label className="product__label " htmlFor="pro1">
-				<label
-					className="product__btn between flex middle"
-					onClick={() => setToogle(!toogle)}
+			<h2 id={`anchor-prod${newid}`}></h2>
+			<input
+				type="radio"
+				className="product__input"
+				name="product"
+				id={`prod${newid}`}
+				ref={$input}
+			/>
+			<label
+				className="product__label "
+				// htmlFor={`prod${newid}`}
+			>
+				<a
+					className="product__btn"
+					href={`#anchor-prod${newid}`}
+					onClick={labelClick}
 				>
-					<div className="item__header">{product && product.description}</div>
-				</label>
-				<div className={toogle ? 'product__content' : 'hidden'}>
+					{product && product.description}
+				</a>
+				<div className="product__content">
 					<form onSubmit={saveProduct}>
 						<div className="panel__item">
 							<label className="panel__label">Fotos</label>
@@ -218,15 +250,9 @@ const ProductContent = ({ state, categorie, id }) => {
 									// onKeyUp={handleUp}
 								/>
 							</div>
-							<div className="item flex right end">
-								<button
-									type="button"
-									className={
-										categorie.products.length > 1 ? 'btn btn--delete' : 'hidden'
-									}
-									onClick={removeProduct}
-								>
-									excluir
+							<div className="item flex right  reverse">
+								<button type="submit" className="btn btn--green">
+									Salvar
 								</button>
 								{id > 0 && (
 									<button
@@ -240,8 +266,15 @@ const ProductContent = ({ state, categorie, id }) => {
 										Subir
 									</button>
 								)}
-								<button type="submit" className="btn btn--green">
-									Salvar
+
+								<button
+									type="button"
+									className={
+										categorie.products.length > 1 ? 'btn btn--delete' : 'hidden'
+									}
+									onClick={removeProduct}
+								>
+									excluir
 								</button>
 							</div>
 						</div>

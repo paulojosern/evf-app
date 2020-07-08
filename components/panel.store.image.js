@@ -59,6 +59,7 @@ const StoreImage = () => {
 			{msg.active && (
 				<div className={`image__msg image__msg--${msg}`}>{msg.message}</div>
 			)}
+			<label className="panel__label">Imagen de fundo</label>
 
 			<div
 				className="image"

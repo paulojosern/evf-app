@@ -19,7 +19,7 @@ const ItemContent = ({ items, column, getItem, toReal }) => {
 			{column ? (
 				items.map((item, i) => {
 					const handleClick = () => getItem(item);
-					const img = item.pics[0] && item.pics[0].url;
+					const img = item.pics[0] && item.pics[0];
 					// item.pics[0].image ||
 					return (
 						<div className="item item--column" key={i}>
@@ -47,7 +47,7 @@ const ItemContent = ({ items, column, getItem, toReal }) => {
 				<Slider {...settings}>
 					{items.map((item, i) => {
 						const handleClick = () => getItem(item);
-						const img = item.pics && item.pics[0].url;
+						const img = item.pics && item.pics[0];
 
 						return (
 							<div className="item" key={i}>
@@ -56,12 +56,13 @@ const ItemContent = ({ items, column, getItem, toReal }) => {
 									style={{ backgroundImage: `url(${img})` }}
 								></div>
 								<div className="item__detail">
-									<div className="item__title">{item.description}</div>
-									<p>
+									<div>
+										<div className="item__title">{item.description}</div>
+
 										{item.detail.length > 60
 											? item.detail.substr(0, 60) + '...'
 											: item.detail}
-									</p>
+									</div>
 									<div className="item__price">
 										<button className="item__add" onClick={handleClick}>
 											{item.price && toReal(item.price)}

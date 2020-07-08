@@ -8,7 +8,7 @@ import { useAuth } from '../store/Auth';
 
 const Panel = () => {
 	const { currentUser } = useSession();
-	const { panelState, inputStatePanel } = usePanelContext();
+	const { panelState, inputStatePanel, loading } = usePanelContext();
 	const [fixed, setFixed] = useState(false);
 	const [toogleStore, setToogleStore] = useState(true);
 	const [msg, setMsg] = useState({
@@ -80,6 +80,14 @@ const Panel = () => {
 
 	return (
 		<div className="panel" ref={panel}>
+			<div
+				className={
+					loading ? 'panel__loading' : 'panel__loading panel__loading--hidden'
+				}
+			>
+				<div className="loader"></div>
+			</div>
+
 			<Msg />
 			<div className="panel__header">
 				{!panelState ? (

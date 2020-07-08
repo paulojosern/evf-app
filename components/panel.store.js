@@ -10,7 +10,7 @@ const PanelStore = ({ toogleStore, user, setMsg }) => {
 	const [colors, setColors] = useState({});
 	const [loading, setLoading] = useState(false);
 	const [{ data }, getCep] = useGetCep();
-	const { panelState, inputStatePanel } = usePanelContext();
+	const { panelState, inputStatePanel, showLoading } = usePanelContext();
 
 	useEffect(() => {
 		panelState &&
@@ -78,6 +78,7 @@ const PanelStore = ({ toogleStore, user, setMsg }) => {
 
 	const saveStore = async (e) => {
 		setLoading(true);
+		showLoading(true);
 		e.preventDefault();
 		const db = await database;
 		return db
@@ -94,6 +95,7 @@ const PanelStore = ({ toogleStore, user, setMsg }) => {
 					message: 'Alterado com sucesso',
 				});
 				setLoading(false);
+				showLoading(false);
 			});
 	};
 
@@ -110,6 +112,7 @@ const PanelStore = ({ toogleStore, user, setMsg }) => {
 					<div className="about__item panel__item--inline between">
 						<div className="item--small">
 							<PanelBase64 setMsg={setMsg} />
+
 							<PanelStoreImage />
 						</div>
 						<div className="item--large">

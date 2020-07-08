@@ -5,6 +5,7 @@ const PanelContext = createContext({});
 const PanelProvider = ({ children }) => {
 	const [panelState, setPanelState] = useState();
 	const [panelCategories, setPanelCategories] = useState([]);
+	const [loading, setLoading] = useState(false);
 
 	const inputStatePanel = (payload) => {
 		setPanelState({ ...payload });
@@ -14,9 +15,20 @@ const PanelProvider = ({ children }) => {
 		setPanelCategories([...payload]);
 	};
 
+	const showLoading = (value) => {
+		setLoading(value);
+	};
+
 	return (
 		<PanelContext.Provider
-			value={{ panelState, inputStatePanel, panelCategories, inputCategories }}
+			value={{
+				panelState,
+				inputStatePanel,
+				panelCategories,
+				inputCategories,
+				loading,
+				showLoading,
+			}}
 		>
 			{children}
 		</PanelContext.Provider>

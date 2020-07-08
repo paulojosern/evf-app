@@ -36,9 +36,9 @@ const OptionItem = ({ list, card, setCard, toReal }) => {
 					};
 
 					return (
-						<div className="item" key={i}>
-							<div className="counter__price">
-								<span>{el.detail}</span> + {toReal(el.price)}
+						<div className="item item--option" key={i}>
+							<div className="option__price">
+								<span>{el.description}</span> + {toReal(el.price)}
 							</div>
 							<div className="counter">
 								<input type="checkbox" className="counter--input" id={option} />
