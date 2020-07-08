@@ -214,9 +214,9 @@
 		background: white;
 
 		h2 {
-			font-size: 1.4em;
+			font-size: 1.6em;
 			padding-bottom: 5px;
-			font-weight: 800;
+			font-weight: 700;
 		}
 		h2:target::before {
 			content: ' ';
@@ -251,15 +251,15 @@
 
 			&__title {
 				@include font($color, 1.3em, 700);
-				padding: 0 0 5px;
+				padding: 0 0 8px;
 				line-height: 110%;
 			}
 			&__detail {
-				padding: 15px 5px;
+				padding: 10px 5px;
 				margin: 0;
 				@include font(rgba($color, 0.5), 0.9em, 600);
 				line-height: 120%;
-				min-height: 115px;
+				min-height: 120px;
 				display: flex;
 				flex-direction: column;
 				justify-content: space-between;
@@ -574,10 +574,10 @@
 		}
 		.list__description {
 			position: absolute;
-			padding: 25px 80px 45px 25px;
+			padding: 25px 40px 45px 25px;
 			z-index: 4;
 			bottom: 0;
-			@include font(white, 2.2em, 700);
+			@include font(white, 2.5em, 700);
 			text-shadow: 1px 1px 2px rgba($color, 0.2);
 			line-height: 120%;
 		}
@@ -802,6 +802,7 @@
 				b {
 					font-weight: 700;
 					padding: 0 14px 0 4px;
+					font-size: 1.2em;
 				}
 				&::before,
 				&::after {
@@ -848,15 +849,18 @@
 		box-shadow: 0 -10px 10px 15px rgba(black, 0.1);
 		//overflow-y: auto;
 	}
+	label {
+		color: rgba($color, 0.6);
+	}
 	&__back {
 		position: absolute;
 		appearance: none;
 		user-select: none;
 		top: 15px;
-		left: 18px;
+		right: 20px;
 		border-radius: 50%;
 		z-index: 5;
-		border: 1px solid rgba($color, 0.8);
+		border: 2px solid rgba($color, 0.8);
 		@include font($color, 1.1em, 400);
 		padding: 0;
 		height: 30px;
@@ -870,34 +874,34 @@
 			content: '';
 			position: absolute;
 			top: 13px;
-			left: 6px;
+			left: 5px;
 			transform: rotate(45deg);
 			background: $color;
 			border-radius: 1px;
 		}
 		&::after {
 			transform: rotate(-45deg);
-			left: 12px;
+			left: 11px;
 		}
 	}
 	&__container {
 		background: white;
 	}
 	&__header {
-		background-color: $yellow;
+		background-color: $background;
 		padding: 20px;
-		height: 60px;
 		display: flex;
 		align-items: flex-end;
+		@include font(rgba($color, 0.9), 1.5em, 700);
 	}
 	&__content {
 		padding: 20px;
 		.content__item {
 			background: white;
-			box-shadow: 0px 0px 12px 8px rgba($color, 0.05);
-			border-radius: 12px;
+			border: 1px solid $background;
+			border-radius: 6px;
 			.item {
-				padding: 12px 16px;
+				padding: 12px 15px;
 				border-bottom: 1px solid rgba(black, 0.1);
 				line-height: 140%;
 				display: flex;
@@ -933,22 +937,26 @@
 					}
 				}
 				h4 {
-					font-size: 1.2em;
+					font-size: 1.3em;
+					font-weight: 700;
+					padding: 0 0 2px;
 				}
 				small {
-					font-size: 0.9em;
+					font-size: 1em;
 					color: rgba($color, 0.8);
 					display: block;
 					line-height: 1.3em;
-					padding: 2px 0 4px;
+					padding: 0px;
+					font-weight: 600;
 				}
 			}
 		}
 	}
 	&__order {
 		margin: 0 20px;
-		border-bottom: 1px solid rgba($yellow, 0.3);
+		border-bottom: 1px solid $background;
 		padding: 10px 0;
+		@include font($color, 1.1em, 600);
 		.order__item {
 			padding: 3px 0;
 			display: flex;
@@ -957,7 +965,7 @@
 	}
 	&__payment {
 		margin: 0 20px;
-		border-bottom: 1px solid rgba($yellow, 0.3);
+		border-bottom: 1px solid $background;
 		padding: 15px 0;
 		.payment__btn {
 			display: flex;
@@ -965,11 +973,11 @@
 			margin: 10px -3px;
 			&--label {
 				border: 1px solid rgba($color, 0.7);
-				border-radius: 20px;
+				border-radius: 6px;
 				padding: 7px 10px;
 				white-space: nowrap;
 				margin: 3px;
-				font-size: 1em;
+				@include font($color, 1em, 600);
 			}
 			&--input {
 				display: none;
@@ -982,11 +990,12 @@
 	}
 	&__delivery {
 		margin: 0 20px;
-		border-bottom: 1px solid rgba($yellow, 0.3);
+		border-bottom: 1px solid $background;
 		padding: 15px 0;
 		.delivery__detail {
 			padding: 6px 0 15px;
 			line-height: 135%;
+			@include font($color, 1.1em, 600);
 			p {
 				padding-top: 4px;
 				font-style: italic;
@@ -997,7 +1006,7 @@
 		background: white;
 		padding: 20px 20px 35px;
 		.btn__confirm {
-			padding: 14px;
+			padding: 10px 14px;
 			background: $yellow;
 			text-align: center;
 			border: 0;
@@ -1005,7 +1014,7 @@
 			appearance: none;
 			user-select: none;
 			border-radius: 30px;
-			@include font($color, 1.1em, 600);
+			@include font($color, 1.1em, 700);
 			position: relative;
 			&::before,
 			&::after {

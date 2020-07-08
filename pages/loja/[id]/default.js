@@ -33,8 +33,11 @@ const Default = ({ store }) => {
 
 	useEffect(() => {
 		document.body.style.overflowY = scroll;
-		scrolling('menu');
 	}, [scroll]);
+
+	useEffect(() => {
+		scrolling('menu');
+	}, []);
 
 	useEffect(() => {
 		setTimeout(() => {

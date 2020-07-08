@@ -91,17 +91,22 @@ const ShopCardList = ({ addpay, list, closeList, toReal }) => {
 									</div>
 								</div>
 							</div>
-							<div className="content__title">Opções disponíveis</div>
-							<div className="content__item">
-								{addpay && (
-									<OptionItem
-										list={list}
-										card={card}
-										setCard={setCard}
-										toReal={toReal}
-									/>
-								)}
-							</div>
+							{list.options !== undefined && (
+								<>
+									<div className="content__title">Opções disponíveis</div>
+
+									<div className="content__item">
+										{addpay && (
+											<OptionItem
+												list={list}
+												card={card}
+												setCard={setCard}
+												toReal={toReal}
+											/>
+										)}
+									</div>
+								</>
+							)}
 						</div>
 						<div className="list__btn">
 							<button className="btn__add" onClick={handleConfirm}>

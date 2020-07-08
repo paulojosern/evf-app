@@ -22,9 +22,7 @@ const ShopCardCart = ({ toReal, openCart, handleCart, address }) => {
 		<div className={!openCart ? 'cart' : 'cart cart--show'}>
 			{openCart && (
 				<div className="cart__container">
-					<div className="cart__header">
-						<h3>Meu pedido</h3>
-					</div>
+					<div className="cart__header">Meu pedido</div>
 					<div className="cart__content">
 						<section className="content__item">
 							{Object.keys(item).map((i, el) => {
@@ -64,7 +62,7 @@ const ShopCardCart = ({ toReal, openCart, handleCart, address }) => {
 						</div>
 					</div>
 					<div className="cart__payment">
-						<b>Selecione a forma de pagamento</b>
+						<label>Selecione a forma de pagamento</label>
 						<div className="payment__btn">
 							<input
 								type="radio"
@@ -112,7 +110,7 @@ const ShopCardCart = ({ toReal, openCart, handleCart, address }) => {
 						</div>
 					</div>
 					<div className="cart__delivery">
-						<b>Endereço de entrega</b>
+						<label>Endereço de entrega</label>
 						<div className="delivery__detail">
 							{address.rua + ', ' + address.numero}
 							{address.complemento && ' - '}
@@ -137,7 +135,7 @@ const ShopCardCart = ({ toReal, openCart, handleCart, address }) => {
 					</div>
 
 					<div className="cart__footer">
-						<button className="btn__confirm">Enviar meu pedido</button>
+						<button className="btn__confirm">Ok, enviar meu pedido</button>
 					</div>
 					<button onClick={handleCart} className="cart__back"></button>
 				</div>
