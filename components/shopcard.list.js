@@ -5,6 +5,7 @@ import OptionItem from '~/components/option.item';
 const ShopCardList = ({ addpay, list, closeList, toReal }) => {
 	const [card, setCard] = useState({});
 	const [indent, setIndent] = useState(1);
+	const [state, setState] = useState([]);
 	const {
 		shopCardState: { total, item },
 		inputShopCard,
@@ -59,18 +60,44 @@ const ShopCardList = ({ addpay, list, closeList, toReal }) => {
 		backClear();
 	};
 
+	useEffect(() => {
+		//list !== undefined && preloadImages();
+	}, []);
+
+	const preloadImages = () => {
+		let links = list.pics;
+		// setState(
+		// 	links.map((link, i) => {
+		// 		var img = new Image();
+		// 		img.onload = () => handleImageLoad(i);
+		// 		img.src = link;
+		// 		return link;
+		// 	})
+		// );
+		let arr = [];
+		links.map((link, i) => {
+			var img = new Image();
+			img.onload = () => (img.loaded = true);
+			img.src = link;
+			arr.push(link);
+		});
+		return arr;
+	};
+
+	const imgs = list !== undefined && preloadImages(list.pics);
+	// imgs !== 0 && console.log('liste', imgs);
+
 	return (
 		<div className={addpay ? 'card__list card__list--show' : 'card__list'}>
 			{list !== undefined && (
 				<>
 					<button className="list__btn--close" onClick={backClear}></button>
-					<div className="list__image">
+					<div
+						className="list__image"
+						style={{ backgroundImage: `url(${imgs[0]})` }}
+					>
 						<div className="list__description">{list.description}</div>
 						<div className="list__image-overlay"></div>
-						<div
-							className="list__image-img"
-							style={{ backgroundImage: `url(${list.pics[0]})` }}
-						/>
 					</div>
 					<div className="list__content">
 						<div className="content__separate"></div>
@@ -109,8 +136,11 @@ const ShopCardList = ({ addpay, list, closeList, toReal }) => {
 							)}
 						</div>
 						<div className="list__btn">
+							<div className="btn__total">
+								Total <span>{toReal(card.total)}</span>
+							</div>
 							<button className="btn__add" onClick={handleConfirm}>
-								Adicionar produto: <b>{toReal(card.total)}</b>
+								Adicionar produto
 							</button>
 						</div>
 					</div>

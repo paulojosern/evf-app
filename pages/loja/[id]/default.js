@@ -47,6 +47,7 @@ const Default = ({ store }) => {
 			});
 		}, 300);
 	}, [querie]);
+	scroll && console.log(scroll);
 
 	const getItem = (items) => {
 		setAddpay(!addpay);

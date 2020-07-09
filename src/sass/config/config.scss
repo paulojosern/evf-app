@@ -9,6 +9,10 @@ $border: rgb(129, 138, 150);
 $silver: rgb(195, 202, 211);
 $grey: rgb(107, 117, 126);
 $placeholder: rgba($color, 0.7);
+$dark: #222;
+$dark-second: rgb(54, 54, 54);
+$dark-border: rgb(54, 54, 54);
+$dark-color: rgb(206, 204, 204);
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
 //@import url('https://fonts.googleapis.com/css2?family=Cabin:wght@400;500;600;700&display=swap');
 //@import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap');
@@ -197,17 +201,17 @@ b {
 // 	background: #eee;
 // }
 
-// @media (prefers-color-scheme: dark) {
-// 	.box {
-// 		background: $color !important;
-// 	}
-// }
+@media (prefers-color-scheme: dark) {
+	.box {
+		background: $color !important;
+	}
+}
 
-// @media (prefers-color-scheme: light) {
-// 	.box {
-// 		background: #fff !important;
-// 	}
-// }
+@media (prefers-color-scheme: light) {
+	.box {
+		background: #fff !important;
+	}
+}
 
 .main {
 	display: flex;

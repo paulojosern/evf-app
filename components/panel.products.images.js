@@ -9,7 +9,7 @@ const ProductImages = ({ id, slug, pics, setPics }) => {
 		type: '',
 		message: '',
 	});
-	// const [images, setImages] = useState([]);
+
 	const { showLoading } = usePanelContext();
 	const storageRef = storage.ref();
 
@@ -69,9 +69,6 @@ const ProductImages = ({ id, slug, pics, setPics }) => {
 					.getDownloadURL()
 					.then((fireBaseUrl) => {
 						setPics((oldArray) => [...oldArray, fireBaseUrl]);
-					})
-					.then(() => {
-						// pics[0] && saveProductAndPics();
 						showLoading(false);
 					});
 			}

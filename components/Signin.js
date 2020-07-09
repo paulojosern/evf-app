@@ -53,7 +53,7 @@ export default function SigninForm({ msg }) {
 	return (
 		<div className="panel">
 			<div className="panel__signin">
-				<div className="signin">
+				<div className="signin ">
 					<div className="signin__logo"></div>
 					<div className="signin__form">
 						{msg && <div className="panel__msg">{valideMsg(msg)}</div>}
