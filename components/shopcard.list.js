@@ -103,10 +103,11 @@ const ShopCardList = ({ addpay, list, closeList, toReal }) => {
 						<div className="content__separate"></div>
 						<div className="content__detail">{list.detail}</div>
 						<div className="content__container">
-							<div className="content__item">
+							<div className="content__item content__item--price">
 								<div className="item">
-									<div className="counter__price">
-										<span>Unidade: </span> {toReal(list.price)}
+									<div className="item__price">
+										<label>Unidade: </label>
+										{toReal(list.price)}
 									</div>
 									<div className="counter">
 										<button

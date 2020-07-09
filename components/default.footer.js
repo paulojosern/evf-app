@@ -132,7 +132,12 @@ const DefaultFooter = ({ toReal, setScroll }) => {
 							</div>
 						)}
 					</div>
-					<button className="location__card" onClick={total && handleCart}>
+					<button
+						className={
+							total ? 'location__card location__card--active' : 'location__card'
+						}
+						onClick={total && handleCart}
+					>
 						<IconShop />
 						{total ? toReal(total) : 'vazio'}
 					</button>
