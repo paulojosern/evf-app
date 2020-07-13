@@ -2,12 +2,14 @@
 	height: 100%;
 	display: flex;
 	flex-direction: column;
+	background-color: $dark;
 	&__logo {
-		background-color: $blue;
+		background-color: white;
 		height: 100%;
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		flex-direction: column;
 		font-size: 2em;
 		font-weight: 600;
 		padding: 0 30px;
@@ -38,14 +40,21 @@
 				height: 50%;
 			}
 		}
-		svg {
+		.title {
+			padding-top: 20px;
+			@include font($dark, 0.8em, 700);
+			color: $dark;
+			opacity: 0.3;
+		}
+		.logo {
 			width: 0;
 			height: auto;
 			animation: showsvg;
 			animation-timing-function: ease-in-out;
 			animation-duration: 0.3s;
 			animation-fill-mode: both;
-			animation-delay: 0.5s;
+			animation-delay: 0.3s;
+			border-radius: 50%;
 		}
 	}
 	@keyframes showLogo {
@@ -60,14 +69,18 @@
 		0% {
 			width: 0;
 			opacity: 0;
-			transform: rotate(180deg);
+			transform: rotate(90deg);
 		}
 		100% {
+			height: 150px;
 			width: 150px;
+			background-size: 100% auto;
+			background-position: center center;
 			opacity: 1;
 			transform: rotate(0);
 			@include size(tablet) {
-				width: 200px;
+				width: 250px;
+				height: 250px;
 			}
 		}
 	}
@@ -227,7 +240,7 @@
 		margin-top: 10px;
 		appearance: none;
 		border: 0;
-		background: $blue;
+		background: $yellow;
 		border-radius: 30px;
 		padding: 0 20px;
 		//width: 70px;

@@ -6,7 +6,7 @@ import { useAddressContext } from '~/context/address.context';
 import useLocalStorage from '~/effects/useLocalStorage';
 import LogoEvf from '~/assets/logos/logo-evf.svg';
 
-const StoreAddress = ({ setState, state, theme, slug }) => {
+const StoreAddress = ({ setState, state, theme, slug, logo, store }) => {
 	const cepInput = useRef();
 	const [btn, setBtn] = useState();
 	const [data, setData] = useState({ empty: true });
@@ -68,15 +68,17 @@ const StoreAddress = ({ setState, state, theme, slug }) => {
 		const newcep = inputCep.replace('-', '');
 		getCep(newcep);
 	};
+
 	return (
 		<>
 			<div
 				className={
 					!data.logradouro ? 'home__logo' : 'home__logo home__logo--hide'
 				}
-				style={{ backgroundColor: `${theme.color1}` }}
+				style={{ backgroundColor: `rgba(${theme.color3})` }}
 			>
-				<LogoEvf />
+				<div className="logo" style={{ backgroundImage: `url(${logo})` }}></div>
+				<div className="title">{store}</div>
 			</div>
 			<div
 				className={

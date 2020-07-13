@@ -6,7 +6,7 @@ import { database } from '~/services/config';
 const Store = ({ store }) => {
 	const { inputStore } = useStoreContext();
 	const [state, setState] = useState(false);
-	// store && console.log(store);
+	store && console.log(store);
 	useEffect(() => {
 		inputStore({ store });
 	}, [store]);
@@ -23,6 +23,8 @@ const Store = ({ store }) => {
 					setState={setState}
 					theme={store.colors}
 					slug={store.slug}
+					logo={store.logo}
+					store={store.name}
 				/>
 			</main>
 		)
