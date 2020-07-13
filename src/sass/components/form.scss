@@ -3,12 +3,28 @@
 		max-width: 400px;
 		margin: 0 auto;
 		width: 100%;
+		.content {
+			width: 80%;
+			max-width: 220px;
+			margin: 0 auto;
+		}
 		label {
 			display: block;
 			width: 100%;
-			padding-bottom: 8px;
+			padding-bottom: 10px;
 			font-size: 0.85em;
-			color: $color;
+			color: $dark-color;
+		}
+		.message {
+			font-size: 0.8em;
+		}
+		&--loading {
+			height: 100%;
+			width: 100%;
+			position: absolute;
+			top: 0;
+			left: 0;
+			background: rgba(black, 0.9);
 		}
 	}
 	&__item {
@@ -18,18 +34,18 @@
 				//flex: auto;
 				&:first-of-type {
 					// width: 40px;
-					flex: 90px;
-					min-width: 90px;
+					flex: 30%;
+					min-width: 30%;
 					margin-right: 10px;
 				}
 			}
 		}
 	}
 	&__input {
-		@include font($color, 1.1em, 500);
-		background: rgba($color, 0.1);
+		@include font($dark-color, 1.1em, 500);
+		background: rgba($dark-second, 0.8);
 		border: 0px solid $color;
-		border-radius: 30px;
+		border-radius: 8px;
 		-webkit-box-sizing: border-box;
 		-moz-box-sizing: border-box;
 		box-sizing: border-box;
@@ -45,7 +61,7 @@
 		@include size(tablet) {
 			width: calc(100% - 0px);
 			&:hover {
-				border: 1px solid black;
+				//border: 1px solid black;
 			}
 		}
 		&::-webkit-input-placeholder {
@@ -80,7 +96,7 @@
 		// }
 	}
 	&__btn {
-		width: 45px;
+		width: 0;
 		height: 45px;
 		background-color: $blue;
 		display: flex;
@@ -93,7 +109,7 @@
 		left: 0;
 		border-radius: 30px;
 		text-decoration: none;
-		@include font($color, 0.6em, 700);
+		@include font($color, 0.7em, 700);
 		transform: translateX(-150%);
 		opacity: 0;
 		visibility: hidden;
@@ -104,6 +120,7 @@
 			opacity: 1;
 			visibility: visible;
 			transform: translateX(0);
+			width: auto;
 		}
 	}
 }
@@ -116,22 +133,24 @@
 	align-items: center;
 	justify-content: center;
 	z-index: 10;
-	color: $color;
+
 	position: relative;
 	margin: 10px;
 	border-radius: 30px;
 	text-decoration: none;
 	padding: 0 15px;
 	border: 1px solid $yellow;
-	@include font($color, 1em, 600);
+	@include font($dark, 1em, 700);
 	transition: all 0.3s ease-in-out;
 	cursor: pointer;
+	color: $dark !important;
 	&--delete {
 		background-color: $red;
 		color: white;
 	}
 	&--default {
-		border: 1px solid $color;
+		border: 1px solid $dark-color;
 		background-color: transparent;
+		color: $dark-color !important;
 	}
 }

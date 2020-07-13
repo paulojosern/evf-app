@@ -107,7 +107,7 @@ const DefaultFooter = ({ toReal, setScroll }) => {
 										/>
 										{data &&
 											(data.erro ? (
-												<div className="address__detail address__detail--form">
+												<div className="address__detail address__detail--form center">
 													Não encontrado :(
 												</div>
 											) : (

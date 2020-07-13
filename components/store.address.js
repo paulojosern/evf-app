@@ -46,6 +46,7 @@ const StoreAddress = ({ setState, state, theme, slug }) => {
 			.get(`https://viacep.com.br/ws/${newcep}/json/`)
 			.then(function (response) {
 				setData(response.data);
+				console.log(response.data);
 			})
 			.catch((error) => console.log(error));
 	};
@@ -96,7 +97,7 @@ const StoreAddress = ({ setState, state, theme, slug }) => {
 							<h3>
 								{address.rua}, {address.numero}
 							</h3>
-							<h4>{address.complemento}</h4>
+							{address.complemento && <h4>{address.complemento}</h4>}
 							<h4>{address.bairro}</h4>
 							<div className="flex--row center">
 								<button className="btn btn--default" onClick={handleAddress}>
@@ -108,7 +109,7 @@ const StoreAddress = ({ setState, state, theme, slug }) => {
 							</div>
 						</div>
 					) : (
-						<>
+						<div className="content">
 							<label>Informe seu cep</label>
 							<input
 								type="text"
@@ -116,16 +117,18 @@ const StoreAddress = ({ setState, state, theme, slug }) => {
 								onChange={handleCEP}
 								ref={cepInput}
 							/>
-						</>
+						</div>
 					)}
 
-					{data.erro && <div className="cep__erro">Não encontrado :(</div>}
-					<input
-						type="submit"
-						value="buscar"
-						onClick={handleSubmit}
-						className={!btn ? 'home__btn' : 'home__btn home__btn--open'}
-					/>
+					<div className="content">
+						{data.erro && <div className="cep__erro">Não encontrado :(</div>}
+						<input
+							type="submit"
+							value="buscar"
+							onClick={handleSubmit}
+							className={!btn ? 'home__btn' : 'home__btn home__btn--open'}
+						/>
+					</div>
 				</div>
 			</div>
 			<div
