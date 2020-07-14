@@ -1,9 +1,9 @@
+import { useState } from 'react';
 import { useRouter } from 'next/router';
-import axios from 'axios';
 import useFormCep from '~/effects/useFormCep';
 import { useAddressContext } from '~/context/address.context';
 import useLocalStorage from '~/effects/useLocalStorage';
-import { useState, useEffect } from 'react';
+import MapContainer from '~/components/map.container';
 
 const AddressForm = ({ cep, rua, bairro, href, input }) => {
 	const [{ values, loading }, handleChange, handleSubmitCep] = useFormCep();
@@ -11,10 +11,8 @@ const AddressForm = ({ cep, rua, bairro, href, input }) => {
 	const [distance, setDistance] = useState();
 	const [loader, setLoader] = useState(false);
 	const [name, setName] = useLocalStorage('address');
-	// const address = name && JSON.parse(name);
-	// href && console.log(href);
-
 	const router = href !== undefined && useRouter();
+	const [state, setState] = useState({ visible: false });
 	const sendConfirm = (e) => {
 		e.preventDefault();
 		const newAddress = {
@@ -29,24 +27,13 @@ const AddressForm = ({ cep, rua, bairro, href, input }) => {
 		setName(JSON.stringify(newAddress));
 	};
 
-	const GOOGLE_API_KEY = 'AIzaSyCl-OZndF-w6neMJI1zauQ8v_umrIIGKcY';
-
-	const getDistance = (userLocation, truckLocation) => {
-		setLoader(true);
-		let url = `https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${userLocation}&destinations=${truckLocation}&departure_time=now&key=${GOOGLE_API_KEY}`;
-		// let url = `https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${userLocation}&destinations=${truckLocation}&departure_time=now&key=${GOOGLE_API_KEY}`;
-		axios
-			.get(url, {
-				headers: {
-					'Content-Type': 'application/json',
-				},
-			})
-			.then(function (response) {
-				//setGeolocale(response.data);
-				setDistance(response.data.rows[0].elements[0]);
-				setLoader(false);
-			})
-			.catch((error) => console.log(error));
+	const getDistance = (currentAddress, destination) => {
+		// setLoader(true);
+		setState({
+			visible: true,
+			currentAddress,
+			destination,
+		});
 	};
 	// const lat1 = '-23.5010279';
 	// const lon1 = '-46.613732';
@@ -74,23 +61,17 @@ const AddressForm = ({ cep, rua, bairro, href, input }) => {
 	const currentAddress = 'Rua Maria Candida, 358';
 	const handleValidChange = (e) => {
 		if (e.target.value.length >= 1) {
-			const address = rua + e.target.value;
-			getDistance(currentAddress, address);
+			const destination = rua + e.target.value;
+			getDistance(currentAddress, destination);
+
 			handleChange(e);
 		}
 	};
 
-	// useEffect(() => {
-	// 	!distance
-	// 		? console.log('nem existe ainda')
-	// 		: distance.distance.value > 5000
-	// 		? console.log('naoooopode', distance.distance.value)
-	// 		: console.log('pode', distance.distance.value);
-	// }, [distance]);
-
+	distance && console.log(distance);
 	return (
 		<div className="form__group cep__form">
-			{loader && (
+			{state.visible && (
 				<div className="form__group--loading">
 					<div className="loader loader--position">
 						<span></span>
@@ -123,7 +104,6 @@ const AddressForm = ({ cep, rua, bairro, href, input }) => {
 							: distance.distance.value > 5000
 							? 'form__btn'
 							: 'form__btn form__btn--show'
-						// values === undefined ? 'form__btn' : 'form__btn form__btn--show'
 					}
 				>
 					{loading ? '...' : 'Ok, continuar'}
@@ -140,6 +120,11 @@ const AddressForm = ({ cep, rua, bairro, href, input }) => {
 					<div></div>
 				)}
 			</form>
+			<MapContainer
+				setDistance={setDistance}
+				state={state}
+				setState={setState}
+			/>
 		</div>
 	);
 };

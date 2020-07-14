@@ -4,7 +4,6 @@ import axios from 'axios';
 import AddressForm from '~/components/address.form';
 import { useAddressContext } from '~/context/address.context';
 import useLocalStorage from '~/effects/useLocalStorage';
-import LogoEvf from '~/assets/logos/logo-evf.svg';
 
 const StoreAddress = ({ setState, state, theme, slug, logo, store }) => {
 	const cepInput = useRef();
@@ -14,7 +13,7 @@ const StoreAddress = ({ setState, state, theme, slug, logo, store }) => {
 	const [name] = useLocalStorage('address');
 	const [address, setAddress] = useState();
 	const router = useRouter();
-	// console.log(theme);
+	// consoles.log(theme);
 
 	const {
 		addressState: { cep },
