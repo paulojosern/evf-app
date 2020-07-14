@@ -55,7 +55,7 @@ class ColorPicker extends React.Component {
 				swatch: {
 					padding: '5px',
 					margin: '5px 10px 5px 0',
-					background: '#fff',
+					background: '#191919',
 					borderRadius: '1px',
 					boxShadow: '0 0 0 1px rgba(0,0,0,.1)',
 					display: 'inline-block',
