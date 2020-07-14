@@ -94,13 +94,13 @@
 		padding: 0 40px;
 		position: absolute;
 		bottom: -100%;
-		animation: show;
+		animation: ini;
 		animation-timing-function: ease-in-out;
 		animation-duration: 0.3s;
 		animation-fill-mode: both;
 		animation-delay: 1s;
 		height: 50%;
-		transition: all 0.3s ease-in-out;
+		transition: all 0.8s ease-in-out;
 		width: calc(100% - 80px);
 		color: $dark-color;
 		input[type='text'] {
@@ -113,10 +113,11 @@
 			font-size: 2em;
 		}
 		&--show {
-			align-items: flex-start;
-			padding: 20% 40px 0;
-			height: calc(100% - 20%);
-			top: 0;
+			animation: show;
+			animation-timing-function: ease-in-out;
+			animation-duration: 0.2s;
+			animation-fill-mode: both;
+			animation-delay: 0.1s;
 		}
 		&--active {
 			animation: none;
@@ -126,12 +127,24 @@
 			padding: 15% 40px 0;
 			height: calc(100% - 15%);
 		}
-		@keyframes show {
+		&--erro {
+			transition: all 0.8s ease-in-out;
+			bottom: 0 !important;
+		}
+		@keyframes ini {
 			0% {
 				bottom: -100%;
 			}
 			100% {
 				bottom: 0;
+			}
+		}
+		@keyframes show {
+			0% {
+				bottom: 0;
+			}
+			100% {
+				bottom: 50%;
 			}
 		}
 		.cep__detail {
@@ -243,7 +256,7 @@
 		background: $yellow;
 		border-radius: 30px;
 		padding: 0 20px;
-		//width: 70px;
+		width: 100%;
 		height: 45px;
 		min-width: 50px;
 		display: flex;

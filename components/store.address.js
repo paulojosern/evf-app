@@ -12,6 +12,7 @@ const StoreAddress = ({ setState, state, theme, slug, logo, store }) => {
 	const [inputCep, setInputCep] = useState();
 	const [name] = useLocalStorage('address');
 	const [address, setAddress] = useState();
+	const [recused, setRecused] = useState(true);
 	const router = useRouter();
 	// consoles.log(theme);
 
@@ -37,6 +38,7 @@ const StoreAddress = ({ setState, state, theme, slug, logo, store }) => {
 	const handleConfirm = (e) => {
 		e.preventDefault();
 		setState(!state);
+
 		router.push(`/loja/${slug}/default`);
 	};
 
@@ -45,7 +47,7 @@ const StoreAddress = ({ setState, state, theme, slug, logo, store }) => {
 			.get(`https://viacep.com.br/ws/${newcep}/json/`)
 			.then(function (response) {
 				setData(response.data);
-				console.log(response.data);
+				//console.log(response.data);
 			})
 			.catch((error) => console.log(error));
 	};
@@ -122,7 +124,7 @@ const StoreAddress = ({ setState, state, theme, slug, logo, store }) => {
 					)}
 
 					<div className="content">
-						{data.erro && <div className="cep__erro">Não encontrado :(</div>}
+						{data.erro && <div className="cep__erro">Não enconntrado :(</div>}
 						<input
 							type="submit"
 							value="buscar"

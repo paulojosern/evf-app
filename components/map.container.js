@@ -19,11 +19,14 @@ const MapContainer = (props) => {
 					if (status !== 'OK') {
 						alert('Error was: ' + status);
 					} else {
-						props.setDistance(response.rows[0].elements[0]);
+						const res = response.rows[0].elements[0];
+						props.setDistance(res);
 						props.setState({
 							...props.state,
 							visible: false,
+							recused: res.distance.value > 5000 ? true : false,
 						});
+						res.distance.value > 5000 && (props.number.current.value = '');
 					}
 				}
 			);

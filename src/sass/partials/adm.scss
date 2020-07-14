@@ -317,8 +317,8 @@
 			color: rgba($dark-color, 0.7);
 		}
 		&:-webkit-autofill {
-			-webkit-box-shadow: 0 0 0px 1000px $dark-color inset !important;
-			-webkit-text-fill-color: $dark-color !important;
+			-webkit-box-shadow: 0 0 0px 1000px $dark-strong inset !important;
+			-webkit-text-fill-color: $blue !important;
 		}
 		&[readonly] {
 			//opacity: 0.5;
