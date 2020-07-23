@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useAuth } from '~/store/Auth';
-const Signin = ({ msg, styles, apartment, state }) => {
+import styles from './index.module.scss';
+const Signin = ({ msg, apartment, state }) => {
 	const { signin } = useAuth();
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
@@ -54,9 +55,9 @@ const Signin = ({ msg, styles, apartment, state }) => {
 	return (
 		<div className={styles.scheduling__signin}>
 			<div className={styles.scheduling__form}>
-				<h2>{apartment.unidade + '-' + apartment.bloco}</h2>
+				<h2>{apartment && apartment.unidade + '-' + apartment.bloco}</h2>
 
-				<h3>{`Olá, ${state.user.name}`}</h3>
+				<h3>{state && `Olá, ${state.user.name}`}</h3>
 				{msg && <h4>{valideMsg(msg)}</h4>}
 				<form>
 					<label>Entre com seu e-mail</label>

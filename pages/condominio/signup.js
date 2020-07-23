@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useAuth } from '~/store/Auth';
-const Signup = ({ styles, apartment }) => {
+import styles from './index.module.scss';
+
+const Signup = ({ apartment }) => {
 	const { signup } = useAuth();
 	const [name, setName] = useState('');
 	const [email, setEmail] = useState('');
@@ -11,7 +13,7 @@ const Signup = ({ styles, apartment }) => {
 		signup(email, password, name, apto);
 	}
 
-	const apto = apartment.unidade + '-' + apartment.bloco;
+	const apto = apartment && apartment.unidade + '-' + apartment.bloco;
 	return (
 		<div className={styles.scheduling__signup}>
 			<div className={styles.scheduling__form}>

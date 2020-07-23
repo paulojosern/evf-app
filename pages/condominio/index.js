@@ -46,14 +46,9 @@ const Condominio = () => {
 		<div className={styles.scheduling}>
 			{state ? (
 				state.user !== undefined ? (
-					<Signin
-						styles={styles}
-						apartment={apartment}
-						msg={msg}
-						state={state}
-					/>
+					<Signin apartment={apartment} msg={msg} state={state} />
 				) : (
-					<Signup styles={styles} apartment={apartment} />
+					<Signup apartment={apartment} />
 				)
 			) : (
 				<div className={styles.scheduling__wrap}>
