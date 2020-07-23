@@ -44,12 +44,16 @@ const PanelBase64 = ({ setMsg }) => {
 
 	return (
 		<div className="about__logo">
-			<div
-				className="logo"
-				style={{ backgroundImage: `url(${panelState.logo})` }}
-			>
-				{/* {panelState.logo && <img src={panelState.logo} className="logo" />} */}
-			</div>
+			{panelState.logo ? (
+				<div
+					className="logo"
+					style={{ backgroundImage: `url(${panelState.logo})` }}
+				>
+					{/* {panelState.logo && <img src={panelState.logo} className="logo" />} */}
+				</div>
+			) : (
+				'Adicione um logo'
+			)}
 
 			<input
 				type="file"

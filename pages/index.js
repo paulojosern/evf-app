@@ -18,6 +18,9 @@ const Index = ({ store }) => {
 			<Link href="/adm">
 				<a className="store">PAINEL</a>
 			</Link>
+			<Link href="/condominio">
+				<a className="store">CONDOMÍNIO</a>
+			</Link>
 		</main>
 	);
 };

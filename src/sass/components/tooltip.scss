@@ -41,6 +41,7 @@
 	box-shadow: 0.1em 0.3em 1em -0.2em rgba(0, 0, 0, 0.2);
 	background: rgb(255, 255, 255);
 	@include font($color, 1.1em, 500);
+	color: $dark-strong;
 	z-index: 1000; /* absurdity 2 */
 }
 

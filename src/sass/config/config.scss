@@ -1,7 +1,7 @@
 $blue: rgb(14, 188, 231);
 $green: rgb(41, 230, 182);
 $yellow: rgb(235, 218, 63);
-$pink: rgb(247, 176, 217);
+$pink: rgb(189, 111, 165);
 $background: #e9eff1;
 $red: rgb(255, 0, 85);
 $color: rgb(0, 0, 0);
@@ -9,11 +9,11 @@ $border: rgb(129, 138, 150);
 $silver: rgb(195, 202, 211);
 $grey: rgb(107, 117, 126);
 
-$dark: #222;
-$dark-strong: rgb(26, 25, 25);
-$dark-second: rgb(54, 54, 54);
-$dark-border: rgb(54, 54, 54);
-$dark-color: rgb(206, 204, 204);
+$dark: rgb(31, 32, 32);
+$dark-strong: rgb(19, 20, 20);
+$dark-second: rgb(55, 56, 56);
+$dark-border: rgb(66, 65, 65);
+$dark-color: rgb(216, 219, 219);
 $placeholder: rgba($dark-color, 0.7);
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
 //@import url('https://fonts.googleapis.com/css2?family=Cabin:wght@400;500;600;700&display=swap');
@@ -112,7 +112,7 @@ body {
 	// @include size(fullhd) {
 	// 	background-color: rgba(255, 238, 0, 0.829);
 	// }
-	@include font($dark-color, 13px, 400);
+	@include font($dark-color, 14px, 400);
 	// overflow-x: hidden !important;
 }
 .main {
@@ -154,50 +154,10 @@ b {
 .hidden {
 	display: none;
 }
-.flex {
-	@include size(tablet) {
-		display: flex;
-	}
-	&--row {
-		display: flex;
-	}
-}
-@include size(tablet) {
-	.reverse {
-		flex-direction: row-reverse;
-		.btn {
-			&:first-of-type {
-				margin-left: 15px !important;
-			}
-		}
-	}
-
-	.between {
-		justify-content: space-between;
-	}
-	.bottom {
-		align-items: flex-end;
-	}
-	.end {
-		justify-content: flex-end;
-	}
-}
-.left {
-	text-align: left;
-}
-.right {
-	text-align: right;
-}
-.center {
-	justify-content: center;
-}
-.middle {
-	align-items: center;
-}
 
 .line {
 	margin: 15px 0;
-	border-bottom: 1px solid rgba($silver, 0.5);
+	border-bottom: 1px solid rgba($dark-border, 0.9);
 	display: block;
 }
 // .box {

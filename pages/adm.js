@@ -1,4 +1,4 @@
-import { useSession } from '../store/Session';
+import { useSession } from '~/store/Session';
 import Panel from '~/components/panel';
 import { PanelProvider } from '~/context/panel.context';
 import Signin from '~/components/Signin';
@@ -20,6 +20,9 @@ export default function Adm() {
 			<Panel />
 		</PanelProvider>
 	) : (
-		<Signin msg={msg} />
+		<>
+			<Signin msg={msg} />
+			<Signup />
+		</>
 	);
 }

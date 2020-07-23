@@ -1,0 +1,105 @@
+$bg: #1c1e1f;
+$bg-panel: rgb(45, 48, 49);
+$blue: rgb(34, 204, 247);
+$yellow: rgb(235, 218, 63);
+$red: rgb(255, 0, 85);
+
+@mixin size($size) {
+	@if $size == mobile {
+		@media (min-width: 280px) and (min-height: 500px) {
+			@content;
+		}
+	} @else if $size == mobile_min {
+		@media (min-width: 360px) and (min-height: 640px) {
+			@content;
+		}
+	} @else if $size == mobile_med {
+		@media (min-width: 411px) and (min-height: 730px) {
+			@content;
+		}
+	} @else if $size == mobile_max {
+		@media (min-width: 450px) {
+			@content;
+		}
+	} @else if $size == tablet {
+		@media (min-width: 768px) {
+			@content;
+		}
+	} @else if $size == pro {
+		@media (min-width: 992px) {
+			@content;
+		}
+	} @else if $size == hd {
+		@media (min-width: 1280px) {
+			@content;
+		}
+	} @else if $size == fullhd {
+		@media (min-width: 1900px) {
+			@content;
+		}
+	}
+}
+.scheduling {
+	height: 100%;
+	background-color: $bg;
+	&__wrap {
+		height: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	&__form {
+		width: calc(90% - 60px);
+		max-width: calc(500px - 60px);
+		padding: 30px;
+
+		@include size(tablet) {
+			background-color: $bg-panel;
+			width: calc(80% - 100px);
+			max-width: calc(500px - 100px);
+			padding: 40px 50px;
+		}
+
+		h2 {
+			font-size: 3em;
+			font-weight: 900;
+			padding-bottom: 15px;
+			color: $blue;
+		}
+		h3 {
+			font-size: 2em;
+			font-weight: 900;
+			padding-bottom: 15px;
+		}
+		h4 {
+			font-size: 1.5em;
+			font-weight: 700;
+			padding-bottom: 15px;
+			line-height: 120%;
+		}
+		label {
+			font-size: 1.1em;
+			font-weight: 700;
+			margin: 10px 0;
+			display: block;
+			line-height: 120%;
+			opacity: 0.6;
+		}
+	}
+	&__signin {
+		height: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background-color: $bg;
+	}
+	&__signup {
+		height: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	&__default {
+		width: 150px;
+	}
+}

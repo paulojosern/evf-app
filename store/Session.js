@@ -1,4 +1,4 @@
-import { auth } from '../services/config';
+import { auth } from '~/services/config';
 import { useEffect, useState } from 'react';
 import Store from './';
 

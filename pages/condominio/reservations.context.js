@@ -1,8 +1,8 @@
 import React, { createContext, useContext, useState } from 'react';
 
-const PanelContext = createContext({});
+const ReservationsContext = createContext({});
 
-const PanelProvider = ({ children }) => {
+const ReservationsProvider = ({ children }) => {
 	const [panelState, setPanelState] = useState();
 	const [panelCategories, setPanelCategories] = useState([]);
 	const [loading, setLoading] = useState(false);
@@ -29,7 +29,7 @@ const PanelProvider = ({ children }) => {
 	};
 
 	return (
-		<PanelContext.Provider
+		<ReservationsContext.Provider
 			value={{
 				panelState,
 				inputStatePanel,
@@ -42,13 +42,13 @@ const PanelProvider = ({ children }) => {
 			}}
 		>
 			{children}
-		</PanelContext.Provider>
+		</ReservationsContext.Provider>
 	);
 };
 
-const usePanelContext = () => {
-	const context = useContext(PanelContext);
+const useReservationsContext = () => {
+	const context = useContext(ReservationsContext);
 	return context;
 };
 
-export { usePanelContext, PanelProvider };
+export { useReservationsContext, ReservationsProvider };

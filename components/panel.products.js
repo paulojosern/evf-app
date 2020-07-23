@@ -11,7 +11,7 @@ const ProductContent = ({ state, categorie, id }) => {
 	const [toogle, setToogle] = useState(false);
 	const [toogleOption, setToogleOption] = useState(false);
 	const [pics, setPics] = useState([]);
-	const { panelCategories, inputCategories } = usePanelContext();
+	const { panelCategories, inputCategories, showConfirm } = usePanelContext();
 	const sub = product && product.description.substr(0, 5);
 	const newid = `${id}${sub}`;
 	const router = useRouter();
@@ -272,7 +272,13 @@ const ProductContent = ({ state, categorie, id }) => {
 									className={
 										categorie.products.length > 1 ? 'btn btn--delete' : 'hidden'
 									}
-									onClick={removeProduct}
+									onClick={() =>
+										showConfirm({
+											active: true,
+											msg: 'Deseja remover ' + product.description,
+											function: (e) => removeProduct(e),
+										})
+									}
 								>
 									excluir
 								</button>

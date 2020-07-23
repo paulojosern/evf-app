@@ -25,6 +25,7 @@
     "react-dom": "16.13.1",
     "react-google-maps": "^9.4.5",
     "react-slick": "^0.26.1",
+    "sass": "^1.26.10",
     "slick-carousel": "^1.8.1",
     "styled-components": "^5.1.1"
   },

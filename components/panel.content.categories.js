@@ -7,7 +7,7 @@ import { price, priceData, handleInput, handleUp, rnd } from '~/effects/mask';
 const PanelCategories = ({ currentCategorie, id }) => {
 	const [categorie, setCategorie] = useState();
 	const [newProduct, setNewProduct] = useState();
-	const { panelCategories, inputCategories } = usePanelContext();
+	const { panelCategories, inputCategories, showConfirm } = usePanelContext();
 
 	// panelCategories && console.log(panelCategories);
 	const [valide, setValide] = useState({
@@ -124,9 +124,20 @@ const PanelCategories = ({ currentCategorie, id }) => {
 					>
 						{id + 1}
 					</button>
-					<button onClick={removeCategorie} className="btn--icon-delete">
-						<IconDelete />
-					</button>
+					{id > 0 && (
+						<button
+							onClick={() =>
+								showConfirm({
+									active: true,
+									msg: 'Deseja remover ' + categorie.category,
+									function: (e) => removeCategorie(e),
+								})
+							}
+							className="btn--icon-delete"
+						>
+							<IconDelete />
+						</button>
+					)}
 				</div>
 			</label>
 
@@ -145,7 +156,7 @@ const PanelCategories = ({ currentCategorie, id }) => {
 					</div>
 					<div className="item">
 						<label className="panel__label">Titulo da layout</label>
-						<div className="panel__btn">
+						<div className="panel__btn panel__btn--inline">
 							<input
 								type="radio"
 								id={`l1${key}`}

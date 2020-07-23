@@ -4,11 +4,18 @@ import { useSession } from '~/store/Session';
 import { usePanelContext } from '~/context/panel.context';
 import PanelStore from '~/components/panel.store';
 import PanelContent from '~/components/panel.content';
+import PanelConfirm from '~/components/panel.confirm';
+import PanelResetPassword from '~/components/panel.resetPassword';
 import { useAuth } from '../store/Auth';
 
 const Panel = () => {
 	const { currentUser } = useSession();
-	const { panelState, inputStatePanel, loading } = usePanelContext();
+	const {
+		panelState,
+		inputStatePanel,
+		loading,
+		showConfirm,
+	} = usePanelContext();
 	const [fixed, setFixed] = useState(false);
 	const [toogleStore, setToogleStore] = useState(true);
 	const [msg, setMsg] = useState({
@@ -32,6 +39,8 @@ const Panel = () => {
 	// useEffect(() => {
 	// 	scrolling();
 	// }, []);
+
+	//panelState && console.log(panelState);
 
 	useEffect(() => {
 		getStoreFromDB(currentUser.email);
@@ -67,19 +76,23 @@ const Panel = () => {
 			// }, 20000);
 		});
 		return (
-			msg.active === true && (
-				<label
-					className={`panel__msg panel__msg--${msg.type}`}
-					onClick={handleCloseMsg}
-				>
-					{msg.message}
-				</label>
-			)
+			<label
+				className={
+					msg.active
+						? `panel__msg panel__msg--${msg.type} panel__msg--show`
+						: `panel__msg panel__msg--hide`
+				}
+				onClick={handleCloseMsg}
+			>
+				{msg.message}
+			</label>
 		);
 	};
 
 	return (
 		<div className="panel" ref={panel}>
+			<PanelConfirm />
+			{/* <PanelResetPassword /> */}
 			<div
 				className={
 					loading ? 'panel__loading' : 'panel__loading panel__loading--hidden'
@@ -87,7 +100,6 @@ const Panel = () => {
 			>
 				<div className="loader"></div>
 			</div>
-
 			<Msg />
 			<div className="panel__header">
 				{!panelState ? (
@@ -105,7 +117,7 @@ const Panel = () => {
 									{' '}
 								</div>
 							)}
-							{panelState.name && panelState.name}
+							{panelState.name ? panelState.name : 'Nome da loja'}
 						</div>
 
 						<div

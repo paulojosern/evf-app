@@ -60,7 +60,7 @@ const StoreImage = () => {
 				<div className={`image__msg image__msg--${msg}`}>{msg.message}</div>
 			)}
 			<label className="panel__label">Imagen de fundo</label>
-
+			{!panelState.image && 'Adicione uma imagem de fundo'}
 			<div
 				className="image"
 				style={{ backgroundImage: `url(${panelState.image})` }}

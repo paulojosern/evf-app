@@ -40,6 +40,7 @@ export default function SigninForm({ msg }) {
 		});
 	};
 
+	// console.log(msg);
 	const valideMsg = (message) => {
 		if (message === 'auth/wrong-password') {
 			return 'A senha não confere';
@@ -56,7 +57,7 @@ export default function SigninForm({ msg }) {
 				<div className="signin ">
 					<div className="signin__logo"></div>
 					<div className="signin__form">
-						{msg && <div className="panel__msg">{valideMsg(msg)}</div>}
+						{msg && <div className="oo">{valideMsg(msg)}</div>}
 						<form>
 							<div className="panel__item">
 								<label className="panel__label">Email</label>

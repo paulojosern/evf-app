@@ -9,7 +9,6 @@ const ProductImages = ({ id, slug, pics, setPics }) => {
 		type: '',
 		message: '',
 	});
-
 	const { showLoading } = usePanelContext();
 	const storageRef = storage.ref();
 
@@ -19,10 +18,11 @@ const ProductImages = ({ id, slug, pics, setPics }) => {
 
 	const loadImages = () => {
 		const imagesRef = storageRef.child(`/${slug}`);
+		if (pics.length > 0) return;
 		imagesRef.listAll().then((res) => {
-			res.items.forEach((resItem) => {
+			res.items.forEach((resItem, i) => {
 				resItem.getDownloadURL().then((url) => {
-					setPics((oldArray) => [...oldArray, url]); // This line has changed!
+					setPics((oldArray) => [...oldArray, url]);
 				});
 			});
 		});

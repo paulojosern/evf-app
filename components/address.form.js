@@ -5,7 +5,7 @@ import { useAddressContext } from '~/context/address.context';
 import useLocalStorage from '~/effects/useLocalStorage';
 import MapContainer from '~/components/map.container';
 
-const AddressForm = ({ cep, rua, bairro, href, input, recused }) => {
+const AddressForm = ({ cep, rua, bairro, href, input, local }) => {
 	const [{ values, loading }, handleChange, handleSubmitCep] = useFormCep();
 	const { inputAddress } = useAddressContext();
 	const [distance, setDistance] = useState();
@@ -36,7 +36,8 @@ const AddressForm = ({ cep, rua, bairro, href, input, recused }) => {
 		});
 	};
 
-	const currentAddress = 'Rua Maria Candida, 358';
+	const currentAddress = local;
+
 	const handleValidChange = (e) => {
 		if (e.target.value.length >= 1) {
 			const destination = rua + e.target.value;
@@ -53,6 +54,7 @@ const AddressForm = ({ cep, rua, bairro, href, input, recused }) => {
 			});
 	}, [cep]);
 
+	local && console.log(local);
 	return (
 		<div className="form__group cep__form">
 			{state.visible && (
@@ -85,10 +87,10 @@ const AddressForm = ({ cep, rua, bairro, href, input, recused }) => {
 					onClick={sendConfirm}
 					className={
 						!distance
-							? 'form__btn'
+							? 'btn__form'
 							: distance.distance.value > 5000
-							? 'form__btn'
-							: 'form__btn form__btn--show'
+							? 'btn__form'
+							: 'btn__form btn__form--show'
 					}
 				>
 					{loading ? '...' : 'Ok, continuar'}

@@ -19,13 +19,14 @@ const PanelContent = ({ user, setMsg, toogleStore }) => {
 		panelState,
 		inputCategories,
 		showLoading,
+		showConfirm,
 	} = usePanelContext();
 	const categorieTitle = useRef();
 
-	// panelCategories && console.log(panelCategories);
-
 	useEffect(() => {
-		panelState && inputCategories(panelState.categories);
+		panelState &&
+			panelState.categories &&
+			inputCategories(panelState.categories);
 	}, [panelState]);
 
 	useEffect(() => {

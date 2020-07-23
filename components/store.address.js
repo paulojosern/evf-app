@@ -5,14 +5,13 @@ import AddressForm from '~/components/address.form';
 import { useAddressContext } from '~/context/address.context';
 import useLocalStorage from '~/effects/useLocalStorage';
 
-const StoreAddress = ({ setState, state, theme, slug, logo, store }) => {
+const StoreAddress = ({ setState, state, theme, slug, logo, store, local }) => {
 	const cepInput = useRef();
 	const [btn, setBtn] = useState();
 	const [data, setData] = useState({ empty: true });
 	const [inputCep, setInputCep] = useState();
 	const [name] = useLocalStorage('address');
 	const [address, setAddress] = useState();
-	const [recused, setRecused] = useState(true);
 	const router = useRouter();
 	// consoles.log(theme);
 
@@ -149,6 +148,7 @@ const StoreAddress = ({ setState, state, theme, slug, logo, store }) => {
 				</h5>
 				<AddressForm
 					cep={inputCep}
+					local={local}
 					rua={data.logradouro}
 					bairro={data.bairro}
 					href={`/loja/${slug}/default`}

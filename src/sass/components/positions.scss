@@ -1,0 +1,220 @@
+.item {
+	@include size(tablet) {
+		&--thin {
+			width: 15%;
+		}
+		&--small {
+			width: 25%;
+		}
+		&--triple {
+			width: 33.33%;
+		}
+		&--medium {
+			width: 50%;
+		}
+		&--large {
+			width: 75%;
+		}
+		&--full {
+			width: 100%;
+		}
+	}
+}
+.columns {
+	display: flex;
+	flex-direction: column;
+
+	@include size(tablet) {
+		flex-direction: row;
+		width: 100%;
+	}
+	@mixin attr($width) {
+		flex: $width;
+		padding: 10px 0px;
+		position: relative;
+		display: block;
+		max-width: $width;
+		&:first-of-type {
+			max-width: $width;
+		}
+		&:last-of-type {
+			max-width: $width;
+			//width: calc($white - 10px);
+		}
+	}
+	.item {
+		flex: auto;
+		padding: 10px 0;
+		background: transparent !important;
+		opacity: 0;
+		visibility: hidden;
+		animation-fill-mode: both;
+		animation-name: fade-in;
+		animation-duration: 0.5s;
+		&--full {
+			padding: 10px 0;
+		}
+		@include size(tablet) {
+			&:first-of-type {
+				padding: 10px 10px 10px 0;
+			}
+			&:nth-child(2) {
+				padding: 10px;
+			}
+			&:nth-child(3) {
+				padding: 10px;
+			}
+			&:nth-child(4) {
+				padding: 10px;
+			}
+			&:nth-child(5) {
+				padding: 10px;
+			}
+			&:nth-child(6) {
+				padding: 10px;
+			}
+			&:nth-child(7) {
+				padding: 10px;
+			}
+			&:last-of-type {
+				padding: 10px 0 10px 10px;
+
+				//width: calc($white - 10px);
+			}
+			&:only-child {
+				padding: 10px 0;
+			}
+			.btn {
+				&:only-child {
+					margin: 0 !important;
+				}
+			}
+			.form__input {
+				margin: 0 !important;
+			}
+			.form__select {
+				margin: 0 !important;
+			}
+			.form__label {
+				padding-bottom: 5px !important;
+			}
+			&--thin {
+				@include attr(15%);
+			}
+			&--small {
+				@include attr(25%);
+			}
+			&--triple {
+				@include attr(33.33%);
+			}
+			&--medium {
+				@include attr(50%);
+			}
+			&--large {
+				@include attr(75%);
+			}
+			&--full {
+				@include attr(100%);
+			}
+		}
+		&--flex {
+			display: flex !important;
+		}
+	}
+	&--inline {
+		@mixin attr($width) {
+			flex: $width;
+			padding: 0px !important;
+			position: relative;
+			display: block;
+			max-width: $width;
+			&:first-of-type {
+				max-width: $width;
+			}
+			&:last-of-type {
+				max-width: $width;
+				//width: calc($white - 10px);
+			}
+		}
+		.item {
+			flex: auto;
+			padding: 0;
+			background: transparent !important;
+			@include size(tablet) {
+				&:first-of-type {
+					padding: 0px 10px 0px 0;
+				}
+				&:nth-child(2) {
+					padding: 0 10px;
+				}
+				&:nth-child(3) {
+					padding: 0 10px;
+				}
+				&:nth-child(4) {
+					padding: 0 10px;
+				}
+				&:nth-child(5) {
+					padding: 0 10px;
+				}
+				&:nth-child(6) {
+					padding: 0 10px;
+				}
+				&:nth-child(7) {
+					padding: 0 10px;
+				}
+				&:last-of-type {
+					padding: 0;
+
+					//width: calc($white - 10px);
+				}
+				&:only-child {
+					padding: 0 10px;
+				}
+			}
+		}
+	}
+	@for $i from 1 through 30 {
+		.item:nth-of-type(#{$i}) {
+			animation-delay: #{0.3+ ($i)/30}s;
+		}
+	}
+}
+.flex {
+	@include size(tablet) {
+		display: flex;
+	}
+	&--row {
+		display: flex;
+	}
+}
+@include size(tablet) {
+	.reverse {
+		flex-direction: row-reverse;
+		.btn {
+			&:first-of-type {
+				margin-left: 15px !important;
+			}
+		}
+	}
+	.between {
+		justify-content: space-between;
+	}
+	.bottom {
+		align-items: flex-end;
+	}
+	.end {
+		justify-content: flex-end;
+	}
+}
+.left {
+	text-align: left;
+}
+.right {
+	text-align: right;
+}
+.center {
+	justify-content: center;
+}
+.middle {
+	align-items: center;
+}
