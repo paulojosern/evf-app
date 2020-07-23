@@ -1,9 +1,9 @@
-import React from 'react';
-import { useAuth } from '../store/Auth';
+import { useState } from 'react';
+import { useAuth } from '~/store/Auth';
 
 export default function SignUpForm() {
 	const { resetPassword, sendEmail } = useAuth();
-	const [password, setPassword] = React.useState('');
+	const [password, setPassword] = useState('');
 	console.log(password);
 
 	function handleReset(e) {
