@@ -5,7 +5,7 @@ import { usePanelContext } from '~/context/panel.context';
 import PanelStore from '~/components/panel.store';
 import PanelContent from '~/components/panel.content';
 import PanelConfirm from '~/components/panel.confirm';
-import PanelResetPassword from '~/components/panel.resetPassword';
+// import PanelResetPassword from '~/components/panel.resetPassword';
 import { useAuth } from '../store/Auth';
 
 const Panel = () => {
