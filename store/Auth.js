@@ -43,7 +43,7 @@ export function useAuth() {
 			});
 	};
 
-	const saveUserToDB = async (user, name, apartment) => {
+	const saveUserToDB = async (user, name, apartment, reservation) => {
 		const db = await database;
 		return db
 			.collection('users')
@@ -53,6 +53,7 @@ export function useAuth() {
 				name,
 				email: user.email,
 				apartment,
+				reservation,
 			})
 			.then(() => {
 				setState({
@@ -135,13 +136,17 @@ export function useAuth() {
 			});
 	};
 
-	const signout = () => {
+	const signout = (value) => {
 		return auth.signOut().then(() => {
 			setState({
 				currentUser: null,
 				isLoggedIn: false,
 			});
-			router.push('/adm');
+			if (value) {
+				router.push(value);
+			} else {
+				router.push('/adm');
+			}
 		});
 	};
 
@@ -154,5 +159,6 @@ export function useAuth() {
 		updateMail,
 		getApartment,
 		getDayFromDB,
+		saveUserToDB,
 	};
 }

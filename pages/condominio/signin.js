@@ -10,7 +10,7 @@ const Signin = ({ msg, apartment, state }) => {
 		password: false,
 	});
 
-	console.log(email, password);
+	// console.log(email, password);
 
 	function handleSignin(e, email, password) {
 		e.preventDefault();

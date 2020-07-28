@@ -41,7 +41,7 @@ const Condominio = () => {
 	state && console.log(state);
 
 	return isLoggedIn ? (
-		<Reservations />
+		<Reservations state={state} />
 	) : (
 		<div className={styles.scheduling}>
 			{state ? (
