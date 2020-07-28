@@ -9,13 +9,13 @@ const Confirm = ({ confirm, setConfirm }) => {
 	return (
 		<div
 			className={
-				!confirm.active
+				confirm && !confirm.active
 					? 'scheduling__wrap'
 					: 'scheduling__wrap scheduling__wrap--show'
 			}
 		>
 			<div className="confirm">
-				<h3>{confirm.msg}</h3>
+				<h3>{confirm && confirm.msg}</h3>
 				<div className="line"></div>
 				<div className="flex--row between">
 					<button
@@ -28,7 +28,10 @@ const Confirm = ({ confirm, setConfirm }) => {
 					>
 						não
 					</button>
-					<button className="btn" onClick={handleConfirm(confirm.function)}>
+					<button
+						className="btn"
+						onClick={handleConfirm(confirm && confirm.function)}
+					>
 						sim
 					</button>
 				</div>
