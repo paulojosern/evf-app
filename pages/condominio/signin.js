@@ -53,7 +53,8 @@ const Signin = ({ error, setError, apartment, state, setState, setLoader }) => {
 		return 'Ops, confira sua senha';
 	};
 
-	const handleBack = () => {
+	const handleBack = (e) => {
+		e.preventDefault();
 		setState(false);
 		setError(false);
 	};

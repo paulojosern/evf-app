@@ -12,8 +12,8 @@ const Signup = ({ error, setError, apartment, setState, setLoader }) => {
 	const apto = apartment && apartment.unidade + '-' + apartment.bloco;
 
 	const handleSignUp = async (e) => {
-		setLoading(true);
 		e.preventDefault();
+		setLoader(true);
 		const id = await signup(
 			register.email,
 			register.password,
@@ -69,6 +69,12 @@ const Signup = ({ error, setError, apartment, setState, setLoader }) => {
 				  });
 		}
 		const auxValues = { ...register };
+
+		if (event.target.name === 'email') {
+			let val = event.target.value.toLowerCase();
+			event.target.value = val;
+			auxValues[e.target.name] = val;
+		}
 		auxValues[e.target.name] = e.target.value;
 		e.target.value === '' ? setRegister(register) : setRegister(auxValues);
 	};
@@ -85,7 +91,8 @@ const Signup = ({ error, setError, apartment, setState, setLoader }) => {
 		return 'Ops, confira seus dados';
 	};
 
-	const handleBack = () => {
+	const handleBack = (e) => {
+		e.preventDefault();
 		setState(false);
 		setError(false);
 	};
