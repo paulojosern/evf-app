@@ -105,7 +105,7 @@ const Condominio = () => {
 						setState={setState}
 						setError={setError}
 						error={error}
-						setLoading={setLoading}
+						setLoader={setLoader}
 					/>
 				)
 			) : (
