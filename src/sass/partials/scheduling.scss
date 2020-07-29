@@ -159,16 +159,34 @@
 			max-width: 500px;
 			color: $background-strong;
 			position: relative;
+			background: $blue;
+			border-radius: 6px;
+			&__qrcode {
+				background-color: white;
+				text-align: center;
+				border-radius: 0 0 6px 6px;
+				canvas {
+					padding: 10px;
+				}
+			}
 			&__content {
-				background: $blue;
 				padding: 20px;
 				margin-bottom: 20px;
-				border-radius: 6px;
-
 				svg {
 					fill: $background-strong;
-					width: 100px;
+					width: 50px;
+					height: auto;
 					margin-bottom: 15px;
+					@include size(tablet) {
+						width: 100px;
+					}
+				}
+			}
+			&__detail {
+				padding: 0 10px;
+				h2 {
+					line-height: 120%;
+					font-weight: 900;
 				}
 			}
 			&__remove {

@@ -24,6 +24,7 @@
     "react-color": "^2.18.1",
     "react-dom": "16.13.1",
     "react-google-maps": "^9.4.5",
+    "react-hook-qrcode": "^1.0.7",
     "react-slick": "^0.26.1",
     "sass": "^1.26.10",
     "slick-carousel": "^1.8.1",

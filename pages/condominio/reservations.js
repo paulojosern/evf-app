@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { database } from '~/services/config';
 import { useAuth } from '~/store/Auth';
 import Confirm from './reservations.confirm';
+import QRCode from './qrcode';
 import IconChecked from '~/assets/logos/icon-checked.svg';
 import IconDelete from '~/assets/logos/icon-garbage.svg';
 
@@ -285,10 +286,12 @@ const Reservations = ({ state, setState, setLoader, setValidation }) => {
 						<div className="reserved">
 							<div className="reserved__content">
 								<IconChecked />
-								<h3>Você tem uma reserva para</h3>
-								<h2>
-									{formatDate(reserved.day)} às {reserved.hour}
-								</h2>
+								<div className="reserved__detail">
+									<h3>Você tem uma reserva</h3>
+									<h2>
+										{formatDate(reserved.day)} às {reserved.hour}
+									</h2>
+								</div>
 							</div>
 							<label
 								className="reserved__remove"
@@ -296,6 +299,9 @@ const Reservations = ({ state, setState, setLoader, setValidation }) => {
 							>
 								<IconDelete />
 							</label>
+							<div className="reserved__qrcode">
+								<QRCode />
+							</div>
 						</div>
 					)}
 				</>
