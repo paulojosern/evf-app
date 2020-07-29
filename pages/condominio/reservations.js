@@ -2,8 +2,10 @@ import { useState, useEffect } from 'react';
 import { database } from '~/services/config';
 import { useAuth } from '~/store/Auth';
 import Confirm from './reservations.confirm';
+import IconChecked from '~/assets/logos/icon-checked.svg';
+import IconDelete from '~/assets/logos/icon-garbage.svg';
 
-const Reservations = ({ state }) => {
+const Reservations = ({ state, setState, setLoader }) => {
 	const { signout, getDayFromDB } = useAuth();
 	const [calendar, setCalendar] = useState([]);
 	const [day, setDay] = useState([]);
@@ -16,9 +18,10 @@ const Reservations = ({ state }) => {
 	});
 
 	const [reserved, setReserved] = useState(null);
-	//state && console.log(state.user.reservation.day);
+	state && console.log(state);
 
 	useEffect(() => {
+		setLoader(false);
 		state &&
 			state.user.reservation &&
 			(setReserved({
@@ -26,17 +29,18 @@ const Reservations = ({ state }) => {
 				hour: state.user.reservation.hour,
 			}),
 			setCurrent(state.user.reservation.day));
-	}, []);
+	}, [state]);
 
 	// reserved && console.log(reserved);
 
 	useEffect(() => {
-		let startingDay = new Date();
-		let thisDay = new Date();
+		var curr = new Date();
+		var first = curr.getDate() - 1;
 		let newCalendar = [];
-		for (var i = 0; i < 7; i++) {
-			thisDay.setDate(startingDay.getDate() + i);
-			newCalendar.push(thisDay.format());
+		for (var i = 1; i < 7; i++) {
+			var next = new Date(curr.getTime());
+			next.setDate(first + i);
+			newCalendar.push(next.format());
 		}
 		calendar.length <= 7 && setCalendar(newCalendar);
 	}, []);
@@ -185,6 +189,18 @@ const Reservations = ({ state }) => {
 			});
 	};
 
+	const logout = () => {
+		setState(false);
+		signout('/condominio');
+		console.log('deslogado');
+	};
+
+	const formatDate = (date) => {
+		let dt = date.split('_');
+		dt = `${dt[0]}, ${dt[1]} de ${dt[2]}`;
+		return dt;
+	};
+
 	return (
 		<div className="scheduling__panel">
 			<div
@@ -199,56 +215,86 @@ const Reservations = ({ state }) => {
 				</div>
 			</div>
 			<Confirm confirm={confirm} setConfirm={setConfirm} />
-			<header>
-				{state && <div className="user">Olá, {state.user.name}</div>}
-				<button className="btn" onClick={() => signout('/condominio')}>
-					Sair
-				</button>
-			</header>
-			{!reserved ? (
-				<section>
-					{calendar.length > 0 &&
-						calendar.map((el, i) => {
-							const slug = el.replace(/[,|\s]+/g, '_').toLowerCase();
-							return (
-								<button
-									className="btn__day"
-									key={i}
-									onClick={() => handleDay(slug)}
-								>
-									{el}
-								</button>
-							);
-						})}
-					{day.length > 0 && (
-						<div className="panel__hours">
-							{Object.keys(day).map((el, i) => {
-								return (
-									<button
-										className="hours"
-										key={i}
-										onClick={() => ConfirmHour(day[el])}
-									>
-										{day[el].hour}
-									</button>
-								);
-							})}
-
-							<button onClick={() => setDay(false)} className="btn">
-								Escolher outro dia
-							</button>
+			{state ? (
+				<>
+					<header>
+						<div className="user">Olá, {state.user.name}</div>
+						<button className="btn btn--white" onClick={() => logout()}>
+							Sair
+						</button>
+					</header>
+					{!reserved ? (
+						<section>
+							{calendar.length > 0 &&
+								calendar.map((el, i) => {
+									const slug = el.replace(/[,|\s]+/g, '_').toLowerCase();
+									return (
+										<button
+											className="btn__day"
+											key={i}
+											onClick={() => handleDay(slug)}
+										>
+											{el}
+										</button>
+									);
+								})}
+							{day.length > 0 && (
+								<div className="panel__hours">
+									<div className="hours__container">
+										<h3>Selecione o dia desejado</h3>
+										<div className="hours__content">
+											{Object.keys(day).map((el, i) => {
+												return !day[el].user ? (
+													<button
+														className="hours__btn"
+														key={i}
+														onClick={() => ConfirmHour(day[el])}
+													>
+														{day[el].hour}
+													</button>
+												) : (
+													<button
+														className="hours__btn hours__btn--reserved"
+														key={i}
+													>
+														{day[el].hour}
+														<small>Indisponível</small>
+													</button>
+												);
+											})}
+										</div>
+										<button
+											onClick={() => setDay(false)}
+											className="btn btn--default"
+										>
+											Escolher outro dia
+										</button>
+									</div>
+								</div>
+							)}
+						</section>
+					) : (
+						<div className="reserved">
+							<div className="reserved__content">
+								<IconChecked />
+								<h3>Você tem uma reserva para</h3>
+								<h2>
+									{formatDate(reserved.day)} às {reserved.hour}
+								</h2>
+							</div>
+							<label
+								className="reserved__remove"
+								onClick={() => removeHour(reserved.hour)}
+							>
+								<IconDelete />
+							</label>
 						</div>
 					)}
-				</section>
+				</>
 			) : (
-				<div className="reserved">
-					Reservado dia {reserved.day} as {reserved.hour}
-					<div className="line"></div>
-					<button
-						className="btn btn--delete"
-						onClick={() => removeHour(reserved.hour)}
-					>
-						Cancelar reserva
+				<div className="scheduling__wrap scheduling__wrap--show">
+					<button className="btn" onClick={() => logout()}>
+						Sair
 					</button>
 				</div>
 			)}

@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useAuth } from '~/store/Auth';
-import styles from './index.module.scss';
-const Signin = ({ msg, apartment, state }) => {
+const Signin = ({ error, setError, apartment, state, setState, setLoader }) => {
 	const { signin } = useAuth();
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
@@ -10,9 +9,8 @@ const Signin = ({ msg, apartment, state }) => {
 		password: false,
 	});
 
-	// console.log(email, password);
-
 	function handleSignin(e, email, password) {
+		setLoader(true);
 		e.preventDefault();
 		signin(email, password);
 	}
@@ -21,16 +19,15 @@ const Signin = ({ msg, apartment, state }) => {
 		setEmail(event.target.value);
 		var input = event.target.value;
 		if (input && /(^\w.*@\w+\.\w)/.test(input)) {
-			setDisabled({
-				...disabled,
-				email: true,
-			});
-		} else if (input === '') {
-		} else {
-			setDisabled({
-				...disabled,
-				email: false,
-			});
+			input === state.user.email
+				? setDisabled({
+						...disabled,
+						email: true,
+				  })
+				: setDisabled({
+						...disabled,
+						email: false,
+				  });
 		}
 	};
 
@@ -44,6 +41,7 @@ const Signin = ({ msg, apartment, state }) => {
 
 	// console.log(msg);
 	const valideMsg = (message) => {
+		setLoader(false);
 		if (message === 'auth/wrong-password') {
 			return 'Ops, confira sua senha';
 		}
@@ -52,13 +50,22 @@ const Signin = ({ msg, apartment, state }) => {
 		}
 		return 'Ops, confira sua senha';
 	};
-	return (
-		<div className={styles.scheduling__signin}>
-			<div className={styles.scheduling__form}>
-				<h2>{apartment && apartment.unidade + '-' + apartment.bloco}</h2>
 
-				<h3>{state && `Olá, ${state.user.name}`}</h3>
-				{msg && <h4>{valideMsg(msg)}</h4>}
+	const handleBack = () => {
+		setState(false);
+		setError(false);
+	};
+
+	return (
+		<div className="scheduling__signin">
+			<div className="scheduling__form">
+				<h2>{apartment && apartment.unidade + '-' + apartment.bloco}</h2>
+				{state && (
+					<>
+						<h3>{`Olá, ${state.user.name}`}</h3>
+						{error && <h4>{valideMsg(error)}</h4>}
+					</>
+				)}
 				<form>
 					<label>Entre com seu e-mail</label>
 
@@ -69,23 +76,38 @@ const Signin = ({ msg, apartment, state }) => {
 						className="form__input"
 						required
 					/>
-					<label>Sua senha</label>
-					<input
-						type="password"
-						name="unidade"
-						onChange={handlePass}
-						className="form__input"
-						required
-					/>
-					<div className="line"></div>
-					<button
-						type="submit"
-						className="btn"
-						disabled={disabled.email && disabled.password ? '' : 'disabled'}
-						onClick={(e) => handleSignin(e, email, password)}
-					>
-						Entrar
-					</button>
+					{disabled.email && (
+						<>
+							<label>Sua senha</label>
+							<input
+								type="password"
+								name="unidade"
+								onChange={handlePass}
+								className="form__input"
+								required
+							/>
+						</>
+					)}
+					<br />
+					<br />
+					<div className="flex--row between">
+						<button
+							type="button"
+							className="btn btn--white"
+							onClick={handleBack}
+						>
+							Voltar
+						</button>
+						{disabled.password && (
+							<button
+								type="submit"
+								className="btn btn--default"
+								onClick={(e) => handleSignin(e, email, password)}
+							>
+								Entrar
+							</button>
+						)}
+					</div>
 				</form>
 			</div>
 		</div>

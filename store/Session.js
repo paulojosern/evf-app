@@ -16,8 +16,8 @@ export function useSession() {
 		const unsubscribe = auth.onAuthStateChanged((user) => {
 			if (user) {
 				setState({
-					currentUser: user,
-					isLoggedIn: true,
+					// currentUser: user,
+					//isLoggedIn: true,
 				});
 			} else {
 				setState({

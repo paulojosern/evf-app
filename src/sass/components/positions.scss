@@ -185,6 +185,7 @@
 	}
 	&--row {
 		display: flex;
+		flex-direction: row;
 	}
 }
 @include size(tablet) {
@@ -196,15 +197,15 @@
 			}
 		}
 	}
-	.between {
-		justify-content: space-between;
-	}
-	.bottom {
-		align-items: flex-end;
-	}
-	.end {
-		justify-content: flex-end;
-	}
+}
+.between {
+	justify-content: space-between;
+}
+.bottom {
+	align-items: flex-end;
+}
+.end {
+	justify-content: flex-end;
 }
 .left {
 	text-align: left;

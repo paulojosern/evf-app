@@ -61,19 +61,26 @@ export function useAuth() {
 						id: user.uid.toString(),
 						name,
 						email: user.email,
+						apartment,
+						reservation,
 					},
 					isLoggedIn: true,
 				});
 			});
 	};
 
-	const signup = (email, password, userName, apto) => {
+	const signup = (email, password, userName, apartment) => {
 		return auth
 			.createUserWithEmailAndPassword(email, password)
 			.then((response) => {
 				// We want to save the user to our own collection with custom attributes for us
-				saveUserToDB(response.user, userName, apartment);
-				return response.user;
+				saveUserToDB(response.user, userName, apartment, null);
+				return response.user.uid;
+			})
+			.catch(function (error) {
+				setState({
+					msg: error.code,
+				});
 			});
 	};
 
