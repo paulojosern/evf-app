@@ -16,8 +16,10 @@ const Signin = ({ error, setError, apartment, state, setState, setLoader }) => {
 	}
 
 	const handleEmail = (event) => {
-		setEmail(event.target.value);
 		var input = event.target.value;
+		let val = input.toLowerCase();
+		event.target.value = val;
+		setEmail(val);
 		if (input && /(^\w.*@\w+\.\w)/.test(input)) {
 			input === state.user.email
 				? setDisabled({

@@ -5,7 +5,7 @@ import Confirm from './reservations.confirm';
 import IconChecked from '~/assets/logos/icon-checked.svg';
 import IconDelete from '~/assets/logos/icon-garbage.svg';
 
-const Reservations = ({ state, setState, setLoader }) => {
+const Reservations = ({ state, setState, setLoader, setValidation }) => {
 	const { signout, getDayFromDB } = useAuth();
 	const [calendar, setCalendar] = useState([]);
 	const [day, setDay] = useState([]);
@@ -190,6 +190,10 @@ const Reservations = ({ state, setState, setLoader }) => {
 	};
 
 	const logout = () => {
+		setValidation({
+			bloco: false,
+			btn: false,
+		});
 		setState(false);
 		signout('/condominio');
 		console.log('deslogado');

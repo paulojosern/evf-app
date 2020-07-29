@@ -70,7 +70,12 @@ const Condominio = () => {
 	// state && console.log('state:', state);
 
 	return isLoggedIn ? (
-		<Reservations state={state} setState={setState} setLoader={setLoader} />
+		<Reservations
+			state={state}
+			setState={setState}
+			setLoader={setLoader}
+			setValidation={setValidation}
+		/>
 	) : (
 		<div className="scheduling">
 			<div
