@@ -18,7 +18,7 @@ const Reservations = ({ state, setState, setLoader, setValidation }) => {
 	});
 
 	const [reserved, setReserved] = useState(null);
-	state && console.log(state);
+	// state && console.log(state);
 
 	useEffect(() => {
 		setLoader(false);
@@ -143,16 +143,18 @@ const Reservations = ({ state, setState, setLoader, setValidation }) => {
 	};
 
 	const saveToDB = async (currentHour) => {
+		// console.log(hours);
+		// console.log(day);
+		// console.log(currentHour);
 		setLoading(true);
-
 		let hour = currentHour.hour;
 		hour = { hour, user: state.user };
-		const objIndex = hours.findIndex((obj) => obj.hour == currentHour.hour);
-		const updatedObj = { ...hours[objIndex], ...hour };
+		const objIndex = day.findIndex((obj) => obj.hour == currentHour.hour);
+		const updatedObj = { ...day[objIndex], ...hour };
 		const updatedProjects = [
-			...hours.slice(0, objIndex),
+			...day.slice(0, objIndex),
 			updatedObj,
-			...hours.slice(objIndex + 1),
+			...day.slice(objIndex + 1),
 		];
 		let newHours = { ...updatedProjects };
 		newHours = { hours: newHours };
@@ -172,6 +174,8 @@ const Reservations = ({ state, setState, setLoader, setValidation }) => {
 				setLoading(false);
 			});
 	};
+
+	// day && console.log(day);
 
 	const removeToDB = async () => {
 		setLoading(true);
