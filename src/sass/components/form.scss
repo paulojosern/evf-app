@@ -65,7 +65,7 @@
 		margin: 0 0 10px;
 		letter-spacing: 0.5px;
 		&:focus {
-			//background-color: rgba($dark-strong, 0.4);
+			background: $background-strong;
 		}
 		&::-webkit-input-placeholder {
 			/* Chrome/Opera/Safari */
@@ -104,6 +104,14 @@
 		&[type='number'] {
 			-moz-appearance: textfield; /* Firefox */
 		}
+		&:-webkit-autofill,
+		&:-webkit-autofill:hover,
+		&:-webkit-autofill:focus &:-webkit-autofill {
+			background-color: $background-strong;
+			-webkit-text-fill-color: $color;
+			-webkit-box-shadow: 0 0 0px 1000px $background-strong inset;
+		}
+
 		// &[readonly='readonly'] {
 		// 	color: rgba(black, 0.7);
 		// 	border: 1px solid $yellow;
