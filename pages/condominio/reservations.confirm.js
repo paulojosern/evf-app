@@ -16,10 +16,10 @@ const Confirm = ({ confirm, setConfirm }) => {
 		>
 			<div className="confirm">
 				<h3>{confirm && confirm.msg}</h3>
-				<div className="line"></div>
+				<br />
 				<div className="flex--row between">
 					<button
-						className="btn btn--delete"
+						className="confirm__btn confirm__btn--not"
 						onClick={() =>
 							setConfirm({
 								active: false,
@@ -29,7 +29,7 @@ const Confirm = ({ confirm, setConfirm }) => {
 						não
 					</button>
 					<button
-						className="btn"
+						className="confirm__btn"
 						onClick={handleConfirm(confirm && confirm.function)}
 					>
 						sim

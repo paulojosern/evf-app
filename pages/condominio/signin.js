@@ -70,7 +70,7 @@ const Signin = ({ error, setError, apartment, state, setState, setLoader }) => {
 					</>
 				)}
 				<form>
-					<label>Entre com seu e-mail</label>
+					<label>Entre com o e-mail cadastrado</label>
 
 					<input
 						type="text"

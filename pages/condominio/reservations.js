@@ -228,7 +228,7 @@ const Reservations = ({ state, setState, setLoader, setValidation }) => {
 				<>
 					<header>
 						<div className="user">Olá, {state.user.name}</div>
-						<button className="btn btn--white" onClick={() => logout()}>
+						<button className="logout" onClick={() => logout()}>
 							Sair
 						</button>
 					</header>

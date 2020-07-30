@@ -8,20 +8,18 @@ import Signup from './signup';
 
 const Condominio = () => {
 	const [apartment, setApartment] = useState();
-	const [state, setState] = useState();
+	const [state, setState] = useState(false);
 	const { getApartment } = useAuth();
 	const { isLoggedIn, msg } = useSession();
 	const [error, setError] = useState();
 	const [loader, setLoader] = useState(false);
 	const [validation, setValidation] = useState({ bloco: false, btn: false });
 
-	// currentUser && console.log(currentUser);
+	useEffect(() => {
+		state && useState(false);
+	}, []);
 
-	// useEffect(() => {
-	// 	currentUser && setState({ user: currentUser });
-	// }, [currentUser]);
-
-	// state && console.log('newstate :', state);
+	state && console.log(state);
 
 	useEffect(() => {
 		msg && setError(msg);
@@ -89,8 +87,8 @@ const Condominio = () => {
 					<span></span>
 				</div>
 			</div>
-			{state ? (
-				state.user !== undefined ? (
+			{state &&
+				(state.user !== undefined ? (
 					<Signin
 						apartment={apartment}
 						state={state}
@@ -107,61 +105,62 @@ const Condominio = () => {
 						error={error}
 						setLoader={setLoader}
 					/>
-				)
-			) : (
-				<div className="scheduling">
-					<div className="scheduling__default">
-						<form>
-							<h2>Qual o seu apartamento?</h2>
-							<br />
-							<input
-								type="number"
-								name="unidade"
-								onChange={handleChange}
-								className="form__input form__input--large center"
-								required
-							/>
-							{validation.bloco && (
-								<>
-									<h4>Qual o bloco?</h4>
-									<div className="form__btn form__btn--auto">
-										<input
-											type="radio"
-											id="1"
-											className="form__btn--input"
-											name="bloco"
-											value="1"
-											onChange={handleCheckbox}
-											required
-										/>
-										<label className="form__btn--label" htmlFor="1" id="btn">
-											1
-										</label>
-										<input
-											type="radio"
-											id="2"
-											className="form__btn--input"
-											name="bloco"
-											value="2"
-											onChange={handleCheckbox}
-											required
-										/>
-										<label className="form__btn--label" htmlFor="2" id="btn">
-											2
-										</label>
-									</div>
-								</>
-							)}
-							<br />
-							{validation.btn && (
-								<button className="btn btn--default" onClick={handleSubmit}>
-									Enviar
-								</button>
-							)}
-						</form>
-					</div>
+				))}
+			<div className={state ? 'scheduling scheduling--hidden' : 'scheduling'}>
+				<div className="scheduling__default">
+					<form>
+						<h2>Qual o seu apartamento?</h2>
+						<br />
+						<input
+							type="number"
+							name="unidade"
+							onChange={handleChange}
+							className="form__input form__input--large center"
+							required
+						/>
+						{validation.bloco && (
+							<div className="default__animation">
+								<h4>Qual o bloco?</h4>
+								<div className="form__btn form__btn--auto">
+									<input
+										type="radio"
+										id="1"
+										className="form__btn--input"
+										name="bloco"
+										value="1"
+										onChange={handleCheckbox}
+										required
+									/>
+									<label className="form__btn--label" htmlFor="1" id="btn">
+										1
+									</label>
+									<input
+										type="radio"
+										id="2"
+										className="form__btn--input"
+										name="bloco"
+										value="2"
+										onChange={handleCheckbox}
+										required
+									/>
+									<label className="form__btn--label" htmlFor="2" id="btn">
+										2
+									</label>
+								</div>
+							</div>
+						)}
+						<br />
+						{validation.btn && (
+							<button
+								className="btn btn--default default__animation"
+								onClick={handleSubmit}
+							>
+								Enviar
+							</button>
+						)}
+					</form>
 				</div>
-			)}
+			</div>
 		</div>
 	);
 };
