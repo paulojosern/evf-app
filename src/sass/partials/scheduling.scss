@@ -9,11 +9,13 @@
 	// background-image: url('/workout.jpg');
 	// background-size: cover;
 	overflow-x: hidden !important;
+
 	&--hidden {
 		position: absolute;
-		transform: translateX(50%);
+		transform: translateX(70%);
 		opacity: 0;
 		visibility: hidden;
+		z-index: -1;
 	}
 	&__wrap {
 		height: 100%;
@@ -72,8 +74,8 @@
 		header {
 			position: absolute;
 			top: 0;
-			width: calc(100% - 60px);
-			padding: 25px 30px;
+			width: calc(100% - 30px);
+			padding: 20px 15px;
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
@@ -86,6 +88,10 @@
 			animation-duration: 0.2s;
 			animation-delay: 0.4s;
 			transform: translateY(-150%);
+			@include size(tablet) {
+				width: calc(100% - 60px);
+				padding: 25px 30px;
+			}
 			.user {
 				font-size: 1.4em;
 				font-weight: 700;
@@ -111,7 +117,7 @@
 		section {
 			// width: 85%;
 			// max-width: 600px;
-			width: 100%;
+			width: 85%;
 			display: flex;
 			flex-direction: column;
 			padding-top: 100px;
@@ -144,18 +150,17 @@
 				background-color: $blue;
 			}
 
-			@include size(tablet) {
-				&:only-child {
-					border-radius: 6px;
-				}
-				&:first-of-type {
-					border-radius: 6px 6px 0 0;
-				}
-				&:last-of-type {
-					border-radius: 0 0 6px 6px;
-					margin-bottom: 12px;
-				}
+			&:only-child {
+				border-radius: 6px;
 			}
+			&:first-of-type {
+				border-radius: 6px 6px 0 0;
+			}
+			&:last-of-type {
+				border-radius: 0 0 6px 6px;
+				margin-bottom: 12px;
+			}
+
 			&:nth-of-type(1) {
 				background-color: $blue;
 			}
@@ -445,6 +450,7 @@
 		animation-delay: 0.5s;
 		position: relative;
 		transform: translateY(100px);
+		transition: all 0.4s ease-in-out;
 		.default__animation {
 			opacity: 0;
 			visibility: hidden;
@@ -508,5 +514,18 @@
 		visibility: visible;
 		transform: translateX(0);
 		position: relative;
+	}
+}
+@keyframes right_out {
+	0% {
+		opacity: 0;
+		visibility: hidden;
+		transform: translateX(100%);
+	}
+	100% {
+		opacity: 1;
+		visibility: visible;
+		transform: translateX(0);
+		position: absolute;
 	}
 }
