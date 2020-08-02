@@ -106,7 +106,7 @@ const Condominio = () => {
 						setLoader={setLoader}
 					/>
 				))}
-			<div className={state ? 'scheduling scheduling--hidden' : 'scheduling'}>
+			<div className={state ? 'scheduling scheduling--hidden' : ''}>
 				<div className="scheduling__default">
 					<form>
 						<h2>Qual o seu apartamento?</h2>

@@ -8,7 +8,7 @@ const Index = ({ store }) => {
 	return (
 		<main className="main">
 			{/* <div>{JSON.stringify(data)}</div> */}
-			{store.map((store, i) => {
+			{/* {store.map((store, i) => {
 				return (
 					<Link key={i} href={`/loja/${store.slug}`}>
 						<a className="store">{store.name}</a>
@@ -17,9 +17,12 @@ const Index = ({ store }) => {
 			})}
 			<Link href="/adm">
 				<a className="store">PAINEL</a>
-			</Link>
+			</Link> */}
 			<Link href="/condominio">
 				<a className="store">CONDOMÍNIO</a>
+			</Link>
+			<Link href="/condominio/confirmation">
+				<a className="store">Confirmação</a>
 			</Link>
 		</main>
 	);

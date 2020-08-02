@@ -300,7 +300,7 @@ const Reservations = ({ state, setState, setLoader, setValidation }) => {
 								<IconDelete />
 							</label>
 							<div className="reserved__qrcode">
-								<QRCode />
+								<QRCode id={state.user.id} />
 							</div>
 						</div>
 					)}

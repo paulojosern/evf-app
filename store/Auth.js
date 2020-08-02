@@ -167,5 +167,6 @@ export function useAuth() {
 		getApartment,
 		getDayFromDB,
 		saveUserToDB,
+		getUserFromDB,
 	};
 }

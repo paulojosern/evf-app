@@ -1,16 +1,17 @@
 import React from 'react';
 import { useQRCode } from 'react-hook-qrcode';
 
-function QRCode() {
+function QRCode({ id }) {
+	const str = `https://euvoufacil.com.br/condominio/confirmation/${id}`;
 	const [inputRef] = useQRCode({
-		text: 'https://pudim.com.br/',
+		text: str,
 		options: {
 			level: 'M',
 			margin: 7,
 			scale: 1,
 			width: 200,
 			color: {
-				dark: '#222',
+				dark: '#111',
 				light: '#fff',
 			},
 		},
